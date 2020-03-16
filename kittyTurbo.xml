@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE library SYSTEM "library.dtd">
+<library name="kittyTurbo" basename="kittyTurboBase" openname="kittyturbo.library">
+	<include>exec/types.h</include>
+	<include>libraries/kittyTurbo.h</include>
+	<interface name="main" version="1.0" struct="kittyCompactIFace" prefix="_kittyturbo_" asmprefix="IkittyCompact" global="IkittyTurbo">
+		<method name="Obtain" result="ULONG"/>
+		<method name="Release" result="ULONG"/>
+		<method name="Expunge" result="void" status="unimplemented"/>
+		<method name="Clone" result="struct Interface *" status="unimplemented"/>
+		<method name="makeLookupTable" result="char *">
+		</method>
+		<method name="FreeLookupTable" result="void">
+			<arg name="table" type="void *"/>
+		</method>
+	</interface>
+</library>
+
