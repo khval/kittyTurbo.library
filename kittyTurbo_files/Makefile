@@ -36,7 +36,7 @@ VERSION = 53
 
 # "main" Interface Source Files
 main_SRCS = main/Obtain.c main/Release.c main/makeLookupTable.c \
-    main/FreeLookupTable.c
+    main/FreeLookupTable.c \
 	AmosString.c \
 	stack.c \
 	cmdList.c \
