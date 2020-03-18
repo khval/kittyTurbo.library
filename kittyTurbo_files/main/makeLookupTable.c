@@ -28,6 +28,7 @@
 
 #include <proto/retroMode.h>
 #include <amoskittens.h>
+#include <cmdList.h>
 
 /****** kittyTurbo/main/makeLookupTable ******************************************
 *
@@ -56,6 +57,8 @@
 *
 */
 
+extern struct cmdData AMOSPro_TURBO_Plus[];
+
 char * _kittyturbo_makeLookupTable(struct kittyCompactIFace *Self)
 {
 	struct cmdData *cmd;
@@ -67,14 +70,14 @@ char * _kittyturbo_makeLookupTable(struct kittyCompactIFace *Self)
 
 	Printf("makeLookupTable\n");
 
-/*
-	for (cmd=AMOSPro_Turbo;cmd -> fn;cmd++)
+
+	for (cmd=AMOSPro_TURBO_Plus;cmd -> fn;cmd++)
 	{
 		Printf("%08lx\n",((char *(**) KITTENS_CMD_ARGS) (ptr + cmd -> token)));
 
 		*((char *(**) KITTENS_CMD_ARGS) (ptr + cmd -> token)) = cmd -> fn;
 	}
-*/
+
 
 	return ptr;
 }
