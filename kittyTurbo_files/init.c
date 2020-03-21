@@ -102,6 +102,8 @@ STATIC APTR libExpunge(struct LibraryManagerInterface *Self)
 	     result = (APTR)libBase->segList;
         /* Undo what the init code did */
 
+	close_libs();
+
         IExec->Remove((struct Node *)libBase);
         IExec->DeleteLibrary((struct Library *)libBase);
     }
@@ -114,11 +116,9 @@ STATIC APTR libExpunge(struct LibraryManagerInterface *Self)
 }
 
 struct ExecIFace *IExec = NULL;
-
 struct NewlibIFace * INewlib = NULL;
 struct retroIFace * IRetroMode = NULL;
 struct DOSIFace *IDOS = NULL;
-
 struct Library *NewLibBase = NULL;
 struct Library *RetroModeBase = NULL;
 struct Library *DOSBase = NULL;
