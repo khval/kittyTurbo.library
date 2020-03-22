@@ -28,5 +28,5 @@ copy ram:temp/kittyTurbo_files/kittyTurbo_vectors.c ""
 copy ram:temp/kittyTurbo_files/kittyTurbo_vectors.h ""
 xcopy ram:temp/kittyTurbo_files/main main NOREP ALL QUIET
 
-;delete QUIET ram:temp all 
+delete QUIET ram:temp all 
 

@@ -11,6 +11,8 @@ STATIC CONST APTR main_v1_vectors[] =
     NULL,
     _kittyturbo_makeLookupTable,
     _kittyturbo_FreeLookupTable,
+    _kittyturbo_makeContext,
+    _kittyturbo_FreeContext,
     (APTR)-1
 };
 

@@ -28,5 +28,7 @@
 /* Inline macros for Interface "main" */
 #define makeLookupTable() IkittyTurbo->makeLookupTable() 
 #define FreeLookupTable(table) IkittyTurbo->FreeLookupTable((table)) 
+#define makeContext() IkittyTurbo->makeContext() 
+#define FreeContext(table) IkittyTurbo->FreeContext((table)) 
 
 #endif /* INLINE4_KITTYTURBO_H */
