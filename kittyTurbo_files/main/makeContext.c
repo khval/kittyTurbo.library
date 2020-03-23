@@ -51,6 +51,6 @@
 
 void * _kittyturbo_makeContext(struct kittyCompactIFace *Self)
 {
-  return makeContext();
+  	return NULL;
 }
 

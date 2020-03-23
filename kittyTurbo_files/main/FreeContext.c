@@ -53,6 +53,5 @@
 void _kittyturbo_FreeContext(struct kittyCompactIFace *Self,
        void * table)
 {
-  FreeContext(table);
 }
 
