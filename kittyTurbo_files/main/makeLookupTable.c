@@ -70,14 +70,10 @@ char * _kittyturbo_makeLookupTable(struct kittyCompactIFace *Self)
 
 	Printf("makeLookupTable\n");
 
-
 	for (cmd=AMOSPro_TURBO_Plus;cmd -> fn;cmd++)
 	{
-		Printf("%08lx\n",((char *(**) KITTENS_CMD_ARGS) (ptr + cmd -> token)));
-
 		*((char *(**) KITTENS_CMD_ARGS) (ptr + cmd -> token)) = cmd -> fn;
 	}
-
 
 	return ptr;
 }
