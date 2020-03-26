@@ -27,18 +27,18 @@ namespace AmigaOS {
 extern "C" {
 #endif
 
-struct kittyCompactIFace
+struct kittyTurboIFace
 {
 	struct InterfaceData Data;
 
-	ULONG APICALL (*Obtain)(struct kittyCompactIFace *Self);
-	ULONG APICALL (*Release)(struct kittyCompactIFace *Self);
-	void APICALL (*Expunge)(struct kittyCompactIFace *Self);
-	struct Interface * APICALL (*Clone)(struct kittyCompactIFace *Self);
-	char * APICALL (*makeLookupTable)(struct kittyCompactIFace *Self);
-	void APICALL (*FreeLookupTable)(struct kittyCompactIFace *Self, void * table);
-	void * APICALL (*makeContext)(struct kittyCompactIFace *Self);
-	void APICALL (*FreeContext)(struct kittyCompactIFace *Self, void * table);
+	ULONG APICALL (*Obtain)(struct kittyTurboIFace *Self);
+	ULONG APICALL (*Release)(struct kittyTurboIFace *Self);
+	void APICALL (*Expunge)(struct kittyTurboIFace *Self);
+	struct Interface * APICALL (*Clone)(struct kittyTurboIFace *Self);
+	char * APICALL (*makeLookupTable)(struct kittyTurboIFace *Self);
+	void APICALL (*FreeLookupTable)(struct kittyTurboIFace *Self, void * table);
+	void * APICALL (*makeContext)(struct kittyTurboIFace *Self);
+	void APICALL (*FreeContext)(struct kittyTurboIFace *Self, void * table);
 };
 
 #ifdef __cplusplus

@@ -49,7 +49,7 @@
 *
 */
 
-ULONG _kittyturbo_Obtain(struct kittyCompactIFace *Self)
+ULONG _kittyturbo_Obtain(struct kittyTurboIFace *Self)
 {
   return Self -> Data.RefCount++;
 }

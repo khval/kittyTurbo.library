@@ -9,15 +9,15 @@
 #include <exec/exec.i>
 #include <exec/interfaces.i>
 
-STRUCTURE kittyCompactIFace, InterfaceData_SIZE
-	    FPTR IkittyCompact_Obtain
-	    FPTR IkittyCompact_Release
-	    FPTR IkittyCompact_Expunge
-	    FPTR IkittyCompact_Clone
-	    FPTR IkittyCompact_makeLookupTable
-	    FPTR IkittyCompact_FreeLookupTable
-	    FPTR IkittyCompact_makeContext
-	    FPTR IkittyCompact_FreeContext
-	LABEL kittyCompactIFace_SIZE
+STRUCTURE kittyTurboIFace, InterfaceData_SIZE
+	    FPTR IkittyTurbo_Obtain
+	    FPTR IkittyTurbo_Release
+	    FPTR IkittyTurbo_Expunge
+	    FPTR IkittyTurbo_Clone
+	    FPTR IkittyTurbo_makeLookupTable
+	    FPTR IkittyTurbo_FreeLookupTable
+	    FPTR IkittyTurbo_makeContext
+	    FPTR IkittyTurbo_FreeContext
+	LABEL kittyTurboIFace_SIZE
 
 #endif

@@ -3,7 +3,7 @@
 <library name="kittyTurbo" basename="kittyTurboBase" openname="kittyturbo.library">
 	<include>exec/types.h</include>
 	<include>libraries/kittyTurbo.h</include>
-	<interface name="main" version="1.0" struct="kittyCompactIFace" prefix="_kittyturbo_" asmprefix="IkittyCompact" global="IkittyTurbo">
+	<interface name="main" version="1.0" struct="kittyTurboIFace" prefix="_kittyturbo_" asmprefix="IkittyTurbo" global="IkittyTurbo">
 		<method name="Obtain" result="ULONG"/>
 		<method name="Release" result="ULONG"/>
 		<method name="Expunge" result="void" status="unimplemented"/>

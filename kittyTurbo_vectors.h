@@ -15,9 +15,9 @@
 #include <libraries/kittyTurbo.h>
 #endif
 
-extern ULONG                VARARGS68K _kittyturbo_Obtain(struct kittyCompactIFace *);
-extern ULONG                VARARGS68K _kittyturbo_Release(struct kittyCompactIFace *);
-extern char *               VARARGS68K _kittyturbo_makeLookupTable(struct kittyCompactIFace *);
-extern void                 VARARGS68K _kittyturbo_FreeLookupTable(struct kittyCompactIFace *, void * table);
-extern void *               VARARGS68K _kittyturbo_makeContext(struct kittyCompactIFace *);
-extern void                 VARARGS68K _kittyturbo_FreeContext(struct kittyCompactIFace *, void * table);
+extern ULONG                VARARGS68K _kittyturbo_Obtain(struct kittyTurboIFace *);
+extern ULONG                VARARGS68K _kittyturbo_Release(struct kittyTurboIFace *);
+extern char *               VARARGS68K _kittyturbo_makeLookupTable(struct kittyTurboIFace *);
+extern void                 VARARGS68K _kittyturbo_FreeLookupTable(struct kittyTurboIFace *, void * table);
+extern void *               VARARGS68K _kittyturbo_makeContext(struct kittyTurboIFace *);
+extern void                 VARARGS68K _kittyturbo_FreeContext(struct kittyTurboIFace *, void * table);

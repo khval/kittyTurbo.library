@@ -38,7 +38,7 @@
   #define CLIB_KITTYTURBO_PROTOS_H 1
  #endif /* CLIB_KITTYTURBO_PROTOS_H */
  #ifndef __NOGLOBALIFACE__
-  extern struct kittyCompactIFace *IkittyTurbo;
+  extern struct kittyTurboIFace *IkittyTurbo;
  #endif /* __NOGLOBALIFACE__ */
 #else /* __amigaos4__ */
  #ifndef CLIB_KITTYTURBO_PROTOS_H

@@ -49,7 +49,7 @@
 *
 */
 
-ULONG _kittyturbo_Release(struct kittyCompactIFace *Self)
+ULONG _kittyturbo_Release(struct kittyTurboIFace *Self)
 {
   return --Self -> Data.RefCount;
 }
