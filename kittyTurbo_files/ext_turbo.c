@@ -25,6 +25,8 @@
 #include <kittyErrors.h>
 
 #include "cmdList.h"
+#include "context.h"
+
 
 #define kittyError instance->kittyError
 #define api instance -> api
@@ -33,6 +35,9 @@
 
 #define alloc_private(x) AllocVecTags( x , AVT_Type, MEMF_PRIVATE, TAG_END )
 #define alloc_shared(x) AllocVecTags( x , AVT_Type, MEMF_SHARED, TAG_END )
+
+#define proc_names_printf printf
+
 
 char *turboplusMultiYes KITTENS_CMD_ARGS
 {
@@ -895,10 +900,42 @@ char *turboplusBlitIntWait KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_ext_cmd_range( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args = instance_stack - data->stack +1;
+	int ret = 0,_min,_max;
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	printf("args: %d\n",args);
+
+	api.dumpStack();
+
+	switch (args)
+	{
+		case 3:
+			ret = getStackNum(instance,__stack-2 );
+			_min = getStackNum(instance,__stack-1 );
+			_max = getStackNum(instance,__stack );
+	
+			if (ret<_min) ret=_min;
+			if (ret>_max) ret=_max;
+			break;
+		default:
+			api.setError(22,data->tokenBuffer);
+	}
+
+	popStack( instance, instance_stack - data->stack );
+	setStackNum( instance, ret);
+
+	return  NULL ;
+}
+
 char *turboplusRange KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	api.setCmdTo(e_cmdTo_default);
+	stackCmdParm( _ext_cmd_range, tokenBuffer );
 	return tokenBuffer;
 }
 
