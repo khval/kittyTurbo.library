@@ -53,52 +53,226 @@ char *turboplusMultiNo KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusLsl_b( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args = instance_stack - data->stack +1;
+	int ret = 0,shift, mask;
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 2:
+			ret = getStackNum(instance,__stack-1 );
+			shift = getStackNum(instance,__stack );
+			mask = 0xFF >> shift;
+
+			popStack( instance, instance_stack - data->stack );
+			setStackNum( instance, (ret & 0xFFFFFF00) | ((ret & mask) << shift) );
+			break;
+		default:
+			popStack( instance, instance_stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+
+	return  NULL ;
+}
+
 char *turboplusLsl_b KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdParm( _turboplusLsl_b, tokenBuffer );
 	return tokenBuffer;
+}
+
+char *_turboplusLsl_w( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args = instance_stack - data->stack +1;
+	int ret = 0,shift, mask;
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 2:
+			ret = getStackNum(instance,__stack-1 );
+			shift = getStackNum(instance,__stack );
+			mask = 0xFFFF >> shift;
+
+			popStack( instance, instance_stack - data->stack );
+			setStackNum( instance, (ret & 0xFFFF0000) | ((ret & mask) << shift) );
+			break;
+		default:
+			popStack( instance, instance_stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+
+	return  NULL ;
 }
 
 char *turboplusLsl_w KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdParm( _turboplusLsl_w, tokenBuffer );
 	return tokenBuffer;
+}
+
+char *_turboplusLsl_l( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args = instance_stack - data->stack +1;
+	int ret = 0,shift;
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 2:
+			ret = getStackNum(instance,__stack-1 );
+			shift = getStackNum(instance,__stack );
+
+			popStack( instance, instance_stack - data->stack );
+			setStackNum( instance, ret << shift );
+			break;
+		default:
+			popStack( instance, instance_stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+
+	return  NULL ;
 }
 
 char *turboplusLsl_l KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdParm( _turboplusLsl_l, tokenBuffer );
 	return tokenBuffer;
+}
+
+char *_turboplusLsr_b( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args = instance_stack - data->stack +1;
+	unsigned int ret = 0,shift;
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 2:
+			ret = getStackNum(instance,__stack-1 );
+			shift = getStackNum(instance,__stack );
+
+			popStack( instance, instance_stack - data->stack );
+			setStackNum( instance, (ret & 0xFFFFFF00) | ((ret & 0xFF)>> shift) );
+			break;
+		default:
+			popStack( instance, instance_stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+
+	return  NULL ;
 }
 
 char *turboplusLsr_b KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdParm( _turboplusLsr_b, tokenBuffer );
 	return tokenBuffer;
+}
+
+char *_turboplusLsr_w( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args = instance_stack - data->stack +1;
+	unsigned int ret = 0,shift;
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 2:
+			ret = getStackNum(instance,__stack-1 );
+			shift = getStackNum(instance,__stack );
+			popStack( instance, instance_stack - data->stack );
+
+			popStack( instance, instance_stack - data->stack );
+			setStackNum( instance, (ret & 0xFFFF0000) | ((ret & 0xFFFF) >>  shift) );
+			break;
+		default:
+			popStack( instance, instance_stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+
+	return  NULL ;
 }
 
 char *turboplusLsr_w KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdParm( _turboplusLsr_w, tokenBuffer );
 	return tokenBuffer;
+}
+
+char *_turboplusLsr_l( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args = instance_stack - data->stack +1;
+
+	// hemm.. shift works different with signed values
+
+	unsigned int ret = 0,shift;
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 2:
+			ret = getStackNum(instance,__stack-1 );
+			shift = getStackNum(instance,__stack );
+
+			popStack( instance, instance_stack - data->stack );
+			setStackNum( instance, (ret >> shift) );
+			break;
+		default:
+			popStack( instance, instance_stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+
+	return  NULL ;
 }
 
 char *turboplusLsr_l KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdParm( _turboplusLsr_l, tokenBuffer );
 	return tokenBuffer;
+}
+
+char *_turboplusLSwap( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args = instance_stack - data->stack +1;
+
+	// hemm.. shift works different with signed values
+
+	unsigned int value;
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 1:
+			value = getStackNum(instance,__stack );
+			setStackNum( instance, ( ((value & 0xFFFF0000) >> 16) | ((value & 0x0000FFFF) << 16)  ));
+			break;
+		default:
+			popStack( instance, instance_stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+
+	return  NULL ;
 }
 
 char *turboplusLSwap KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdParm( _turboplusLSwap, tokenBuffer );
 	return tokenBuffer;
 }
 
@@ -981,10 +1155,36 @@ char *turboplusTClip KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusBetween( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args = instance_stack - data->stack +1;
+	int ret = 0,_min,_value,_max;
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 3:
+			_min = getStackNum(instance,__stack-2 );
+			_value = getStackNum(instance,__stack-1 );
+			_max = getStackNum(instance,__stack );
+			ret  = ((_min < _value) && (_value < _max)) ? ~0 : 0 ;
+			break;
+
+		default:
+			api.setError(22,data->tokenBuffer);
+	}
+
+	popStack( instance, instance_stack - data->stack );
+	setStackNum( instance, ret);
+
+	return  NULL ;
+}
+
 char *turboplusBetween KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdParm( _turboplusBetween, tokenBuffer );
 	return tokenBuffer;
 }
 
