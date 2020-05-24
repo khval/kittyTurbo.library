@@ -66,6 +66,11 @@ n=Lsr.l(value,shift)
 
 n=L Swap(n)
 
+    this command is just the same as "L.Swap" command in Craft.
+    
+    Swaps high and low word in a long / (int32), 
+    $04030201 becomes $02010403
+
 n=Test.b(n,n)
 
 n=Test.w(n,n)
