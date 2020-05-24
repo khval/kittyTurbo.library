@@ -2,7 +2,7 @@ Multi Yes
 
 Multi No  
 
-n=Lsl.b(n,n)
+n=Lsl.b(value,shift)
 
     Shifts bits down/left, resulting bits moving to left.
     This command only effect low byte, the high bytes are kept.
@@ -10,7 +10,7 @@ n=Lsl.b(n,n)
     Example:
     lsl.b($81818181,1)=$81818102
         
-n=Lsl.w(n,n)
+n=Lsl.w(value,shift)
 
     Shifts bits down/left, resulting bits moving to left.
     This command only effect low bytes, the high bytes are kept.
@@ -18,7 +18,7 @@ n=Lsl.w(n,n)
     Example:
     lsl.b($81818181,1)=$81810202
 
-n=Lsl.l(n,n)
+n=Lsl.l(value,shift)
 
     Shifts bits down/left, resulting bits moving to left.
     
@@ -33,7 +33,7 @@ n=Lsl.l(n,n)
     Example:
     lsl.b($81818181,1)=$03030302
     
-n=Lsr.b(n,n)
+n=Lsr.b(value,shift)
 
     Shifts bits up/right, resulting bits moving to right.
     This command only effect low byte, the high bytes are kept.
@@ -41,7 +41,7 @@ n=Lsr.b(n,n)
     Example:
     lsl.b($81818181,1)=$81818140
 
-n=Lsr.w(n,n)
+n=Lsr.w(value,shift)
 
     Shifts bits up/right, resulting bits moving to right.
     This command only effect the two low bytes, the high bytes are kept.
@@ -49,7 +49,7 @@ n=Lsr.w(n,n)
     Example:
     lsl.b($81818181,1)=$818140C0
 
-n=Lsr.l(n,n)
+n=Lsr.l(value,shift)
 
     Shifts bits up/right, resulting bits moving to right.
     
