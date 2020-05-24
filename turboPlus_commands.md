@@ -244,7 +244,10 @@ Blit Int Change n To n
 
 Blit Int Wait n 
 
-n=Range(n,n To n)
+n=Range(value,start To end)
+
+  if value is less then [start] then [value] is [start]
+  if value is more then [end] then [value] is [end].
 
 n=Texp(n,n,n)
 
