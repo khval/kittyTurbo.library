@@ -246,8 +246,8 @@ Blit Int Wait n
 
 n=Range(value,start To end)
 
-  if value is less then [start] then [value] is [start]
-  if value is more then [end] then [value] is [end].
+    if value is less then [start] then [value] is [start]
+    if value is more then [end] then [value] is [end].
 
 n=Texp(n,n,n)
 
