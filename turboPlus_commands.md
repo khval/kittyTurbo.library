@@ -261,7 +261,12 @@ Scene Icon Bank n
 
 n=T Clip(n,n)
 
-n=Between(n,n,n)
+n=Between(min,value,max)
+
+    This command returns true if value is more then min, 
+    and values is less then max, if this not the case then false is returned.
+
+    Same as "(min < value < max)"
 
 Scene Palette n 
 
