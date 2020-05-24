@@ -4,15 +4,65 @@ Multi No
 
 n=Lsl.b(n,n)
 
+    Shifts bits down/left, resulting bits moving to left.
+    This command only effect low byte, the high bytes are kept.
+
+    Example:
+    lsl.b($81818181,1)=$81818102
+        
 n=Lsl.w(n,n)
+
+    Shifts bits down/left, resulting bits moving to left.
+    This command only effect low bytes, the high bytes are kept.
+
+    Example:
+    lsl.b($81818181,1)=$81810202
 
 n=Lsl.l(n,n)
 
+    Shifts bits down/left, resulting bits moving to left.
+    
+    To example the command to none computer geeks.
+    The command can be explained mathematical like this.
+    
+    result = value * (2^shift)
+    
+    In effect this command is often used for quick multiply,
+    provided you can convert your multipay value to 2^shift format.
+    
+    Example:
+    lsl.b($81818181,1)=$03030302
+    
 n=Lsr.b(n,n)
+
+    Shifts bits up/right, resulting bits moving to right.
+    This command only effect low byte, the high bytes are kept.
+
+    Example:
+    lsl.b($81818181,1)=$81818140
 
 n=Lsr.w(n,n)
 
+    Shifts bits up/right, resulting bits moving to right.
+    This command only effect the two low bytes, the high bytes are kept.
+
+    Example:
+    lsl.b($81818181,1)=$818140C0
+
 n=Lsr.l(n,n)
+
+    Shifts bits up/right, resulting bits moving to right.
+    
+    To example the command to none computer geeks.
+    The command can be explained mathematical like this.
+    
+    result = value / (2^shift)
+    
+    In effect this command is often used for quick divide,
+    provided you can convert your divide value to 2^shift format.
+
+    Example:
+    lsl.b($81818181,1)=$40C0C0C0
 
 n=L Swap(n)
 
