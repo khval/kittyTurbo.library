@@ -151,19 +151,36 @@ n=Left Click
 
 Reserve Stars n 
 
-Define Star n,n,n,n,n 
+    Reserve stars, or random dots in x,y plain
+
+Define Star n,x,y,x speed,y speed 
+
+    Set star [n] coordinate [x],[y] and speed
 
 Display Stars  
+    
+    draws stars and computes the next position of the stars.
 
 Stars Erase  
 
-Stars Compute n To n 
+    Erase stars / dots
+
+Stars Compute [n start] To [n end]
+
+    Calculate the new position of the stars.
+    from [n start] to [n end]
 
 Stars Draw  
 
-Stars Speed n To n,n,n 
+    Draw stars/dots
 
-Stars Clip n,n,n,n 
+Stars Speed [start] To [end],[speed x],[speed y] 
+
+    Change the speed of stars from start to end.
+
+Stars Clip x0,y0,x1,y1 
+
+    Limit where stars are drawn
 
 n=F Point(n,n)
 
@@ -331,6 +348,14 @@ n=Scene Y
 
     A command for a tiles / map system
 
+Scene Palette n 
+
+    A command for a tiles / map system
+
+Scene Mask Palette n 
+
+    A command for a tiles / map system
+
 Amos Pri n 
 
 n=Bit Field Ins(n,n,n,n)
@@ -374,10 +399,6 @@ n=Between(min,value,max)
     and values is less then max, if this not the case then false is returned.
 
     Same as "(min < value < max)"
-
-Scene Palette n 
-
-Scene Mask Palette n 
 
 n=Bank End(n)
 
