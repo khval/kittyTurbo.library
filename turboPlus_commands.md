@@ -229,55 +229,107 @@ F Put Static Block n,n,n
 
 Scene Bank n 
 
+    A command for a tiles / map system
+
 n=Scene Check(n,n)
+
+    A command for a tiles / map system
 
 n=Scene 16 Check(n,n)
 
+    A command for a tiles / map system
+
 Scene Change n,n,n 
+
+    A command for a tiles / map system
 
 Scene 16 Change n,n,n 
 
+    A command for a tiles / map system
+
 Scene 16 Draw n,n,n,n,n,n 
+
+    A command for a tiles / map system
 
 Scene 16 Def n,n,n,n,n,n,n,n 
 
+    A command for a tiles / map system
+
 Scene 16 Restore n 
+
+    A command for a tiles / map system
 
 Scene 16 Limit n 
 
+    A command for a tiles / map system
+
 n=Scene 32 Check(n,n)
+
+    A command for a tiles / map system
 
 Scene 32 Change n,n,n 
 
+    A command for a tiles / map system
+
 Scene 32 Draw n,n,n,n,n,n 
+
+    A command for a tiles / map system
 
 Scene 16 View n,n,n To n,n 
 
+    A command for a tiles / map system
+
 Scene 32 View n,n,n To n,n 
+
+    A command for a tiles / map system
 
 Scene 16 Do n,n 
 
+    A command for a tiles / map system
+
 Scene 32 Do n,n 
+
+    A command for a tiles / map system
 
 Scene 16 Top n,n 
 
+    A command for a tiles / map system
+
 Scene 32 Top n,n 
+
+    A command for a tiles / map system
 
 Scene 16 Bottom n,n 
 
+    A command for a tiles / map system
+
 Scene 32 Bottom n,n 
+
+    A command for a tiles / map system
 
 Scene 16 Left n,n 
 
+    A command for a tiles / map system
+
 Scene 32 Left n,n 
+
+    A command for a tiles / map system
 
 Scene 16 Right n,n 
 
+    A command for a tiles / map system
+
 Scene 32 Right n,n 
+
+    A command for a tiles / map system
 
 n=Scene X  
 
+    A command for a tiles / map system
+
 n=Scene Y  
+
+    A command for a tiles / map system
 
 Amos Pri n 
 
