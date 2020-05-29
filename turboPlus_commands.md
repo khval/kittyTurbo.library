@@ -155,6 +155,8 @@ R Draw dx,dy
 
     Draw a line relative to graphic cursor xgr, ygr
     same as draw xgr,ygr to xgr+dx,ygr+dy
+    
+    Unlike R Box, R Bar, this command does change graphic cursor (xgr,ygr).
 
 R Box dx,dy 
 
