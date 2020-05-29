@@ -1,6 +1,32 @@
 Multi Yes  
 
+    Enable multitasking, calls function exec.library/permit()
+
+    You need too call “Multi Yes” equality number of times as “Multi No” is executed, 
+    it should be safe to use this command in reclusive loop, but you probably should not. 
+
+    (Warning do not mix with craft extension, they do not keep the same count)
+
 Multi No  
+
+    Disable multitasking, executes function exec.library/forbid()
+
+    Do not abuse this command!!!
+    This is not a magic bullet, it should not be used to speed up your basic program.
+
+    On AmigaOS4.1 the mouse, keyboard, audio, +++, needs multitasking, disabling multitasking
+    for a long-time course bad sound, keyboard / mouse locking up, plus graphics will not be updated,
+    if multitasking is disabled, some of the basic command might result in dead locks,
+    as it they might wait for graphic engine, or a system event,
+    that will never happen, while multitasking is disabled.
+
+    If you need safe atomic protection, look at the OS4.1 SDK in the folder. 
+    “SDK:Documentation/Autodocs/exec.h”, See functions MutexObtain() and MutexRelease().
+
+    Only when it written you most disable multitasking, should you disable multitasking,
+    and when you keep the multitasking disabled as short as possible.
+    
+    (Warning do not mix with craft extension, they do not keep the same count)
 
 n=Lsl.b(value,shift)
 
@@ -73,9 +99,17 @@ n=L Swap(n)
 
 n=Test.b(n,n)
 
+    Check is low bytes is equal
+
 n=Test.w(n,n)
 
-Vbl Wait n 
+    Check if low word is equal
+
+Vbl Wait [y beam] 
+
+    Wait for a beam position, 
+    you don’t have access to internal of retro mode, 
+    so this command, will work just wait vbl
 
 Reserve Check n 
 
@@ -95,15 +129,27 @@ n=Hit Spr Check(n To n,n,n,n)
 
 n=Raw Key(n)
 
-R Move n,n 
+R Move dx,dy 
 
-R Draw n,n 
+    Relative to the graphic cursor xgr, ygr
 
-R Box n,n 
+R Draw dx,dy 
 
-R Home n,n 
+    Draw a line relative to graphic cursor xgr, ygr
+    same as draw xgr,ygr to xgr+dx,ygr+dy
 
-R Bar n,n 
+R Box dx,dy 
+
+    Draw a box relative to graphic cursor xgr, ygr
+    same as box xgr,ygr to xgr+dx,ygr+dy
+
+R Home dx,dy 
+
+R Bar dx,dy 
+
+    Draw a bar relative to graphic cursor xgr, ygr
+    same as box xgr,ygr to xgr+dx,ygr+dy
+
 
 Reserve Object n,n 
 
@@ -125,9 +171,9 @@ R Object Mag Draw n,n,n,n
 
 Object Erase n 
 
-Line 3d n,n,n To n,n,n 
+Line 3d x,y,z To x,y,z 
 
-Eye 3d n,n 
+Eye 3d x,y 
 
 Object Save s$,n To n 
 
@@ -182,11 +228,17 @@ Stars Clip x0,y0,x1,y1
 
     Limit where stars are drawn
 
-n=F Point(n,n)
+n=F Point(x,t)
 
-F Circle n,n,n,n 
+    Same as normal point command, no difference in speed.
+
+F Circle x,y,r,c 
+
+    Same as normal circle command, no difference in speed.
 
 n=F Sqr(n)
+
+    Same as normal sqr command, no difference in speed.
 
 Stars Int On n 
 
@@ -196,9 +248,13 @@ Blit Int On n To n
 
 Blit Int Off  
 
-F Draw n,n To n,n 
+F Draw x,y To x,y 
+
+    Same as normal draw command, no difference in speed.
 
 F Draw n,n 
+
+    Same as normal draw command, no difference in speed.
 
 Object Limit n 
 
@@ -214,11 +270,20 @@ Plane Shift Down n,n To n
 
 Plane Update n 
 
-F Paste Icon n,n,n 
+F Paste Icon x,y,n 
+
+    paste icon [n] to [x],[y], same as normal paste icon in.
+    (Should be dirty we don’t allow that in Amos kittens.)
 
 F 32 Icon n,n,n 
 
+    paste icon [n] to [x],[y], same as normal paste icon in.
+    (Should be dirty we don’t allow that in Amos kittens.)
+
 F 16 Icon n,n,n 
+
+    paste icon [n] to [x],[y], same as normal paste icon in.
+    (Should be dirty we don’t allow that in Amos kittens.)
 
 F 16proc Icon n,n,n 
 
@@ -356,7 +421,9 @@ Scene Mask Palette n
 
     A command for a tiles / map system
 
-Amos Pri n 
+Amos Pri [value]
+
+    Set Amos priority
 
 n=Bit Field Ins(n,n,n,n)
 
