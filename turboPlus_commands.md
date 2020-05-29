@@ -224,6 +224,48 @@ Blit Left n,n,n To n,n,n
 
 F Plot n,n,n 
 
+n=F Point(x,t)
+
+    Same as normal point command, no difference in speed.
+
+F Circle x,y,r,c 
+
+    Same as normal circle command, no difference in speed.
+
+F Draw x,y To x,y 
+
+    Same as normal draw command, no difference in speed.
+
+F Draw n,n 
+
+    Same as normal draw command, no difference in speed.
+
+n=F Sqr(n)
+
+    Same as normal sqr command, no difference in speed.
+
+F Plot n,n,n 
+
+n=F Point(x,t)
+
+    Same as normal point command, no difference in speed.
+
+F Circle x,y,r,c 
+
+    Same as normal circle command, no difference in speed.
+
+F Draw x,y To x,y 
+
+    Same as normal draw command, no difference in speed.
+
+F Draw n,n 
+
+    Same as normal draw command, no difference in speed.
+
+n=F Sqr(n)
+
+    Same as normal sqr command, no difference in speed.
+
 Blit Clear n 
 
 n=Left Click  
@@ -261,18 +303,6 @@ Stars Clip x0,y0,x1,y1
 
     Limit where stars are drawn
 
-n=F Point(x,t)
-
-    Same as normal point command, no difference in speed.
-
-F Circle x,y,r,c 
-
-    Same as normal circle command, no difference in speed.
-
-n=F Sqr(n)
-
-    Same as normal sqr command, no difference in speed.
-
 Stars Int On n 
 
 Stars Int Off  
@@ -280,14 +310,6 @@ Stars Int Off
 Blit Int On n To n 
 
 Blit Int Off  
-
-F Draw x,y To x,y 
-
-    Same as normal draw command, no difference in speed.
-
-F Draw n,n 
-
-    Same as normal draw command, no difference in speed.
 
 Object Limit n 
 
