@@ -1,3 +1,21 @@
+# Info
+
+Documentation for Kitty Craft Extensions commands.
+
+Commands listed as 
+**bold**
+are commands that are implemented.
+
+Commands listed as
+*italic*
+are commands started on.
+
+Command without description, are not implemented.
+
+At bottom of the list you will find none supported commands.
+
+# List of commands
+
 Multi Yes  
 
     Enable multitasking, calls function exec.library/permit()
@@ -28,7 +46,7 @@ Multi No
     
     (Warning do not mix with craft extension, they do not keep the same count)
 
-n=Lsl.b(value,shift)
+**n=Lsl.b(value,shift)**
 
     Shifts bits down/left, resulting bits moving to left.
     This command only effect low byte, the high bytes are kept.
@@ -36,7 +54,7 @@ n=Lsl.b(value,shift)
     Example:
     lsl.b($81818181,1)=$81818102
         
-n=Lsl.w(value,shift)
+**n=Lsl.w(value,shift)**
 
     Shifts bits down/left, resulting bits moving to left.
     This command only effect low bytes, the high bytes are kept.
@@ -44,7 +62,7 @@ n=Lsl.w(value,shift)
     Example:
     lsl.b($81818181,1)=$81810202
 
-n=Lsl.l(value,shift)
+**n=Lsl.l(value,shift)**
 
     Shifts bits down/left, resulting bits moving to left.
     
@@ -59,7 +77,7 @@ n=Lsl.l(value,shift)
     Example:
     lsl.b($81818181,1)=$03030302
     
-n=Lsr.b(value,shift)
+**n=Lsr.b(value,shift)**
 
     Shifts bits up/right, resulting bits moving to right.
     This command only effect low byte, the high bytes are kept.
@@ -67,7 +85,7 @@ n=Lsr.b(value,shift)
     Example:
     lsl.b($81818181,1)=$81818140
 
-n=Lsr.w(value,shift)
+**n=Lsr.w(value,shift)**
 
     Shifts bits up/right, resulting bits moving to right.
     This command only effect the two low bytes, the high bytes are kept.
@@ -75,7 +93,7 @@ n=Lsr.w(value,shift)
     Example:
     lsl.b($81818181,1)=$818140C0
 
-n=Lsr.l(value,shift)
+**n=Lsr.l(value,shift)**
 
     Shifts bits up/right, resulting bits moving to right.
     
@@ -90,7 +108,7 @@ n=Lsr.l(value,shift)
     Example:
     lsl.b($81818181,1)=$40C0C0C0
 
-n=L Swap(n)
+**n=L Swap(n)**
 
     this command is just the same as "L.Swap" command in Craft.
     
@@ -443,7 +461,7 @@ Blit Int Change n To n
 
 Blit Int Wait n 
 
-n=Range(value,start To end)
+**n=Range(value,start To end)**
 
     if value is less then [start] then [value] is [start]
     if value is more then [end] then [value] is [end].
@@ -460,7 +478,7 @@ Scene Icon Bank n
 
 n=T Clip(n,n)
 
-n=Between(min,value,max)
+**n=Between(min,value,max)**
 
     This command returns true if value is more then min, 
     and values is less then max, if this not the case then false is returned.
