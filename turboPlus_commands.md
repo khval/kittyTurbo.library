@@ -160,13 +160,26 @@ R Box dx,dy
 
     Draw a box relative to graphic cursor xgr, ygr
     same as box xgr,ygr to xgr+dx,ygr+dy
+    
+    Command does not change graphic cursor, 
+    you need to move graphic cursor your self with R home 
+    or Xgr, Ygr commands.
 
-R Home dx,dy 
+R Home x,y 
+
+    moves graphic cursor to x,y
+
+    same as:
+    xgr=x : ygr=y
 
 R Bar dx,dy 
 
     Draw a bar relative to graphic cursor xgr, ygr
     same as box xgr,ygr to xgr+dx,ygr+dy
+
+    Command does not change graphic cursor, 
+    you need to move graphic cursor your self with R home 
+    or Xgr, Ygr commands.
 
 
 Reserve Object n,n 
