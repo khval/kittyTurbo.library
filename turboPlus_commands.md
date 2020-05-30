@@ -181,9 +181,15 @@ R Box dx,dy
 **R Home x,y**
 
     moves graphic cursor to x,y
+    Reamended using standard command instead using addons have look at Gr Locate.
 
     same as:
-    xgr=x : ygr=y
+  
+        xgr=x : ygr=y
+
+    and command:
+    
+        gr locate x.y
 
 R Bar dx,dy 
 
