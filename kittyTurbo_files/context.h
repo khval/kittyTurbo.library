@@ -1,1 +1,5 @@
 
+struct context
+{
+	ULONG multiOffCount;
+};

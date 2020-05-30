@@ -13,6 +13,9 @@
  *
  */
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 #include <exec/exec.h>
 #include <proto/exec.h>
@@ -21,6 +24,7 @@
 #include <libraries/kittyTurbo.h>
 #include <proto/kittyTurbo.h>
 #include <stdarg.h>
+#include "context.h"
 
 /****** kittyTurbo/main/FreeContext ******************************************
 *
@@ -50,8 +54,12 @@
 *
 */
 
-void _kittyturbo_FreeContext(struct kittyCompactIFace *Self,
-       void * table)
+void _kittyturbo_FreeContext(struct kittyTurboIFace *Self,
+       struct context * context)
 {
+	if (context)
+	{
+		free (context);
+	}
 }
 

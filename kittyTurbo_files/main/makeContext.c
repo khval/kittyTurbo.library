@@ -13,6 +13,9 @@
  *
  */
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 #include <exec/exec.h>
 #include <proto/exec.h>
@@ -21,6 +24,7 @@
 #include <libraries/kittyTurbo.h>
 #include <proto/kittyTurbo.h>
 #include <stdarg.h>
+#include "context.h"
 
 /****** kittyTurbo/main/makeContext ******************************************
 *
@@ -51,6 +55,14 @@
 
 void * _kittyturbo_makeContext(struct kittyCompactIFace *Self)
 {
-  	return NULL;
+	struct context *context;
+
+	context =  malloc(sizeof(struct context));
+	if (context)
+	{
+		bzero( context, sizeof(struct context) );
+	}
+
+	return context;
 }
 
