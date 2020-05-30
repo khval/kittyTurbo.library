@@ -519,11 +519,58 @@ char *turboplusRHome KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusRDraw( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args =__stack - data->stack +1 ;
+	int x0 ,y0,x1=0,y1=0;
+	struct retroScreen *screen = instance -> screens[instance -> current_screen];
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	x0 = instance->xgr;
+	y0 = instance->ygr;
+
+	switch (args)
+	{
+		case 2:
+			x1 = x0 + getStackNum(instance,__stack-1 );
+			y1 = y0 + getStackNum(instance,__stack );
+			instance->xgr = x1;
+			instance->ygr = y1;
+			break;
+
+		default:
+			popStack(instance,__stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+			return NULL;
+	}
+
+	popStack(instance,__stack - data->stack );
+
+	switch (screen ->autoback)
+	{
+		case 0:
+				if (screen) retroLine( screen, screen -> double_buffer_draw_frame,x0,y0,x1,y1,screen -> ink0 );
+				break;
+
+		default:
+				if (screen)
+				{
+					retroLine( screen, 0,x0,y0,x1,y1,screen -> ink0 );
+					if (screen -> Memory[1])	 retroLine( screen, 1,x0,y0,x1,y1,screen -> ink0 );
+				}
+				break;
+	}
+
+	return NULL;
+}
 
 char *turboplusRDraw KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusRDraw, tokenBuffer );
+	setStackNone(instance);
 	return tokenBuffer;
 }
 
