@@ -16,7 +16,7 @@ At bottom of the list you will find none supported commands.
 
 # List of commands
 
-Multi Yes  
+**Multi Yes**
 
     Enable multitasking, calls function exec.library/permit()
 
@@ -25,7 +25,7 @@ Multi Yes
 
     (Warning do not mix with craft extension, they do not keep the same count)
 
-Multi No  
+**Multi No**
 
     Disable multitasking, executes function exec.library/forbid()
 
@@ -122,13 +122,17 @@ Multi No
 
 **n=L Swap(n)**
 
-n=Test.b(n,n)
+**n=Test.b(n,n)**
 
     Check is low bytes is equal
 
-n=Test.w(n,n)
+**n=Test.w(n,n)**
 
     Check if low word is equal
+
+**n=Test.l(n,n)**
+
+    Check if int is equal
 
 Vbl Wait [y beam] 
 
@@ -154,7 +158,7 @@ n=Hit Spr Check(n To n,n,n,n)
 
 n=Raw Key(n)
 
-R Move dx,dy 
+**R Move dx,dy**
 
     Relative to the graphic cursor xgr, ygr
 
@@ -174,7 +178,7 @@ R Box dx,dy
     you need to move graphic cursor your self with R home 
     or Xgr, Ygr commands.
 
-R Home x,y 
+**R Home x,y**
 
     moves graphic cursor to x,y
 
