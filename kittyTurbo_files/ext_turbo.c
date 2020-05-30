@@ -458,10 +458,34 @@ char *turboplusRawKey KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusRMove( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args = instance_stack - data->stack +1;
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	printf("args: %d\n",args);
+
+	switch (args)
+	{
+		case 2:
+			instance->xgr += getStackNum(instance,__stack-1 );
+			instance->ygr += getStackNum(instance,__stack );
+			popStack( instance, instance_stack - data->stack );
+			break;
+		default:
+			popStack( instance, instance_stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+
+	return  NULL ;
+}
+
 char *turboplusRMove KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusRMove, tokenBuffer );
+	setStackNum( instance, 0 );
 	return tokenBuffer;
 }
 
