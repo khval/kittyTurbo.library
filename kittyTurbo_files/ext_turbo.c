@@ -38,18 +38,38 @@
 
 #define proc_names_printf printf
 
+#ifdef debug
+	#warning compiling with debug 
+	#define dprintf printf
+#else
+	#define dprintf(fmt,...)
+#endif
+
 
 char *turboplusMultiYes KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+
+	dprintf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	if (context -> multiOffCount )
+	{
+		context -> multiOffCount --;
+		if (context -> multiOffCount == 0) Permit();
+	}
+
 	return tokenBuffer;
 }
 
 char *turboplusMultiNo KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+
+	dprintf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	if (context -> multiOffCount == 0) Forbid();
+	context -> multiOffCount ++;
+
 	return tokenBuffer;
 }
 
