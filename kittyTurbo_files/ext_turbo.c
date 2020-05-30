@@ -628,11 +628,45 @@ char *turboplusRBox KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusRBar( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args =__stack - data->stack +1 ;
+	int x0 ,y0,x1,y1;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	if (args==2)
+	{
+		struct retroScreen *screen = instance -> screens[instance -> current_screen];
+
+		x0 = instance->xgr;
+		y0 = instance->ygr;
+		x1 = x0+getStackNum(instance,__stack-1 );
+		y1 = y0+getStackNum(instance,__stack );
+
+		if (screen)
+		{
+			switch (screen -> autoback)
+			{
+				case 0:	retroBAR( screen, screen -> double_buffer_draw_frame, x0, y0, x1, y1,screen -> ink0 );
+						break;
+				default:	retroBAR( screen, 0,  x0, y0,  x1,  y1,screen -> ink0 );
+						if (screen -> Memory[1]) retroBAR( screen, 1,  x0, y0,  x1,  y1,screen -> ink0 );
+						break;
+			}
+		}
+	}
+	else api.setError(22,data->tokenBuffer);
+
+	popStack( instance, instance_stack - data->stack );
+	return NULL;
+}
 
 char *turboplusRBar KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusRBar, tokenBuffer );
 	return tokenBuffer;
 }
 
