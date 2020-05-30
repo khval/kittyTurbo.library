@@ -49,24 +49,7 @@ Multi No
 **n=Lsl.b(value,shift)**
 
     Shifts bits down/left, resulting bits moving to left.
-    This command only effect low byte, the high bytes are kept.
-
-    Example:
-    lsl.b($81818181,1)=$81818102
-        
-**n=Lsl.w(value,shift)**
-
-    Shifts bits down/left, resulting bits moving to left.
-    This command only effect low bytes, the high bytes are kept.
-
-    Example:
-    lsl.b($81818181,1)=$81810202
-
-**n=Lsl.l(value,shift)**
-
-    Shifts bits down/left, resulting bits moving to left.
     
-    To example the command to none computer geeks.
     The command can be explained mathematical like this.
     
     result = value * (2^shift)
@@ -75,8 +58,37 @@ Multi No
     provided you can convert your multipay value to 2^shift format.
     
     Example:
-    lsl.b($81818181,1)=$03030302
+    lsl.b($81818181,1)=$81818102
+
+**n=Lsl.w(value,shift)**
+
+
+    Shifts bits down/left, resulting bits moving to left.
     
+    The command can be explained mathematical like this.
+    
+    result = value * (2^shift)
+    
+    In effect this command is often used for quick multiply,
+    provided you can convert your multipay value to 2^shift format.
+    
+    Example:
+    lsl.w($81818181,1)=$81810302
+
+**n=Lsl.l(value,shift)**
+
+    Shifts bits down/left, resulting bits moving to left.
+    
+    The command can be explained mathematical like this.
+    
+    result = value * (2^shift)
+    
+    In effect this command is often used for quick multiply,
+    provided you can convert your multipay value to 2^shift format.
+    
+    Example:
+    lsl.l($81818181,1)=$03030302
+
 **n=Lsr.b(value,shift)**
 
     Shifts bits up/right, resulting bits moving to right.
@@ -91,7 +103,7 @@ Multi No
     This command only effect the two low bytes, the high bytes are kept.
 
     Example:
-    lsl.b($81818181,1)=$818140C0
+    lsr.w($81818181,1)=$818140C0
 
 **n=Lsr.l(value,shift)**
 
@@ -106,14 +118,9 @@ Multi No
     provided you can convert your divide value to 2^shift format.
 
     Example:
-    lsl.b($81818181,1)=$40C0C0C0
+    lsr.l($81818181,1)=$40C0C0C0
 
 **n=L Swap(n)**
-
-    this command is just the same as "L.Swap" command in Craft.
-    
-    Swaps high and low word in a long / (int32), 
-    $04030201 becomes $02010403
 
 n=Test.b(n,n)
 
@@ -498,6 +505,7 @@ Blit Int Change n To n
 
 Blit Int Wait n 
 
+
 **n=Range(value,start To end)**
 
     if value is less then [start] then [value] is [start]
@@ -515,6 +523,7 @@ Scene Icon Bank n
 
 n=T Clip(n,n)
 
+
 **n=Between(min,value,max)**
 
     This command returns true if value is more then min, 
@@ -525,4 +534,3 @@ n=T Clip(n,n)
 n=Bank End(n)
 
 Debug  
-
