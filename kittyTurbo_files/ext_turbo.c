@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <math.h>
 
 #ifdef __amigaos4__
 #include <proto/exec.h>
@@ -894,10 +895,23 @@ char *turboplusFCircle KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusFSqr( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args =__stack - data->stack +1 ;
+	double d = 0.0;
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__ ,__LINE__);
+	if (args == 1)	d = getStackDecimal(instance,__stack);
+	popStack(instance,__stack - data->stack);
+	setStackDecimal(instance, sqrt( d ) );
+	instance -> kittyStack[__stack].state = state_none;
+	return NULL;
+}
+
 char *turboplusFSqr KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdParm( _turboplusFSqr, tokenBuffer );
 	return tokenBuffer;
 }
 
