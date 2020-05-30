@@ -162,14 +162,14 @@ n=Raw Key(n)
 
     Relative to the graphic cursor xgr, ygr
 
-R Draw dx,dy 
+**R Draw dx,dy**
 
     Draw a line relative to graphic cursor xgr, ygr
     same as draw xgr,ygr to xgr+dx,ygr+dy
     
     Unlike R Box, R Bar, this command does change graphic cursor (xgr,ygr).
 
-R Box dx,dy 
+**R Box dx,dy**
 
     Draw a box relative to graphic cursor xgr, ygr
     same as box xgr,ygr to xgr+dx,ygr+dy
@@ -191,7 +191,7 @@ R Box dx,dy
     
         gr locate x.y
 
-R Bar dx,dy 
+**R Bar dx,dy**
 
     Draw a bar relative to graphic cursor xgr, ygr
     same as box xgr,ygr to xgr+dx,ygr+dy
@@ -261,13 +261,15 @@ n=F Sqr(n)
 
     Same as normal sqr command, no difference in speed.
 
-F Plot n,n,n 
+F Plot x,y,[color] 
 
-n=F Point(x,t)
+    Same as normal plot command, no difference in speed.
+
+n=F Point(x,y)
 
     Same as normal point command, no difference in speed.
 
-F Circle x,y,r,c 
+F Circle x,y,r,[color]
 
     Same as normal circle command, no difference in speed.
 
