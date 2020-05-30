@@ -519,6 +519,14 @@ char *turboplusRHome KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+
+char *turboplusRDraw KITTENS_CMD_ARGS
+{
+	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	api.setError(22, tokenBuffer);
+	return tokenBuffer;
+}
+
 char *turboplusRBox KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
@@ -526,12 +534,6 @@ char *turboplusRBox KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
-char *turboplusRHome KITTENS_CMD_ARGS
-{
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
-	return tokenBuffer;
-}
 
 char *turboplusRBar KITTENS_CMD_ARGS
 {
