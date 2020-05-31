@@ -909,10 +909,45 @@ char *turboplusStarsClip KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusFPoint( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args =__stack - data->stack +1 ;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 2:
+			{
+				int x,y;
+				x = getStackNum(instance,__stack-1 );
+				y = getStackNum(instance,__stack );
+				popStack(instance,__stack - data->stack );
+
+				if (instance -> screens[instance -> current_screen])
+				{
+					setStackNum(instance, retroPoint(instance -> screens[instance -> current_screen], x, y)) ;
+				}
+				else
+				{
+					setStackNum(instance, -1) ;
+				}
+			}
+			return NULL;
+
+		default:
+			popStack(instance,__stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+	return NULL;
+}
+
 char *turboplusFPoint KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdParm( _turboplusFPoint, tokenBuffer );
+	setStackNone(instance);
 	return tokenBuffer;
 }
 
