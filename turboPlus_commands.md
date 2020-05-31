@@ -266,7 +266,10 @@ n=F Sqr(n)
 
 Blit Clear n 
 
-n=Left Click  
+n=Left Click
+
+    This command should work while exec/forbid, this not the case for Amos Kittens / AmigaOS4.1, 
+    because the USB stack has run for mouse keys to be processed.
 
 Reserve Stars n 
 
