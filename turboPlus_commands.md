@@ -239,31 +239,10 @@ Blit Speed n,n
 
 Blit Left n,n,n To n,n,n 
 
-F Plot n,n,n 
-
-n=F Point(x,t)
-
-    Same as normal point command, no difference in speed.
-
-F Circle x,y,r,c 
-
-    Same as normal circle command, no difference in speed.
-
-F Draw x,y To x,y 
-
-    Same as normal draw command, no difference in speed.
-
-F Draw n,n 
-
-    Same as normal draw command, no difference in speed.
-
-n=F Sqr(n)
-
-    Same as normal sqr command, no difference in speed.
-
 F Plot x,y,[color] 
 
-    Same as normal plot command, no difference in speed.
+    If your changing colors often then this command can be faster then normal Plot command.
+    if your not changing color often, it should be faster to preset color with ink command.
 
 n=F Point(x,y)
 
@@ -273,11 +252,11 @@ F Circle x,y,r,[color]
 
     Same as normal circle command, no difference in speed.
 
-F Draw x,y To x,y 
+F Draw n,n 
 
     Same as normal draw command, no difference in speed.
 
-F Draw n,n 
+F Draw x,y To x,y 
 
     Same as normal draw command, no difference in speed.
 
