@@ -239,38 +239,38 @@ Blit Speed n,n
 
 Blit Left n,n,n To n,n,n 
 
-F Plot x,y,[color] 
+**F Plot x,y,[color]**
 
     If your changing colors often then this command can be faster then normal Plot command.
     if your not changing color often, it should be faster to preset color with ink command.
 
     This command does not change graphic cursor.
 
-n=F Point(x,y)
+**n=F Point(x,y)**
 
     Same as normal point command, no difference in speed.
 
     This command does not change graphic cursor.
 
-F Circle x,y,r,[color]
+**F Circle x,y,r,[color]**
 
     Same as normal circle command, no difference in speed.
 
     This command does not change graphic cursor.
 
-F Draw n,n 
+**F Draw x,y**
 
     Same as normal draw command, no difference in speed.
 
     This command does change graphic cursor.
 
-F Draw x,y To x,y 
+**F Draw x,y To x,y**
 
     Same as normal draw command, no difference in speed.
 
     This command does change graphic cursor.
 
-n=F Sqr(n)
+**n=F Sqr(n)**
 
     Same as normal sqr command, no difference in speed.
 
