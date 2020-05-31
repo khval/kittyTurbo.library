@@ -951,10 +951,47 @@ char *turboplusFPoint KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusFCircle( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct retroScreen *screen = instance -> screens[instance -> current_screen];
+	int args =__stack - data->stack +1 ;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	if (args==4)
+	{
+		int x,y,r,c;
+
+		x = getStackNum(instance,__stack-3 );
+		y = getStackNum(instance,__stack-2 );
+		r = getStackNum(instance,__stack-1 );
+		c = getStackNum(instance,__stack );
+
+
+		if (screen) 
+		{
+			switch(screen -> autoback)
+			{
+				case 0:	retroCircle( screen, screen -> double_buffer_draw_frame,x,y,r,c ); 
+						break;
+				default:
+						retroCircle( screen, 0,x,y,r,c ); 
+						if (screen -> Memory[1]) retroCircle( screen, 1,x,y,r,c ); 
+						break;
+			}
+		}
+	}
+	else api.setError(22,data->tokenBuffer);
+
+	popStack(instance,__stack - data->stack );
+	return NULL;
+}
+
 char *turboplusFCircle KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusFCircle, tokenBuffer );
 	return tokenBuffer;
 }
 
