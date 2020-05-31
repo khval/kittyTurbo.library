@@ -268,8 +268,11 @@ Blit Clear n
 
 n=Left Click
 
-    This command should work while exec/forbid, this not the case for Amos Kittens / AmigaOS4.1, 
-    because the USB stack has run for mouse keys to be processed.
+    This command should work while in exec/forbid(), this is not the case for Amos Kittens / AmigaOS 4.1, 
+    because the USB stack has run for the mouse keys to be processed.
+
+    You should really avoid writing code that is not system fremedly.
+    I will suggest using Amos Pro command "Mouse Click" or "Mouse Key" instead of this command.
 
 Reserve Stars n 
 
