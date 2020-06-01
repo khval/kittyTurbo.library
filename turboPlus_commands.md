@@ -311,7 +311,8 @@ Stars Draw
 
 Stars Speed [start] To [end],[speed x],[speed y] 
 
-    Change the speed of stars from start to end.
+    Change the speed of of a range of star from start to end.-    
+    First star is at 1, if start is 0, you will get illegal function call.      
 
 Stars Clip x0,y0,x1,y1 
 
