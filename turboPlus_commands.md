@@ -525,6 +525,20 @@ Blit Up n,n,n To n,n,n
 
 Blit Store Up n,n,n,n To n,n,n 
 
+Blit Clear [bit]
+
+    This command clears all or some of bit plains. 
+    on Amiga computers with planar graphics this command should be faster than Cls command.
+    On modern graphic cards, this command its slower, instead of clear one or two bitmaps, this command has mask the image with a AND operation, to remove bits from the color value.
+
+    bit %001 clear plain 0
+    bit %010 clear plain 1
+    bit %011 clear plain 1 and 0
+    bit %100 clear plain 2
+    bit %101 clear plain 2 and 0
+    bit %110 clear plain 2 and 1
+    bit %111 clear plain 2,1 and 0  
+
 n=Icon Check(n)
 
 Scene Icon Bank n 
