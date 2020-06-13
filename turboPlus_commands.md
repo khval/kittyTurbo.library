@@ -336,7 +336,8 @@ Blit Clear [bit]
 
     This command clears all or some of bit plains. 
     on Amiga computers with planar graphics this command should be faster than Cls command.
-    On modern graphic cards, this command its slower, instead of clear one or two bitmaps, this command has mask the image with a AND operation, to remove bits from the color value.
+    On modern graphic cards, this command its slower, instead of clearing one or two bitmaps, 
+    this command has to mask the image with a AND operation, to remove bits from the color value.
 
     bit %001 clear plain 0
     bit %010 clear plain 1
@@ -384,6 +385,8 @@ n=X Icon(n)
 n=Y Icon(n)
 
 n=Planes Icon(n)
+
+n=Icon Check(n)
 
 n=Cpu Info  
 
@@ -529,7 +532,6 @@ Scene Load s$,n
 
 Memory Fill n To n,s$ 
 
-
 **n=Range(value,start To end)**
 
     if value is less then [start] then [value] is [start]
@@ -537,12 +539,9 @@ Memory Fill n To n,s$
 
 n=Texp(n,n,n)
 
-n=Icon Check(n)
-
 Scene Icon Bank n 
 
 n=T Clip(n,n)
-
 
 **n=Between(min,value,max)**
 
