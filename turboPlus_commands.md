@@ -274,8 +274,6 @@ Blit Left n,n,n To n,n,n
 
     Same as normal sqr command, no difference in speed.
 
-Blit Clear n 
-
 n=Left Click
 
     This command should work while in exec/forbid(), this is not the case for Amos Kittens / AmigaOS 4.1, 
@@ -284,19 +282,19 @@ n=Left Click
     You should really avoid writing code that is not system fremedly.
     I will suggest using Amos Pro command "Mouse Click" or "Mouse Key" instead of this command.
 
-Reserve Stars n 
+**Reserve Stars n**
 
     Reserve stars, or random dots in x,y plain
 
-Define Star n,x,y,x speed,y speed 
+**Define Star n,x,y,x speed,y speed**
 
     Set star [n] coordinate [x],[y] and speed
 
-Display Stars  
+**Display Stars**
     
     draws stars and computes the next position of the stars.
 
-Stars Erase  
+**Stars Erase**
 
     Erase stars / dots
 
@@ -305,7 +303,7 @@ Stars Compute [n start] To [n end]
     Calculate the new position of the stars.
     from [n start] to [n end]
 
-Stars Draw  
+**Stars Draw**
 
     Draw stars/dots
 
@@ -325,6 +323,29 @@ Stars Int Off
 Blit Int On n To n 
 
 Blit Int Off  
+
+Blit Int Change n To n 
+
+Blit Int Wait n 
+
+Blit Up n,n,n To n,n,n 
+
+Blit Store Up n,n,n,n To n,n,n 
+
+Blit Clear [bit]
+
+    This command clears all or some of bit plains. 
+    on Amiga computers with planar graphics this command should be faster than Cls command.
+    On modern graphic cards, this command its slower, instead of clearing one or two bitmaps, 
+    this command has to mask the image with a AND operation, to remove bits from the color value.
+
+    bit %001 clear plain 0
+    bit %010 clear plain 1
+    bit %011 clear plain 1 and 0
+    bit %100 clear plain 2
+    bit %101 clear plain 2 and 0
+    bit %110 clear plain 2 and 1
+    bit %111 clear plain 2,1 and 0  
 
 Object Limit n 
 
@@ -364,6 +385,8 @@ n=X Icon(n)
 n=Y Icon(n)
 
 n=Planes Icon(n)
+
+n=Icon Check(n)
 
 n=Cpu Info  
 
@@ -509,11 +532,6 @@ Scene Load s$,n
 
 Memory Fill n To n,s$ 
 
-Blit Int Change n To n 
-
-Blit Int Wait n 
-
-
 **n=Range(value,start To end)**
 
     if value is less then [start] then [value] is [start]
@@ -521,16 +539,9 @@ Blit Int Wait n
 
 n=Texp(n,n,n)
 
-Blit Up n,n,n To n,n,n 
-
-Blit Store Up n,n,n,n To n,n,n 
-
-n=Icon Check(n)
-
 Scene Icon Bank n 
 
 n=T Clip(n,n)
-
 
 **n=Between(min,value,max)**
 
