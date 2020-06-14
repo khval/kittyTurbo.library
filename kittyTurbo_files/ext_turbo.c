@@ -28,7 +28,6 @@
 #include "cmdList.h"
 #include "context.h"
 
-
 #define kittyError instance->kittyError
 #define api instance -> api
 #define last_var instance -> last_var
@@ -853,52 +852,279 @@ char *turboplusLeftClick KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+
+char *_turboplusReserveStars( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args = instance_stack - data->stack +1;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	if (args !=1)
+	{
+		api.dumpStack();
+
+		popStack( instance, instance_stack - data->stack );
+		api.setError(22, data -> tokenBuffer);
+		return NULL;
+	}
+	else
+	{
+		struct context *context = instance -> extensions_context[ instance -> current_extension ];
+
+		if (context)
+		{
+			context -> star_count = getStackNum( instance,__stack);
+			if (context -> stars)	free( context -> stars );
+			context -> stars = (struct star *) malloc( context -> star_count * sizeof(struct star) );
+		}
+	}
+
+	return NULL;
+}
+
 char *turboplusReserveStars KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusReserveStars, tokenBuffer );
 	return tokenBuffer;
+}
+
+char *_turboplusDefineStar( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args = instance_stack - data->stack +1;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	printf("args: %d\n",args);
+
+	if (args !=5)
+	{
+		popStack( instance, instance_stack - data->stack );
+		api.setError(22, data -> tokenBuffer);
+		return NULL;
+	}
+	else
+	{
+		struct context *context = instance -> extensions_context[ instance -> current_extension ];
+
+		if (context)
+		{
+			int32 num = getStackNum( instance,__stack-4)-1;
+
+			if ((context -> stars) && (num>=0) && (num <= context -> star_count))
+			{
+				struct star *star = context -> stars + num;
+				star -> x = getStackNum( instance,__stack-3);
+				star -> y = getStackNum( instance,__stack-2);
+				star -> speedx = getStackNum( instance,__stack-1);
+				star -> speedy = getStackNum( instance,__stack);
+			}
+			else api.setError(34,data -> tokenBuffer);
+		}
+		popStack( instance, instance_stack - data->stack );
+	}
+
+	return NULL;
 }
 
 char *turboplusDefineStar KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusDefineStar, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusDisplayStars KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	if (context)
+	{
+		if (context -> stars) 
+		{
+			struct star *star;
+			struct star *star_end;
+			struct retroScreen *screen = instance -> screens[instance -> current_screen];
+
+			if (screen)
+			{
+				unsigned char *mem = screen -> Memory[ screen -> double_buffer_draw_frame ];
+
+				star_end = context -> stars + context -> star_count;
+				for (  star = context -> stars; star < star_end ; star++)
+				{
+					retroPixel( screen, mem, star -> x, star -> y, screen -> ink0 );
+					star -> x = (star -> x + star -> speedx) % screen -> realWidth ;
+					star -> y = (star -> y + star -> speedy) % screen -> realHeight;
+				}
+			}
+		}
+	}
+
 	return tokenBuffer;
 }
 
 char *turboplusStarsErase KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+
+	if (context)
+	{
+		if (context -> stars)	free( context -> stars );
+		context -> stars = NULL;
+	}
+
 	return tokenBuffer;
+}
+
+char *_turboplusStarsCompute( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args = instance_stack - data->stack +1;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	printf("args: %d\n",args);
+
+	if (args !=2)
+	{
+		popStack( instance, instance_stack - data->stack );
+		api.setError(22, data -> tokenBuffer);
+		return NULL;
+	}
+	else
+	{
+		struct context *context = instance -> extensions_context[ instance -> current_extension ];
+		struct retroScreen *screen = instance -> screens[ instance -> current_screen ];
+
+		if (context)
+		{
+			int32 start = getStackNum( instance,__stack-1)-1;
+			int32 end = getStackNum( instance,__stack)-1;
+
+			if ((start<0) || (start > context -> star_count))
+			{
+				api.setError(34,data -> tokenBuffer);
+				popStack( instance, instance_stack - data->stack );
+				return NULL;
+			}
+
+			if ((end<0) || (end > context -> star_count))
+			{
+				api.setError(34,data -> tokenBuffer);
+				popStack( instance, instance_stack - data->stack );
+				return NULL;
+			}
+
+			if (context -> stars) 
+			{
+				int i;
+				struct star *star;
+
+				star = context -> stars + start;
+
+				for (i = start; i <= end ; i++)
+				{
+					star -> x = (star -> x + star -> speedx) % screen -> realWidth ;
+					star -> y = (star -> y + star -> speedy) % screen -> realHeight;
+					star ++;
+				}
+			}
+			else api.setError(34,data -> tokenBuffer);
+		}
+		popStack( instance, instance_stack - data->stack );
+	}
+
+	return NULL;
 }
 
 char *turboplusStarsCompute KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusStarsCompute, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusStarsDraw KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	struct retroScreen *screen = instance -> screens[ instance -> current_screen ];
+
+	if (context)
+	{
+		if (context -> stars) 
+		{
+			struct star *star;
+			struct star *stars_end = context -> stars + context -> star_count ;
+			unsigned char *mem = screen -> Memory[ screen -> double_buffer_draw_frame ];
+			int ink0 = screen -> ink0;
+
+			for (star = context -> stars; star <= stars_end ; star++)
+			{
+				retroPixel( screen, mem, star -> x, star -> y, ink0 );
+			}
+		}
+	}
+
 	return tokenBuffer;
+}
+
+char *_turboplusStarsSpeed( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args =__stack - data->stack +1 ;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	printf("args: %d\n",args);
+
+	switch (args)
+	{
+		case 4:
+			{
+				int i,start,end,speedx,speedy;
+				start = getStackNum(instance,__stack-3 );
+				end = getStackNum(instance,__stack-2 );
+				speedx = getStackNum(instance,__stack-1 );
+				speedy = getStackNum(instance,__stack );
+				popStack(instance,__stack - data->stack );
+
+				if (context -> stars) 
+				{
+					struct star *star;
+
+					star = context -> stars + start;
+
+					for (i = start; i <= end ; i++)
+					{
+						star -> speedx = speedx;
+						star -> speedy = speedy;
+						star ++;
+					}
+				}
+				else api.setError(34,data -> tokenBuffer);
+			}
+			return NULL;
+
+		default:
+			popStack(instance,__stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+	return NULL;
 }
 
 char *turboplusStarsSpeed KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusStarsSpeed, tokenBuffer );
 	return tokenBuffer;
 }
 
