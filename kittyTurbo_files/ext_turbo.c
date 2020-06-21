@@ -838,10 +838,43 @@ char *turboplusFPlot KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+
+char *_turboplusBlitClear( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args = instance_stack - data->stack +1;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	if (args !=1)
+	{
+		api.dumpStack();
+
+		popStack( instance, instance_stack - data->stack );
+		api.setError(22, data -> tokenBuffer);
+		return NULL;
+	}
+	else
+	{
+		int bits;
+		struct retroScreen *screen = instance -> screens[instance -> current_screen];
+
+		if (screen)
+		{
+			bits = getStackNum( instance,__stack);
+			retroAndClear( screen, screen -> double_buffer_draw_frame, 0, 0, screen -> realWidth, screen -> realHeight , ~bits );
+		}
+	}
+
+	return NULL;
+}
+
+
 char *turboplusBlitClear KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusBlitClear, tokenBuffer );
+	setStackNone( instance );
 	return tokenBuffer;
 }
 
