@@ -454,10 +454,25 @@ n=Planes Icon(n)
 
 n=Icon Check(n)
 
-n=Cpu Info  
+n=Cpu Info
 
-n=Math Info  
+	This command returns CPU type..
+	Because OS4.1 uses same ID numbers for PowerPC as 680x0, to avoid mistakes $1000 is added for PPC.
 
+	= CPUTYPE_68X00
+	or 
+	= $1000 | CPUTYPE_PPC
+
+	Id numbers can be found in file "exectags.h" in the AmigaOS4.1 SDK.
+
+n=Math Info
+
+	Amos Kittens will just return 882, it does not check for coprocessor
+
+	000 - no coprocessor installed
+	881 - MC68881 coprocessor installed
+	882 - MC68882 coprocessor installed
+		
 F Put Block n,n,n 
 
 Reserve Static Block n 
@@ -467,6 +482,10 @@ Static Block Erase
 Build Static Block  
 
 F Put Static Block n,n,n 
+
+Scene Load s$,n 
+
+Scene Icon Bank n 
 
 Scene Bank n 
 
@@ -594,8 +613,6 @@ n=Byte Hunt(n To n,n,n To n)
 
 Workbench Open  
 
-Scene Load s$,n 
-
 Memory Fill n To n,s$ 
 
 **n=Range(value,start To end)**
@@ -604,8 +621,6 @@ Memory Fill n To n,s$
     if value is more then [end] then [value] is [end].
 
 n=Texp(n,n,n)
-
-Scene Icon Bank n 
 
 n=T Clip(n,n)
 
