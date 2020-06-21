@@ -1584,15 +1584,18 @@ char *turboplusPlanesIcon KITTENS_CMD_ARGS
 
 char *turboplusCpuInfo KITTENS_CMD_ARGS
 {
+	ULONG id;
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+
+	GetCPUInfoTags( GCIT_Model, &id , TAG_END );
+	setStackNum(instance, 0x10000000 | id);
 	return tokenBuffer;
 }
 
 char *turboplusMathInfo KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	setStackNum(instance, 882);
 	return tokenBuffer;
 }
 
