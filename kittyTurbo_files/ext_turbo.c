@@ -1422,38 +1422,72 @@ char *turboplusPlaneUpdate KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusFPasteIcon( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args =__stack - data->stack +1 ;
+	struct retroScreen *screen;
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 3:	if ((instance -> icons) && (screen = instance -> screens[instance -> current_screen]))
+				{
+					int x = getStackNum(instance,__stack-2 );
+					int y = getStackNum(instance,__stack-1 );
+					int image = getStackNum(instance,__stack );
+
+					switch (screen -> autoback)
+					{
+						case 0:	retroPasteIcon( screen, screen -> double_buffer_draw_frame,  instance->icons,x,y,image-1);
+								break;
+						default:	retroPasteIcon( screen, 0, instance -> icons,x,y,image-1);
+								if (screen -> Memory[1]) retroPasteIcon( screen, 1,  instance -> icons,x,y,image-1);
+								break;
+					}		
+				}
+				break;
+			break;
+		default:
+			api.setError(22,data->tokenBuffer);
+	}
+
+	popStack(instance,__stack - data->stack );
+	return NULL;
+}
+
 char *turboplusFPasteIcon KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusFPasteIcon, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusF32Icon KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusFPasteIcon, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusF16Icon KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusFPasteIcon, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusF16procIcon KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusFPasteIcon, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusF32procIcon KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusFPasteIcon, tokenBuffer );
 	return tokenBuffer;
 }
 
