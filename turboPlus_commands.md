@@ -361,30 +361,96 @@ Plane Shift Down n,n To n
 
 Plane Update n 
 
-F Paste Icon x,y,n 
+F Paste Icon [x],[y],[n]
 
-    paste icon [n] to [x],[y], same as normal paste icon in.
-    (Should be dirty we don’t allow that in Amos kittens.)
+    On Amos Kittens:
 
-F 32 Icon n,n,n 
+        Same as normal paste icon (uses retroMode.library).
+    
+    On Amos Pro:
+    
+        * This command uses blitter.
+    
+        * This command is made for speed, does not do testing.
 
-    paste icon [n] to [x],[y], same as normal paste icon in.
-    (Should be dirty we don’t allow that in Amos kittens.)
+        * This command can crash your computer.
 
-F 16 Icon n,n,n 
+F 32 Icon [x],[y],[n]
 
-    paste icon [n] to [x],[y], same as normal paste icon in.
-    (Should be dirty we don’t allow that in Amos kittens.)
+    On Amos Kittens:
 
-F 16proc Icon n,n,n 
+        Same as normal paste icon (uses retroMode.library).
+    
+    On Amos Pro:
 
-F 32proc Icon n,n,n 
+        * This command should only work with 32-pixel width icons.
+
+        * This command uses blitter.
+    
+        * This command is made for speed, does not do testing.
+
+        * This command can crash your computer.
+
+F 16 Icon [x],[y],[n]
+
+    On Amos Kittens:
+
+        Same as normal paste icon (uses retroMode.library).
+    
+    On Amos Pro:
+
+        * This command should only work with 16-pixel width icons.
+
+        * This command uses blitter.
+
+        * This command is made for speed, does not do testing.
+
+        * This command can crash your computer.
+
+F 16proc Icon [x],[y],[n]
+
+    On Amos Kittens:
+
+        Same as normal paste icon (uses retroMode.library).
+
+    On Amos Pro:
+    
+        * This command should only work with 16-pixel width icons.
+    
+        * This command uses CPU
+        
+        * This command is made for speed, does not do testing.
+
+        * This command can crash your computer.
+
+F 32proc Icon [x],[y],[n]
+
+    On Amos Kittens:
+
+        Same as normal paste icon (uses retroMode.library).
+
+    On Amos Pro:
+
+        * This command should only work with 32-pixel width icons.
+
+        * This command uses CPU
+
+        * This command is made for speed, does not do testing.
+
+        * This command can crash your computer.
 
 n=X Icon(n)
 
+    Return width in words of icon[n]
+	words width = icon [n] pixel width / 16
+
 n=Y Icon(n)
 
+    return pixel height of icon [n]
+
 n=Planes Icon(n)
+
+    Should returns number of bit plains. (on Amos Kittens this command will return 8.)   
 
 n=Icon Check(n)
 
