@@ -978,6 +978,7 @@ char *turboplusDisplayStars KITTENS_CMD_ARGS
 	{
 		if (context -> stars) 
 		{
+			int x,y;
 			struct star *star;
 			struct star *star_end;
 			struct retroScreen *screen = instance -> screens[instance -> current_screen];
@@ -985,13 +986,23 @@ char *turboplusDisplayStars KITTENS_CMD_ARGS
 			if (screen)
 			{
 				unsigned char *mem = screen -> Memory[ screen -> double_buffer_draw_frame ];
+				int sw,sh;
+
+				sw = screen -> realWidth;
+				sh = screen -> realHeight;
 
 				star_end = context -> stars + context -> star_count;
 				for (  star = context -> stars; star < star_end ; star++)
 				{
 					retroPixel( screen, mem, star -> x, star -> y, screen -> ink0 );
-					star -> x = (star -> x + star -> speedx) % screen -> realWidth ;
-					star -> y = (star -> y + star -> speedy) % screen -> realHeight;
+					x = star -> x + star -> speedx;
+					y = star -> y + star -> speedy;
+
+					if (x<0) { x = sw - x; } else if (x>=sw) x -= sw;
+					if (y<0) {  y = sh - y;} else if (y>=sh) y -= sh;
+
+					star -> x = x;
+					star -> y = y;
 				}
 			}
 		}
