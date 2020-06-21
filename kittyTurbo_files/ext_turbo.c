@@ -1491,24 +1491,94 @@ char *turboplusF32procIcon KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusXIcon( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args =__stack - data->stack +1 ;
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 1:
+			{
+				int image = getStackNum(instance,__stack )-1;
+				if (image > instance -> icons -> number_of_frames) break;
+				if (image < 0) break;
+				setStackNum(instance, (instance -> icons -> frames + image) -> planarXSize );
+			}
+			return NULL;
+	}
+
+	popStack(instance,__stack - data->stack );
+	api.setError(22,data->tokenBuffer);
+
+	return NULL;
+}
+
 char *turboplusXIcon KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdParm( _turboplusXIcon, tokenBuffer );
 	return tokenBuffer;
+}
+
+char *_turboplusYIcon( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args =__stack - data->stack +1 ;
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 1:
+			{
+				int image = getStackNum(instance,__stack )-1;
+				if (image > instance -> icons -> number_of_frames) break;
+				if (image < 0) break;
+				setStackNum(instance, (instance -> icons -> frames + image) -> height );
+			}
+			return NULL;
+	}
+
+	popStack(instance,__stack - data->stack );
+	api.setError(22,data->tokenBuffer);
+	return NULL;
 }
 
 char *turboplusYIcon KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdParm( _turboplusYIcon, tokenBuffer );
 	return tokenBuffer;
+}
+
+char *_turboplusPlanesIcon( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args =__stack - data->stack +1 ;
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 1:
+			{
+				int image = getStackNum(instance,__stack )-1;
+				if (image > instance -> icons -> number_of_frames) break;
+				if (image < 0) break;
+				setStackNum(instance, (instance -> icons -> frames + image) -> numberOfPlains );
+			}
+			return NULL;
+	}
+
+	popStack(instance,__stack - data->stack );
+	api.setError(22,data->tokenBuffer);
+	return NULL;
 }
 
 char *turboplusPlanesIcon KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdParm( _turboplusPlanesIcon, tokenBuffer );
 	return tokenBuffer;
 }
 
