@@ -229,15 +229,60 @@ Object Save s$,n To n
 
 Object Load s$,n 
 
-Blit Store Left n,n,n,n To n,n,n 
+Multi Blit [start] To [end] 
 
-Multi Blit n To n 
+Blit Erase [n] 
 
-Blit Erase n 
+Blit Speed [n],[shift] 
 
-Blit Speed n,n 
+Blit Int On [start] To [end] 
 
-Blit Left n,n,n To n,n,n 
+Blit Int Off  
+
+Blit Int Change [start] To [end]
+
+Blit Int Wait [n] 
+
+Blit Left [screen],[x],[y] To [x1],[y1],[shift]
+
+	[x],[y] top left corner.
+	[x1],[y] right, bottom corner.
+	[shift] value from -15 to 15
+
+Blit Up [screen],[x],[y] To [x1],[y1],[shift]
+
+	[x],[y] top left corner.
+	[x1],[y] right, bottom corner.
+	[shift] value from -15 to 15
+
+Blit Store Left [screen],[n],[x],[y] To [x1],[y1],[shift]
+
+	Store zone [n]
+	[x],[y] top left corner.
+	[x1],[y] right, bottom corner.
+	[shift] value from -15 to 15
+
+Blit Store Up [screen],[n],[x],[y] To [x1],[y1],[shift]
+
+	Store zone [n]
+	[x],[y] top left corner.
+	[x1],[y] right, bottom corner.
+	[shift] value from -15 to 15
+
+Blit Clear [bit]
+
+    This command clears all or some of bit plains. 
+    on Amiga computers with planar graphics this command should be faster than Cls command.
+    On modern graphic cards, this command its slower, instead of clearing one or two bitmaps, 
+    this command has to mask the image with a AND operation, to remove bits from the color value.
+
+    bit %001 clear plain 0
+    bit %010 clear plain 1
+    bit %011 clear plain 1 and 0
+    bit %100 clear plain 2
+    bit %101 clear plain 2 and 0
+    bit %110 clear plain 2 and 1
+    bit %111 clear plain 2,1 and 0  
 
 **F Plot x,y,[color]**
 
@@ -319,33 +364,6 @@ Stars Clip x0,y0,x1,y1
 Stars Int On n 
 
 Stars Int Off  
-
-Blit Int On n To n 
-
-Blit Int Off  
-
-Blit Int Change n To n 
-
-Blit Int Wait n 
-
-Blit Up n,n,n To n,n,n 
-
-Blit Store Up n,n,n,n To n,n,n 
-
-Blit Clear [bit]
-
-    This command clears all or some of bit plains. 
-    on Amiga computers with planar graphics this command should be faster than Cls command.
-    On modern graphic cards, this command its slower, instead of clearing one or two bitmaps, 
-    this command has to mask the image with a AND operation, to remove bits from the color value.
-
-    bit %001 clear plain 0
-    bit %010 clear plain 1
-    bit %011 clear plain 1 and 0
-    bit %100 clear plain 2
-    bit %101 clear plain 2 and 0
-    bit %110 clear plain 2 and 1
-    bit %111 clear plain 2,1 and 0  
 
 Object Limit n 
 
