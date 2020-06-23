@@ -231,9 +231,14 @@ Object Load s$,n
 
 Multi Blit [start] To [end] 
 
-Blit Erase [n] 
+**Blit Erase [n]**
 
-Blit Speed [n],[shift] 
+	Erase blit [n] from memory.
+
+**Blit Speed [n],[shift]**
+
+    Sets the speed of blit
+    [shift] value from -15 to 15
 
 Blit Int On [start] To [end] 
 
@@ -352,7 +357,7 @@ Stars Compute [n start] To [n end]
 
     Draw stars/dots
 
-Stars Speed [start] To [end],[speed x],[speed y] 
+**Stars Speed [start] To [end],[speed x],[speed y]**
 
     Change the speed of of a range of star from start to end.-    
     First star is at 1, if start is 0, you will get illegal function call.      
@@ -631,7 +636,9 @@ n=Byte Hunt(n To n,n,n To n)
 
 Workbench Open  
 
-Memory Fill n To n,s$ 
+**Memory Fill [start] To [end],text$**
+
+    Fill memory with text
 
 **n=Range(value,start To end)**
 
