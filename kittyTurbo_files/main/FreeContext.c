@@ -59,7 +59,11 @@ void _kittyturbo_FreeContext(struct kittyTurboIFace *Self,
 {
 	if (context)
 	{
-		if (context -> stars) free (context -> stars);
+		if (context -> stars) free (context -> stars );
+		if (context -> blits) free ( context -> blits );
+
+		context -> stars = NULL;
+		context -> blits = NULL;
 		free (context);
 	}
 }
