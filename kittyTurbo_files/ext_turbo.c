@@ -855,17 +855,71 @@ void BlitErase(struct context *context,int id)
 	}
 }
 
+char *_turboplusBlitErase( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args =__stack - data->stack +1 ;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 1:
+			{
+				int id = getStackNum(instance,__stack );
+				if (context -> blits == 0) return NULL;
+				BlitErase( context, id );
+			}
+			break;
+		default:
+			api.setError(22,data->tokenBuffer);
+	}
+
+	popStack(instance,__stack - data->stack );
+	return NULL;
+}
+
 char *turboplusBlitErase KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusBlitErase, tokenBuffer );
 	return tokenBuffer;
+}
+
+char *_turboplusBlitSpeed( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args =__stack - data->stack +1 ;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 2:
+			{
+				struct context *context = instance -> extensions_context[ instance -> current_extension ];
+				int id = getStackNum(instance,__stack -1 );
+
+				struct blit *blit = findBlit(context, id);
+				if (blit)
+				{
+					blit -> shift = getStackNum(instance,__stack );
+				}
+			}
+			break;
+		default:
+			api.setError(22,data->tokenBuffer);
+	}
+
+	popStack(instance,__stack - data->stack );
+	return NULL;
 }
 
 char *turboplusBlitSpeed KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusBlitSpeed, tokenBuffer );
 	return tokenBuffer;
 }
 
