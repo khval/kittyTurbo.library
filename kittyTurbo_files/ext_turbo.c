@@ -1865,10 +1865,46 @@ char *turboplusSceneLoad KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusMemoryFill( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args =__stack - data->stack +1 ;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 3:
+			{
+				char *start = (char *)  getStackNum(instance,__stack -2 );
+				char *end = (char *) getStackNum(instance,__stack -1 );
+				struct stringData *txt = getStackString(instance,__stack );
+				char *ptr;
+				char *sptr;
+				int n;
+
+				sptr = &txt -> ptr;
+
+				n=0;
+				for (ptr=start; ptr<end;ptr++)
+				{
+					*ptr = sptr[n];
+					n=(n+1)%txt->size;
+				}
+			}
+			break;
+		default:
+			api.setError(22,data->tokenBuffer);
+	}
+
+	popStack(instance,__stack - data->stack );
+	return NULL;
+}
+
 char *turboplusMemoryFill KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusMemoryFill, tokenBuffer );
 	return tokenBuffer;
 }
 
