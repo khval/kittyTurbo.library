@@ -782,6 +782,79 @@ char *turboplusMultiBlit KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+void blit_push_back(struct context *context,struct blit *blit)
+{
+	struct blit **blits;
+
+	if ((context -> blits_used +1) > context -> blits_allocated)
+	{
+		int allocated = context -> blits_allocated +10;
+
+		blits = (struct blit **) malloc( sizeof(struct blit *)  * allocated );
+		if (blits)
+		{
+			if (context -> blits)
+			{
+				memcpy(blits, context -> blits, sizeof(struct blit *) * context -> blits_used );
+				free(context -> blits);
+			}
+			context -> blits = blits;
+			context -> blits_allocated = allocated;
+			context -> blits[ context -> blits_used ] = blit;
+			context -> blits_used ++;
+		}
+	}
+	else
+	{
+		context -> blits[ context -> blits_used ] = blit;
+		context -> blits_used ++;	
+	}
+}
+
+
+struct blit *findBlit(struct context *context,int id)
+{
+	int i;
+	struct blit **blits = context -> blits;
+
+	if (blits == NULL) return NULL;
+	for (i=0;i<context -> blits_used;i++)
+	{
+		if (blits[i]->id == id) return blits[i];
+	}
+	return NULL;
+}
+
+void BlitErase(struct context *context,int id)
+{
+	int i;
+	struct blit **blits = context -> blits;
+	for (i=0;i<context -> blits_used;i++)
+	{
+		printf("index %d\n", i);
+
+		if (blits[i]->id == id) 
+		{
+			free(blits[i]);
+
+			printf("found id: %d for erase\n",id);
+
+			if (i)
+			{
+				i++;
+				for ( ; i < context -> blits_used;i++)
+				{
+					blits[i-1] = blits[i];
+				}				
+			}
+
+			context -> blits_used--;
+			blits[context -> blits_used] = NULL;
+			break;
+		}
+	}
+}
+
 char *turboplusBlitErase KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
