@@ -5,6 +5,11 @@ struct star
 	int x,y,speedx,speedy;
 };
 
+struct item
+{
+	int id;
+};
+
 struct blit
 {
 	int id;
@@ -14,6 +19,13 @@ struct blit
 	int x1;
 	int y1;
 	int shift;
+};
+
+struct list
+{
+	struct item **items;
+	int allocated;
+	int used;
 };
 
 struct context
@@ -29,7 +41,6 @@ struct context
 
 //--	Blits --
 
-	struct blit **blits;
-	int blits_allocated;
-	int blits_used;
+	struct list blits;
 };
+

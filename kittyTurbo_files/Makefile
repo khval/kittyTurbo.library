@@ -42,6 +42,7 @@ main_SRCS = main/Obtain.c main/Release.c main/makeLookupTable.c \
 	AmosString.c \
 	stack.c \
 	cmdList.c \
+	list.c \
 	ext_turbo.c
 
 # -------------------------------------------------------------

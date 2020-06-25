@@ -25,6 +25,7 @@
 #include <proto/kittyTurbo.h>
 #include <stdarg.h>
 #include "context.h"
+#include "list.h"
 
 /****** kittyTurbo/main/FreeContext ******************************************
 *
@@ -60,10 +61,9 @@ void _kittyturbo_FreeContext(struct kittyTurboIFace *Self,
 	if (context)
 	{
 		if (context -> stars) free (context -> stars );
-		if (context -> blits) free ( context -> blits );
-
 		context -> stars = NULL;
-		context -> blits = NULL;
+
+		list_free( &context -> blits );
 		free (context);
 	}
 }
