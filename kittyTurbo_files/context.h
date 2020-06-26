@@ -19,6 +19,7 @@ struct blit
 	int x1;
 	int y1;
 	int shift;
+	void (*fn) (struct blit *);
 };
 
 struct list

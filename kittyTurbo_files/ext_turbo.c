@@ -769,17 +769,180 @@ char *turboplusObjectLoad KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+void fn_blitLeft(struct blit *blit)
+{
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+}
+
+void fn_blitUp(struct blit *blit)
+{
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+}
+
+char *_turboplusBlitStoreLeft( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args =__stack - data->stack +1 ;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 7:
+			{
+				int screen = getStackNum(instance,__stack-6 );
+				int id = getStackNum(instance,__stack-5 );
+				int x = getStackNum(instance,__stack-4 );
+				int y = getStackNum(instance,__stack-3 );
+				int x1 = getStackNum(instance,__stack-2 );
+				int y1 = getStackNum(instance,__stack-1 );
+				int shift = getStackNum(instance,__stack );
+
+				struct blit *blit = (struct blit *) list_find( &context -> blits, id );
+
+				if (blit == NULL)
+				{
+					printf("not found\n");
+
+					blit = (struct blit *) malloc(sizeof(struct blit));
+					list_push_back( &context -> blits, (struct item *) blit );
+				}
+
+				if (blit)
+				{
+					blit -> screen = screen;
+					blit -> id = id;
+					blit -> x = x;
+					blit -> y = y;
+					blit -> x1 = x1;
+					blit -> y1 = y1;
+					blit -> shift = shift;
+					blit -> fn = fn_blitLeft;
+				}
+				else api.setError( 36, data->tokenBuffer );
+			}
+			break;
+		default:
+			api.setError(22,data->tokenBuffer);
+	}
+
+	popStack(instance,__stack - data->stack );
+
+	getchar();	
+
+	return NULL;
+}
+
 char *turboplusBlitStoreLeft KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusBlitStoreLeft, tokenBuffer );
 	return tokenBuffer;
+}
+
+char *_turboplusBlitStoreUp( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args =__stack - data->stack +1 ;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 7:
+			{
+				int screen = getStackNum(instance,__stack-6 );
+				int id = getStackNum(instance,__stack-5 );
+				int x = getStackNum(instance,__stack-4 );
+				int y = getStackNum(instance,__stack-3 );
+				int x1 = getStackNum(instance,__stack-2 );
+				int y1 = getStackNum(instance,__stack-1 );
+				int shift = getStackNum(instance,__stack );
+
+				struct blit *blit = (struct blit *) list_find( &context -> blits, id );
+
+				if (blit == NULL)
+				{
+					blit = (struct blit *) malloc(sizeof(struct blit));
+					list_push_back( &context -> blits, (struct item *) blit );
+				}
+
+				if (blit)
+				{
+					blit -> screen = screen;
+					blit -> id = id;
+					blit -> x = x;
+					blit -> y = y;
+					blit -> x1 = x1;
+					blit -> y1 = y1;
+					blit -> shift = shift;
+					blit -> fn = fn_blitUp;
+				}
+				else api.setError( 36, data->tokenBuffer );
+			}
+			break;
+		default:
+			api.setError(22,data->tokenBuffer);
+	}
+
+	popStack(instance,__stack - data->stack );
+	return NULL;
+}
+
+char *turboplusBlitStoreUp KITTENS_CMD_ARGS
+{
+	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	stackCmdNormal( _turboplusBlitStoreUp, tokenBuffer );
+	return tokenBuffer;
+}
+
+char *_turboplusMultiBlit( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args =__stack - data->stack +1 ;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 2:
+			{
+				int from = getStackNum(instance,__stack-1 );
+				int to = getStackNum(instance,__stack );
+
+				if (context -> blits.items) 
+				{
+					struct item **blit = context -> blits.items;
+					struct item **blit_end = context -> blits.items + context -> blits.used;
+					int delta = to-from+1;
+
+					for ( ; blit < blit_end ; blit ++)
+					{
+						if  ((*blit) -> id < from) continue;
+						if  ((*blit) -> id > to) continue;
+						((struct blit *) *blit) -> fn ( (struct blit *) *blit );
+
+						delta --;
+						if (delta == 0) break;
+					}
+				}
+			}
+			break;
+		default:
+			api.setError(22,data->tokenBuffer);
+	}
+
+	popStack(instance,__stack - data->stack );
+	return NULL;
 }
 
 char *turboplusMultiBlit KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusMultiBlit, tokenBuffer );
 	return tokenBuffer;
 }
 
@@ -2031,12 +2194,7 @@ char *turboplusBlitUp KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
-char *turboplusBlitStoreUp KITTENS_CMD_ARGS
-{
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
-	return tokenBuffer;
-}
+
 
 char *turboplusIconCheck KITTENS_CMD_ARGS
 {
