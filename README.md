@@ -9,4 +9,4 @@ The license chosen, is MIT this so people can contribute to the extension, as we
 
 **You find the manual here:**
 
-https://github.com/khval/kittyTurbo.library/blob/master/turbo_commands.md
+https://github.com/khval/kittyTurbo.library/blob/master/turboPlus_commands.md
