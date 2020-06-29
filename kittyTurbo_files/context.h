@@ -7,11 +7,13 @@ struct star
 
 struct item
 {
+	struct KittyInstance *instance;
 	int id;
 };
 
 struct blit
 {
+	struct KittyInstance *instance;
 	int id;
 	int screen;
 	int x;
