@@ -263,9 +263,6 @@ Blit Int Wait [n]
 	Amos Pro:
 	
 		[shift] has to be value between -15 and 15.
-	
-		This command is buggy It looks like bytes per row issue,
-		I suggest using Blit Store Up instead, if your writing for Amos Pro.
 
 **Blit Up [screen],[x],[y] To [x1],[y1],[shift]**
 
