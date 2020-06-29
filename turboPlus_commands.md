@@ -148,7 +148,7 @@ n=Check(n To n,n,n)
 
 Set Check n,n,n To n,n 
 
-Reset Check n 
+Reset Check [n] 
 
 n=Hit Spr Zone(n,n,n)
 
@@ -229,8 +229,10 @@ Object Save s$,n To n
 
 Object Load s$,n 
 
-Multi Blit [start] To [end] 
+**Multi Blit [start] To [end]**
 
+	Scroll graphics, execute stored blit up/left.
+	
 **Blit Erase [n]**
 
 	Erase blit [n] from memory.
@@ -248,26 +250,45 @@ Blit Int Change [start] To [end]
 
 Blit Int Wait [n] 
 
-Blit Left [screen],[x],[y] To [x1],[y1],[shift]
+**Blit Left [screen],[x],[y] To [x1],[y1],[shift]**
 
 	[x],[y] top left corner.
 	[x1],[y] right, bottom corner.
 	[shift] value from -15 to 15
 
-Blit Up [screen],[x],[y] To [x1],[y1],[shift]
+	Amos Kittens:
+
+		There is no shift limit.
+
+	Amos Pro:
+	
+		[shift] has to be value between -15 and 15.
+
+**Blit Up [screen],[x],[y] To [x1],[y1],[shift]**
 
 	[x],[y] top left corner.
 	[x1],[y] right, bottom corner.
-	[shift] value from -15 to 15
+	[shift] if shift negative negative move up, if posetive move down.
 
-Blit Store Left [screen],[n],[x],[y] To [x1],[y1],[shift]
+	Amos Kittens:
+
+		There is no shift limit.
+
+	Amos Pro:
+	
+		[shift] has to be value between -15 and 15.
+	
+		This command is buggy It looks like bytes per row issue,
+		I suggest using Blit Store Up instead, if your writing for Amos Pro.
+
+**Blit Store Left [screen],[n],[x],[y] To [x1],[y1],[shift]**
 
 	Store zone [n]
 	[x],[y] top left corner.
 	[x1],[y] right, bottom corner.
 	[shift] value from -15 to 15
 
-Blit Store Up [screen],[n],[x],[y] To [x1],[y1],[shift]
+**Blit Store Up [screen],[n],[x],[y] To [x1],[y1],[shift]**
 
 	Store zone [n]
 	[x],[y] top left corner.
@@ -348,7 +369,7 @@ n=Left Click
 
     Erase stars / dots
 
-Stars Compute [n start] To [n end]
+**Stars Compute [n start] To [n end]**
 
     Calculate the new position of the stars.
     from [n start] to [n end]
@@ -384,7 +405,7 @@ Plane Shift Down n,n To n
 
 Plane Update n 
 
-F Paste Icon [x],[y],[n]
+**F Paste Icon [x],[y],[n]**
 
     On Amos Kittens:
 
@@ -398,7 +419,7 @@ F Paste Icon [x],[y],[n]
 
         * This command can crash your computer.
 
-F 32 Icon [x],[y],[n]
+**F 32 Icon [x],[y],[n]**
 
     On Amos Kittens:
 
@@ -414,7 +435,7 @@ F 32 Icon [x],[y],[n]
 
         * This command can crash your computer.
 
-F 16 Icon [x],[y],[n]
+**F 16 Icon [x],[y],[n]**
 
     On Amos Kittens:
 
@@ -430,7 +451,7 @@ F 16 Icon [x],[y],[n]
 
         * This command can crash your computer.
 
-F 16proc Icon [x],[y],[n]
+**F 16proc Icon [x],[y],[n]**
 
     On Amos Kittens:
 
@@ -446,7 +467,7 @@ F 16proc Icon [x],[y],[n]
 
         * This command can crash your computer.
 
-F 32proc Icon [x],[y],[n]
+**F 32proc Icon [x],[y],[n]**
 
     On Amos Kittens:
 
@@ -477,7 +498,7 @@ n=Planes Icon(n)
 
 n=Icon Check(n)
 
-n=Cpu Info
+**n=Cpu Info**
 
 	This command returns CPU type..
 	Because OS4.1 uses same ID numbers for PowerPC as 680x0, to avoid mistakes $1000 is added for PPC.
@@ -488,7 +509,7 @@ n=Cpu Info
 
 	Id numbers can be found in file "exectags.h" in the AmigaOS4.1 SDK.
 
-n=Math Info
+**n=Math Info**
 
 	Amos Kittens will just return 882, it does not check for coprocessor
 
