@@ -47,6 +47,8 @@
 #endif
 
 
+void dump_blits(struct context *context);
+
 char *turboplusMultiYes KITTENS_CMD_ARGS
 {
 	struct context *context = instance -> extensions_context[ instance -> current_extension ];
@@ -896,6 +898,21 @@ char *turboplusBlitStoreUp KITTENS_CMD_ARGS
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusBlitStoreUp, tokenBuffer );
 	return tokenBuffer;
+}
+
+
+void dump_blits(struct context *context)
+{
+	if (context -> blits.items) 
+	{
+		struct item **blit = context -> blits.items;
+		struct item **blit_end = context -> blits.items + context -> blits.used;
+
+		for ( ; blit < blit_end ; blit ++)
+		{
+			printf("pos %08x, %08x -> id %d\n",blit, *blit, (*blit) -> id);
+		}
+	}
 }
 
 char *_turboplusMultiBlit( struct glueCommands *data, int nextToken )
