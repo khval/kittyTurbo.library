@@ -773,12 +773,98 @@ char *turboplusObjectLoad KITTENS_CMD_ARGS
 
 void fn_blitLeft(struct blit *blit)
 {
+	struct retroScreen *screen;
 	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	screen = blit -> instance -> screens[ blit -> screen ];
+	if (screen)
+	{
+		retroScroll( screen, 0, blit -> x, blit -> y, blit -> x1, blit -> y1, blit -> shift,0 );
+
+		if (blit -> shift > 0)
+		{
+			if (blit -> x == 0) retroBAR( screen, 0, 0, blit -> y, blit-> shift, blit -> y1, 0 );
+		}
+		else if (blit -> shift < 0 )
+		{
+			if (blit -> x1 == screen -> realWidth -1  ) retroBAR( screen, 0, blit -> x1 + blit -> shift, blit -> y, blit -> x1, blit -> y1, 0 );
+		}
+	}
+
 }
 
 void fn_blitUp(struct blit *blit)
 {
+
+	struct retroScreen *screen;
 	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	screen = blit -> instance -> screens[ blit -> screen ];
+	if (screen) 
+	{
+		retroScroll( screen, 0, blit -> x, blit -> y, blit -> x1, blit -> y1, 0, blit -> shift );
+
+		if (blit -> shift > 0)
+		{
+			if (blit -> y == 0) retroBAR( screen, 0, blit -> x, 0, blit -> x1, blit -> shift-1, 0 );
+		}
+		else if (blit -> shift < 0 )
+		{
+			if (blit -> y1 == screen -> realHeight -1  ) retroBAR( screen, 0, blit -> x, blit -> y1+blit -> shift+1, blit -> x1, blit -> y1, 0 );
+		}
+	}
+
+}
+
+char *_turboplusBlitLeft( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args =__stack - data->stack +1 ;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 6:
+			{
+				struct blit blit;
+				struct retroScreen *screen;
+
+				blit.instance = instance;
+				blit.screen = getStackNum(instance,__stack-5 );
+				blit.x = getStackNum(instance,__stack-4 );
+				blit.y = getStackNum(instance,__stack-3 );
+				blit.x1 = getStackNum(instance,__stack-2 )-1;
+				blit.y1 = getStackNum(instance,__stack-1 )-1;
+				blit.shift = getStackNum(instance,__stack );
+				
+				screen = instance -> screens[ blit.screen ];
+				if (screen)
+				{
+					if (blit.x <0) blit.x = 0;
+					if (blit.x1 >= screen -> realWidth) blit.x1 = screen -> realWidth -1;
+
+					if (blit.y <0) blit.y = 0;
+					if (blit.y1 >= screen -> realHeight) blit.y1 = screen -> realHeight -1;
+
+					fn_blitLeft( &blit );
+				}
+				else api.setError( 36, data->tokenBuffer );
+			}
+			break;
+		default:
+			api.setError(22,data->tokenBuffer);
+	}
+
+	popStack(instance,__stack - data->stack );
+	return NULL;
+}
+
+char *turboplusBlitLeft KITTENS_CMD_ARGS
+{
+	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	stackCmdNormal( _turboplusBlitLeft, tokenBuffer );
+	return tokenBuffer;
 }
 
 char *_turboplusBlitStoreLeft( struct glueCommands *data, int nextToken )
@@ -793,34 +879,39 @@ char *_turboplusBlitStoreLeft( struct glueCommands *data, int nextToken )
 	{
 		case 7:
 			{
-				int screen = getStackNum(instance,__stack-6 );
 				int id = getStackNum(instance,__stack-5 );
-				int x = getStackNum(instance,__stack-4 );
-				int y = getStackNum(instance,__stack-3 );
-				int x1 = getStackNum(instance,__stack-2 );
-				int y1 = getStackNum(instance,__stack-1 );
-				int shift = getStackNum(instance,__stack );
 
 				struct blit *blit = (struct blit *) list_find( &context -> blits, id );
 
 				if (blit == NULL)
 				{
-					printf("not found\n");
-
 					blit = (struct blit *) malloc(sizeof(struct blit));
 					list_push_back( &context -> blits, (struct item *) blit );
 				}
 
 				if (blit)
 				{
-					blit -> screen = screen;
+					struct retroScreen *screen;
+
+					blit -> instance = instance;
+					blit -> screen = getStackNum(instance,__stack-6 );
 					blit -> id = id;
-					blit -> x = x;
-					blit -> y = y;
-					blit -> x1 = x1;
-					blit -> y1 = y1;
-					blit -> shift = shift;
+					blit -> x = getStackNum(instance,__stack-4 );
+					blit -> y = getStackNum(instance,__stack-3 );
+					blit -> x1 = getStackNum(instance,__stack-2 )-1;
+					blit -> y1 = getStackNum(instance,__stack-1 )-1;
+					blit -> shift = getStackNum(instance,__stack );
 					blit -> fn = fn_blitLeft;
+
+					screen = instance -> screens[ blit -> screen ];
+					if (screen)
+					{
+						if (blit -> x <0) blit -> x = 0;
+						if (blit -> x1 >= screen -> realWidth) blit -> x1 = screen -> realWidth -1;
+
+						if (blit -> y <0) blit -> y = 0;
+						if (blit -> y1 >= screen -> realHeight) blit -> y1 = screen -> realHeight -1;
+					}
 				}
 				else api.setError( 36, data->tokenBuffer );
 			}
@@ -831,8 +922,6 @@ char *_turboplusBlitStoreLeft( struct glueCommands *data, int nextToken )
 
 	popStack(instance,__stack - data->stack );
 
-	getchar();	
-
 	return NULL;
 }
 
@@ -840,6 +929,57 @@ char *turboplusBlitStoreLeft KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusBlitStoreLeft, tokenBuffer );
+	return tokenBuffer;
+}
+
+char *_turboplusBlitUp( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args =__stack - data->stack +1 ;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 6:
+			{
+				struct blit blit;
+				struct retroScreen *screen;
+
+				blit.instance = instance;
+				blit.screen = getStackNum(instance,__stack-5 );
+				blit.x = getStackNum(instance,__stack-4 );
+				blit.y = getStackNum(instance,__stack-3 );
+				blit.x1 = getStackNum(instance,__stack-2 )-1;
+				blit.y1 = getStackNum(instance,__stack-1 )-1;
+				blit.shift = getStackNum(instance,__stack );
+				
+				screen = instance -> screens[ blit.screen ];
+				if (screen)
+				{
+					if (blit.x <0) blit.x = 0;
+					if (blit.x1 >= screen -> realWidth) blit.x1 = screen -> realWidth -1;
+
+					if (blit.y <0) blit.y = 0;
+					if (blit.y1 >= screen -> realHeight) blit.y1 = screen -> realHeight -1;
+
+					fn_blitUp( &blit );
+				}
+				else api.setError( 36, data->tokenBuffer );
+			}
+			break;
+		default:
+			api.setError(22,data->tokenBuffer);
+	}
+
+	popStack(instance,__stack - data->stack );
+	return NULL;
+}
+
+char *turboplusBlitUp KITTENS_CMD_ARGS
+{
+	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	stackCmdNormal( _turboplusBlitUp, tokenBuffer );
 	return tokenBuffer;
 }
 
@@ -855,14 +995,7 @@ char *_turboplusBlitStoreUp( struct glueCommands *data, int nextToken )
 	{
 		case 7:
 			{
-				int screen = getStackNum(instance,__stack-6 );
 				int id = getStackNum(instance,__stack-5 );
-				int x = getStackNum(instance,__stack-4 );
-				int y = getStackNum(instance,__stack-3 );
-				int x1 = getStackNum(instance,__stack-2 );
-				int y1 = getStackNum(instance,__stack-1 );
-				int shift = getStackNum(instance,__stack );
-
 				struct blit *blit = (struct blit *) list_find( &context -> blits, id );
 
 				if (blit == NULL)
@@ -873,13 +1006,14 @@ char *_turboplusBlitStoreUp( struct glueCommands *data, int nextToken )
 
 				if (blit)
 				{
-					blit -> screen = screen;
+					blit -> instance = instance;
+					blit -> screen = getStackNum(instance,__stack-6 );
 					blit -> id = id;
-					blit -> x = x;
-					blit -> y = y;
-					blit -> x1 = x1;
-					blit -> y1 = y1;
-					blit -> shift = shift;
+					blit -> x = getStackNum(instance,__stack-4 );
+					blit -> y = getStackNum(instance,__stack-3 );
+					blit -> x1 = getStackNum(instance,__stack-2 )-1;
+					blit -> y1 = getStackNum(instance,__stack-1 )-1;
+					blit -> shift = getStackNum(instance,__stack );
 					blit -> fn = fn_blitUp;
 				}
 				else api.setError( 36, data->tokenBuffer );
@@ -1029,13 +1163,6 @@ char *turboplusBlitSpeed KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusBlitSpeed, tokenBuffer );
-	return tokenBuffer;
-}
-
-char *turboplusBlitLeft KITTENS_CMD_ARGS
-{
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
@@ -2204,12 +2331,7 @@ char *turboplusTexp KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
-char *turboplusBlitUp KITTENS_CMD_ARGS
-{
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
-	return tokenBuffer;
-}
+
 
 
 
