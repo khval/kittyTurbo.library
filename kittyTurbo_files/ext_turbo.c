@@ -2353,10 +2353,35 @@ char *turboplusMemoryFill KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusBlitIntChange( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args =__stack - data->stack +1 ;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 2:
+			api.engineLock();
+			context->int_blit.start = getStackNum(instance,__stack-1 );
+			context->int_blit.end = getStackNum(instance,__stack );
+			api.engineUnlock();
+			break;
+
+		default:
+			api.setError(22,data->tokenBuffer);
+	}
+
+	popStack(instance,__stack - data->stack );
+	return NULL;
+}
+
 char *turboplusBlitIntChange KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusBlitIntChange, tokenBuffer );
 	return tokenBuffer;
 }
 
