@@ -200,34 +200,55 @@ n=Raw Key(n)
     you need to move graphic cursor your self with R home 
     or Xgr, Ygr commands.
 
+Reserve Object [object],[number of elements]
 
-Reserve Object n,n 
+	Create an object with x number of elements.
+	an object is a list of draw commands,
+	that are not interpreted in the normal way.
 
-Define Draw n,n To n,n 
+Define Draw [object],[element] To [x],[y] 
 
-Define Move n,n To n,n 
+	Adds a draw command into the object list at element position.
+	[x],[y] is relative coordinates, can be negative and positive numbers.
 
-Define Stop n,n 
+Define Move [object],[element] To [x],[y] 
 
-Define Attr n,n To n,n 
+	Adds a move command into the object list at element position.	
+	[x],[y] is relative coordinates, can be negative and positive numbers.
 
-Object Draw n 
+Define Stop [object],[element]
 
-R Object Draw n,n,n 
+	Adds a stop command into the object list at element position.
 
-Object Mag Draw n,n 
+Define Attr [object],[element] To [colors],[drawmode] 
 
-R Object Mag Draw n,n,n,n 
+Object Draw [object] 
 
-Object Erase n 
+R Object Draw [object],[x],[y]
 
-Line 3d x,y,z To x,y,z 
+Object Mag Draw [object],[element] 
 
-Eye 3d x,y 
+	Position the object on the screen.
 
-Object Save s$,n To n 
+	if [mul]>0 then object coordinates is multiplied by [mul]
+	if [mul]<0 then object coordinates is divided by [mul]
 
-Object Load s$,n 
+R Object Mag Draw [object],[x],[y],[mul] 
+
+	Position the object relative on the screen.
+
+	if [mul]>0 then object coordinates is multiplied by [mul]
+	if [mul]<0 then object coordinates is divided by [mul]
+
+Object Erase [object]
+
+Line 3d [x],[y],[z] To [x],[y],[z] 
+
+Eye 3d [x],[y] 
+
+Object Save s$,[n] To [n] 
+
+Object Load s$,[n] 
 
 **Multi Blit [start] To [end]**
 
