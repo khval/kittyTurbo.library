@@ -1280,8 +1280,18 @@ char *turboplusBlitClear KITTENS_CMD_ARGS
 
 char *turboplusLeftClick KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+
+	dprintf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	if (context -> multiOffCount )
+	{
+		Permit();
+		setStackNum(instance, instance -> engine_mouse_key == 1 ? ~0 : 0);
+		Forbid();
+	}
+	else 	setStackNum(instance, instance -> engine_mouse_key == 1 ? ~0 : 0);
+
 	return tokenBuffer;
 }
 
