@@ -393,17 +393,38 @@ Stars Int Off
 
 Object Limit n 
 
-Set Planes n 
+Set Planes [mask]
 
-Plane Offset n,n,n,n 
+	This command should defines what color index bit to changed.
 
-Plane Swap n,n,n 
+Plane Offset [screen nr],[plain],[xoffset],[yoffset] 
 
-Plane Shift Up n,n To n 
+	This command is not supported.
 
-Plane Shift Down n,n To n 
+Plane Swap [screen nr],[plain1],[plain2] 
 
-Plane Update n 
+	Swaps bits in color value on the screen. 	
+	plain1/2 is bit position to swap.
+	
+	Plain is old terminology used for planar graphic format, describing how the colors are stored.
+	on Amiga computer, how the colors are stores is how ever irrelevant.
+
+	The key thing here is that the color index value will changes on all pixels on the screen.
+
+Plane Shift Up [screen nr],[start] To [end]
+
+	plains change order, planes are shifted in circle way, what is on the [end] become the [start].
+	
+	[tmp]=[end]
+	[end]=[start+2]
+	[start+1]=[start]
+	[start]=[tmp]
+
+Plane Shift Down [screen nr],[start] To [end]
+
+	Planes are shifted in circle way, what is on the [start] become the [end].
+
+Plane Update [screen] 
 
 **F Paste Icon [x],[y],[n]**
 
