@@ -456,10 +456,40 @@ char *turboplusHitSprCheck KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusRawKey( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args = instance_stack - data->stack +1;
+	int key;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 1:
+			key = getStackNum(instance,__stack );
+			if (context -> multiOffCount )
+			{
+				Permit();
+				setStackNum(instance, instance -> engine_key_state[key]);
+				Forbid();
+			}
+			else 	setStackNum(instance, instance -> engine_key_state[key]);
+			return  NULL ;
+
+		default:
+			popStack( instance, instance_stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+
+	return  NULL ;
+}
+
 char *turboplusRawKey KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdParm( _turboplusRawKey, tokenBuffer );
 	return tokenBuffer;
 }
 
