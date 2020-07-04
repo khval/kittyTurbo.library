@@ -408,7 +408,9 @@ char *turboplusReserveCheck KITTENS_CMD_ARGS
 char *turboplusCheckErase KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
 	api.setError(22, tokenBuffer);
+
 	return tokenBuffer;
 }
 
@@ -1049,6 +1051,32 @@ void dump_blits(struct context *context)
 	}
 }
 
+
+void __multi_blit__(struct context *context, int from, int to)
+{
+	if (context -> blits.items) 
+	{
+		struct item **blit = context -> blits.items;
+		struct item **blit_end = context -> blits.items + context -> blits.used;
+		int delta = to-from+1;
+
+		for ( ; blit < blit_end ; blit ++)
+		{
+			printf("pos %08x, %08x -> id %d\n",blit, *blit, (*blit) -> id);
+
+			if  ((*blit) -> id < from) continue;
+			if  ((*blit) -> id > to) continue;
+
+			printf("call function\n");
+
+			((struct blit *) *blit) -> fn ( (struct blit *) *blit );
+
+			delta --;
+			if (delta == 0) break;
+		}
+	}
+}
+
 char *_turboplusMultiBlit( struct glueCommands *data, int nextToken )
 {
 	struct KittyInstance *instance = data -> instance;
@@ -1059,28 +1087,7 @@ char *_turboplusMultiBlit( struct glueCommands *data, int nextToken )
 
 	switch (args)
 	{
-		case 2:
-			{
-				int from = getStackNum(instance,__stack-1 );
-				int to = getStackNum(instance,__stack );
-
-				if (context -> blits.items) 
-				{
-					struct item **blit = context -> blits.items;
-					struct item **blit_end = context -> blits.items + context -> blits.used;
-					int delta = to-from+1;
-
-					for ( ; blit < blit_end ; blit ++)
-					{
-						if  ((*blit) -> id < from) continue;
-						if  ((*blit) -> id > to) continue;
-						((struct blit *) *blit) -> fn ( (struct blit *) *blit );
-
-						delta --;
-						if (delta == 0) break;
-					}
-				}
-			}
+		case 2: __multi_blit__( context, getStackNum(instance,__stack-1 ), getStackNum(instance,__stack ));
 			break;
 		default:
 			api.setError(22,data->tokenBuffer);
@@ -1662,17 +1669,52 @@ char *turboplusStarsIntOff KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+
+void fn_int_blit VBL_FUNC_ARGS
+{
+	struct context *context = (struct context *) custom;
+	if (context -> int_blit.wait) return;
+	__multi_blit__( custom, context -> int_blit.start, context -> int_blit.end );
+}
+
+char *_turboplusBlitIntOn( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args =__stack - data->stack +1 ;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 2:
+			context->int_blit.start = getStackNum(instance,__stack-1 );
+			context->int_blit.end = getStackNum(instance,__stack );
+			api.engineAddVblInterrupt( fn_int_blit , (void *) context );
+			break;
+
+		default:
+			api.setError(22,data->tokenBuffer);
+	}
+
+	popStack(instance,__stack - data->stack );
+	return NULL;
+}
+
+
 char *turboplusBlitIntOn KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusBlitIntOn, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusBlitIntOff KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+
+	api.engineRemoveVblInterrupt( fn_int_blit );
+
 	return tokenBuffer;
 }
 
@@ -2278,10 +2320,32 @@ char *turboplusBlitIntChange KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusBlitIntWait( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args = instance_stack - data->stack +1;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 1:
+			context -> int_blit.wait = getStackNum(instance,__stack );
+			return  NULL;		// don't need to pop stack nothing else to do.
+
+		default:
+			api.setError(22,data->tokenBuffer);
+	}
+
+	popStack( instance, instance_stack - data->stack );
+	return  NULL ;
+}
+
 char *turboplusBlitIntWait KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusBlitIntWait, tokenBuffer );
 	return tokenBuffer;
 }
 
@@ -2330,9 +2394,6 @@ char *turboplusTexp KITTENS_CMD_ARGS
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
-
-
-
 
 
 char *turboplusIconCheck KITTENS_CMD_ARGS

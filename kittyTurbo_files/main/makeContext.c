@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include <exec/exec.h>
 #include <proto/exec.h>
@@ -61,6 +62,8 @@ void * _kittyturbo_makeContext(struct kittyCompactIFace *Self)
 	if (context)
 	{
 		bzero( context, sizeof(struct context) );
+
+		context -> int_blit.wait = true;
 	}
 
 	return context;

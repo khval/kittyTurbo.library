@@ -24,11 +24,34 @@ struct blit
 	void (*fn) (struct blit *);
 };
 
+struct element
+{
+	struct KittyInstance *instance;
+	int x;
+	int y;
+	int color;
+	int drawmode;
+	void (*fn) (struct element *);
+};
+
+struct object
+{
+	struct element *elements;
+	int allocated;
+};
+
 struct list
 {
 	struct item **items;
 	int allocated;
 	int used;
+};
+
+struct int_blit
+{
+	int start;
+	int end;
+	int wait;
 };
 
 struct context
@@ -45,5 +68,13 @@ struct context
 //--	Blits --
 
 	struct list blits;
+
+//--   Object --
+
+	struct list objects;
+
+//-- interrupts --
+
+	struct int_blit int_blit;
 };
 
