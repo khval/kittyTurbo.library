@@ -156,7 +156,15 @@ n=Hit Bob Zone(n,n,n)
 
 n=Hit Spr Check(n To n,n,n,n)
 
-n=Raw Key(n)
+**n=Raw Key(n)**
+
+	This command is same as key state command in Amos Pro, 
+	unlike Key Sate, Raw Key command is designed to work when multitasking is disabled.
+
+	Amos Kittens:
+
+		This command will enable multitasking for a short period.
+		but only works if "Multi No" command was used to do it.
 
 **R Move dx,dy**
 
@@ -263,17 +271,21 @@ Object Load s$,[n]
     Sets the speed of blit
     [shift] value from -15 to 15
 
-Blit Int On [start] To [end] 
+**Blit Int On [start] To [end]**
 
 	Enable blit interrupts from [start] to [end].
 
-Blit Int Off  
+**Blit Int Off**
 
 	Disable blit interrupts.
 
-Blit Int Change [start] To [end]
+**Blit Int Change [start] To [end]**
 
-Blit Int Wait [on/off]
+	Change the blits that are executed in the interrupt scrolling system.
+	Using this you can change the parameters of the scroll without turning the blitter interrupt off.
+	The same as Blit Int On (start to end) but while the interrupt is being executed.
+
+**Blit Int Wait [on/off]**
 
 	Default for all blit’s are in wait state, noting is drawn/done.
 	To enable blits, set Blit Int Wait to False.
@@ -323,7 +335,7 @@ Blit Int Wait [on/off]
 	[x1],[y] right, bottom corner.
 	[shift] value from -15 to 15
 
-Blit Clear [bit]
+*Blit Clear [bit]*
 
     This command clears all or some of bit plains. 
     on Amiga computers with planar graphics this command should be faster than Cls command.
@@ -373,13 +385,14 @@ Blit Clear [bit]
 
     Same as normal sqr command, no difference in speed.
 
-n=Left Click
+**n=Left Click**
 
-    This command should work while in exec/forbid(), this is not the case for Amos Kittens / AmigaOS 4.1, 
-    because the USB stack has run for the mouse keys to be processed.
+    This command should work while in exec/forbid(). 
+	
+	Amos Kittens:
 
-    You should really avoid writing code that is not system fremedly.
-    I will suggest using Amos Pro command "Mouse Click" or "Mouse Key" instead of this command.
+		This command will enable multitasking for a short period.
+		but only works if "Multi No" command was used to do it.
 
 **Reserve Stars n**
 
