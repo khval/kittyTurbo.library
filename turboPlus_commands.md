@@ -265,11 +265,18 @@ Object Load s$,[n]
 
 Blit Int On [start] To [end] 
 
+	Enable blit interrupts from [start] to [end].
+
 Blit Int Off  
+
+	Disable blit interrupts.
 
 Blit Int Change [start] To [end]
 
-Blit Int Wait [n] 
+Blit Int Wait [on/off]
+
+	Default for all blit’s are in wait state, noting is drawn/done.
+	To enable blits, set Blit Int Wait to False.
 
 **Blit Left [screen],[x],[y] To [x1],[y1],[shift]**
 
