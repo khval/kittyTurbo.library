@@ -140,13 +140,25 @@ Vbl Wait [y beam]
     you don’t have access to internal of retro mode, 
     so this command, will work just wait vbl
 
-Reserve Check n 
+Reserve Check [items] 
 
-Check Erase  
+	[items] creates a list of empty check zones.
+
+Check Erase
+
+	Free the memory of check list.
+
+	Amos Kittens:
+	
+		Amos Kittens know it needs to free memory, thanks to context system.
+		
+	Amos Pro:
+
+		You must call this command, before your basic program exists or else you might memory leek.
 
 n=Check(n To n,n,n)
 
-Set Check n,n,n To n,n 
+Set Check [n],[x],[y] To [x1],[y1] 
 
 Reset Check [n] 
 
