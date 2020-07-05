@@ -250,13 +250,19 @@ R Object Mag Draw [object],[x],[y],[mul]
 
 Object Erase [object]
 
-Line 3d [x],[y],[z] To [x],[y],[z] 
-
-Eye 3d [x],[y] 
+	Free the memoey of a object.
 
 Object Save s$,[n] To [n] 
 
 Object Load s$,[n] 
+
+Line 3d [x1],[y1],[z1] To [x2],[y2],[z2]
+
+	Draws a line between x1,x1,y1 to x2,y2,z3
+
+Eye 3d [x],[y]
+
+	Set the center of the screen
 
 **Multi Blit [start] To [end]**
 
