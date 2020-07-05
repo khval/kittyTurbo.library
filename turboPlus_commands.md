@@ -730,7 +730,12 @@ Workbench Open
 
 n=Texp(n,n,n)
 
-n=T Clip(n,n)
+n=T Clip(value,div)
+
+	Round down, returns a value that can be dividable by [div].
+	
+	This command does the same as:
+	n = value - ( value mod div )
 
 **n=Between(min,value,max)**
 
