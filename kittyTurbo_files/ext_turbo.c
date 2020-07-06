@@ -2525,10 +2525,32 @@ char *turboplusSceneIconBank KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusTClip( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args = instance_stack - data->stack +1;
+	int _value,_max;
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 2:
+			_value = getStackNum(instance,__stack-1 );
+			_max = getStackNum(instance,__stack );
+			popStack( instance, instance_stack - data->stack );
+			setStackNum( instance, _value - (_value % _max)) ;
+			return NULL;
+
+		default:
+			api.setError(22,data->tokenBuffer);
+	}
+	return  NULL ;
+}
+
 char *turboplusTClip KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdParm( _turboplusTClip, tokenBuffer );
 	return tokenBuffer;
 }
 
