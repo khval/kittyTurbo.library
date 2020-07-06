@@ -78,6 +78,13 @@ void _kittyturbo_FreeContext(struct kittyTurboIFace *Self,
 		printf("free blits\n");
 		list_free( &context -> blits, dispose_blit );
 		list_free( &context -> objects, dispose_object );
+
+		if (context -> multi_task_off_count)		// prohibit hanging forbid
+		{
+			Permit();
+			context -> multi_task_off_count = 0;
+		}
+
 		free (context);
 	}
 }
