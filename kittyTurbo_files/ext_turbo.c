@@ -394,10 +394,32 @@ char *turboplusTest_l KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusVblWait( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args = instance_stack - data->stack +1;
+	unsigned int value;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 1:
+			value = getStackNum(instance,__stack );
+			api.waitvbl();
+			return  NULL ;
+		default:
+			popStack( instance, instance_stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+
+	return  NULL ;
+}
+
 char *turboplusVblWait KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusVblWait, tokenBuffer );
 	return tokenBuffer;
 }
 
