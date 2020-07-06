@@ -49,6 +49,9 @@
 
 void dump_blits(struct context *context);
 
+extern void dispose_blit (void *ptr);
+extern void dispose_object (void *ptr);
+
 char *turboplusMultiYes KITTENS_CMD_ARGS
 {
 	struct context *context = instance -> extensions_context[ instance -> current_extension ];
@@ -1149,7 +1152,7 @@ char *_turboplusBlitErase( struct glueCommands *data, int nextToken )
 			{
 				int id = getStackNum(instance,__stack );
 				if (context -> blits.items == NULL) return NULL;
-				list_erase( &context -> blits, id );
+				list_erase( &context -> blits, id, dispose_blit );
 			}
 			break;
 		default:

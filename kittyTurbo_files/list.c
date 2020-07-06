@@ -55,7 +55,7 @@ struct blit *list_find(struct list *list,int id)
 	return NULL;
 }
 
-void list_free(struct list *list)
+void list_free(struct list *list, void (*dispose) (void *ptr) )
 {
 	int i;
 	struct item **items = list -> items;
@@ -64,7 +64,7 @@ void list_free(struct list *list)
 	{
 		for (i=0;i<list -> used;i++)
 		{
-			free(items[i]);
+			dispose( items[i] );
 			items[ i] = NULL;
 		}
 		free( items );
@@ -72,27 +72,50 @@ void list_free(struct list *list)
 	}
 }
 
-void list_erase(struct list *list,int id)
+void list_dump(struct list *list)
+{
+	struct item **items = list -> items;
+	int i;
+
+	for (i=0;i<list -> used;i++)
+	{
+		if (items[i])
+		{
+			printf("idx: %d, id: %d, %08x\n",i,items[i]->id, items[i]);
+		}
+		else
+		{
+			printf("idx: %d, id: -1, NULL\n");
+		}
+	}
+}
+
+void list_erase(struct list *list,int id, void (*dispose) (void *ptr))
 {
 	int i;
 	struct item **items = list -> items;
+
+	printf("before:\n");
+	list_dump(list);
+
+
 	for (i=0;i<list -> used;i++)
 	{
 		if (items[i]->id == id) 
 		{
-			free(items[i]);
-			if (i)
+			dispose(items[i]);
+			i++;
+			for ( ; i < list -> used;i++)
 			{
-				i++;
-				for ( ; i < list -> used;i++)
-				{
-					items[i-1] = items[i];
-				}				
-			}
+				items[i-1] = items[i];
+			}				
 			list -> used--;
 			items[ list -> used ] = NULL;
 			break;
 		}
 	}
+
+	printf("after:\n");
+	list_dump(list);
 }
 

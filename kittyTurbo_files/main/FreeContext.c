@@ -55,6 +55,18 @@
 *
 */
 
+void dispose_blit (void *ptr)
+{
+	printf("blit ptr %08x\n",ptr);
+	free(ptr);
+}
+
+void dispose_object (void *ptr)
+{
+	printf("object ptr %08x\n",ptr);
+	free(ptr);
+}
+
 void _kittyturbo_FreeContext(struct kittyTurboIFace *Self,
        struct context * context)
 {
