@@ -75,7 +75,9 @@ void _kittyturbo_FreeContext(struct kittyTurboIFace *Self,
 		if (context -> stars) free (context -> stars );
 		context -> stars = NULL;
 
-		list_free( &context -> blits );
+		printf("free blits\n");
+		list_free( &context -> blits, dispose_blit );
+		list_free( &context -> objects, dispose_object );
 		free (context);
 	}
 }
