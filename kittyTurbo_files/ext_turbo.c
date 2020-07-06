@@ -807,12 +807,37 @@ char *turboplusLine3d KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusEye3d( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args = instance_stack - data->stack +1;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 2:
+			context->eye3d.x = getStackNum(instance,__stack-1 );
+			context->eye3d.y = getStackNum(instance,__stack );
+			popStack( instance, instance_stack - data->stack );
+			break;
+		default:
+			popStack( instance, instance_stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+
+	return  NULL ;
+}
+
+
 char *turboplusEye3d KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusEye3d, tokenBuffer );
 	return tokenBuffer;
 }
+
 
 char *turboplusObjectSave KITTENS_CMD_ARGS
 {
