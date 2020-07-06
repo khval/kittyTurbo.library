@@ -268,6 +268,8 @@ Object Save s$,[n] To [n]
 
 Object Load s$,[n] 
 
+Object Limit n 
+
 Line 3d [x1],[y1],[z1] To [x2],[y2],[z2]
 
 	Draws a line between x1,x1,y1 to x2,y2,z3
@@ -446,11 +448,18 @@ Stars Clip x0,y0,x1,y1
 
     Limit where stars are drawn
 
-Stars Int On n 
+Stars Int On [clear]
+
+	if [clear] is true, it screen will be automaticly cleared
+	This command enabled stars to be drawn automatically, at vertical blanking.
+
+	Amos Pro:
+	
+		Can't be used with double buffer.
 
 Stars Int Off  
 
-Object Limit n 
+	Disable automatic update for stars.
 
 Set Planes [mask]
 
