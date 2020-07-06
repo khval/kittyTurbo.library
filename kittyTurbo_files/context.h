@@ -11,6 +11,12 @@ struct item
 	int id;
 };
 
+struct xy
+{
+	int x;
+	int y;
+};
+
 struct blit
 {
 	struct KittyInstance *instance;
@@ -56,24 +62,13 @@ struct int_blit
 
 struct context
 {
-//--	MultiTasking --
+	ULONG multi_task_off_count;
 
-	ULONG multiOffCount;
-
-//--	Stars --
-
+	struct xy eye3d;
 	struct star *stars;
 	int star_count;
-
-//--	Blits --
-
 	struct list blits;
-
-//--   Object --
-
 	struct list objects;
-
-//-- interrupts --
 
 	struct int_blit int_blit;
 };

@@ -55,10 +55,10 @@ char *turboplusMultiYes KITTENS_CMD_ARGS
 
 	dprintf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 
-	if (context -> multiOffCount )
+	if (context -> multi_task_off_count )
 	{
-		context -> multiOffCount --;
-		if (context -> multiOffCount == 0) Permit();
+		context -> multi_task_off_count --;
+		if (context -> multi_task_off_count == 0) Permit();
 	}
 
 	return tokenBuffer;
@@ -70,8 +70,8 @@ char *turboplusMultiNo KITTENS_CMD_ARGS
 
 	dprintf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 
-	if (context -> multiOffCount == 0) Forbid();
-	context -> multiOffCount ++;
+	if (context -> multi_task_off_count == 0) Forbid();
+	context -> multi_task_off_count ++;
 
 	return tokenBuffer;
 }
@@ -469,7 +469,7 @@ char *_turboplusRawKey( struct glueCommands *data, int nextToken )
 	{
 		case 1:
 			key = getStackNum(instance,__stack );
-			if (context -> multiOffCount )
+			if (context -> multi_task_off_count )
 			{
 				Permit();
 				setStackNum(instance, instance -> engine_key_state[key]);
@@ -1284,7 +1284,7 @@ char *turboplusLeftClick KITTENS_CMD_ARGS
 
 	dprintf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 
-	if (context -> multiOffCount )
+	if (context -> multi_task_off_count )
 	{
 		Permit();
 		setStackNum(instance, instance -> engine_mouse_key == 1 ? ~0 : 0);
