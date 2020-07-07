@@ -60,6 +60,13 @@ struct int_blit
 	int wait;
 };
 
+struct int_stars
+{
+	struct retroScreen **screens;
+	int screen_id;
+	int clear;
+};
+
 struct context
 {
 	ULONG multi_task_off_count;
@@ -71,5 +78,6 @@ struct context
 	struct list objects;
 
 	struct int_blit int_blit;
+	struct int_stars int_stars;
 };
 

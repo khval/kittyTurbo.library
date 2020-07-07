@@ -1751,20 +1751,55 @@ char *turboplusFSqr KITTENS_CMD_ARGS
 }
 
 void __draw_stars(struct context *context, struct retroScreen *screen);
+
+void fn_int_star VBL_FUNC_ARGS
+{
+	struct context *context = (struct context *) custom;
+	struct retroScreen *screen = context -> int_stars.screens[ context -> int_stars.screen_id ];
+
+	__draw_stars( context, screen ) ;
+	__compute_stars( context, screen, 0, context -> star_count );
+
+}
+
+char *_turboplusStarsIntOn( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args =__stack - data->stack +1 ;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 1:
+			context->int_stars.screens = instance -> screens;
+			context->int_stars.screen_id = instance -> current_screen;
+			context->int_stars.clear = getStackNum(instance,__stack-1 );
+			api.engineAddVblInterrupt( fn_int_star , (void *) context );
+			return NULL;
+
+		default:
+			api.setError(22,data->tokenBuffer);
+	}
+
+	popStack(instance,__stack - data->stack );
+	return NULL;
+}
+
 char *turboplusStarsIntOn KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusStarsIntOn, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusStarsIntOff KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	api.engineRemoveVblInterrupt( fn_int_star );
 	return tokenBuffer;
 }
-
 
 void fn_int_blit VBL_FUNC_ARGS
 {
