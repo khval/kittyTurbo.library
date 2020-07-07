@@ -134,11 +134,11 @@ At bottom of the list you will find none supported commands.
 
     Check if int is equal
 
-Vbl Wait [y beam] 
+**Vbl Wait [y beam]**
 
     Wait for a beam position, 
-    you don’t have access to internal of retro mode, 
-    so this command, will work just wait vbl
+    you don’t have access to internals of retroMode.library, 
+    so this command will work, just like "wait vbl" command.
 
 Reserve Check [items] 
 
