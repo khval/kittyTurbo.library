@@ -178,40 +178,40 @@ n=Hit Spr Check(n To n,n,n,n)
 		This command will enable multitasking for a short period.
 		but only works if "Multi No" command was used to do it.
 
-**R Move dx,dy**
+**R Move [dx],[dy]**
 
     Relative to the graphic cursor xgr, ygr
 
-**R Draw dx,dy**
+**R Draw [dx],[dy]**
 
     Draw a line relative to graphic cursor xgr, ygr
-    same as draw xgr,ygr to xgr+dx,ygr+dy
+    same as draw xgr,ygr to xgr+[dx],ygr+[dy]
     
     Unlike R Box, R Bar, this command does change graphic cursor (xgr,ygr).
 
-**R Box dx,dy**
+**R Box [dx],[dy]**
 
     Draw a box relative to graphic cursor xgr, ygr
-    same as box xgr,ygr to xgr+dx,ygr+dy
+    same as box xgr,ygr to xgr+[dx],ygr+[dy]
     
     Command does not change graphic cursor, 
     you need to move graphic cursor your self with R home 
     or Xgr, Ygr commands.
 
-**R Home x,y**
+**R Home [x],[y]**
 
     moves graphic cursor to x,y
     Reamended using standard command instead using addons have look at Gr Locate.
 
     same as:
   
-        xgr=x : ygr=y
+        xgr=[x] : ygr=[y]
 
     and command:
     
-        gr locate x.y
+        gr locate [x],[y]
 
-**R Bar dx,dy**
+**R Bar [dx],[dy]**
 
     Draw a bar relative to graphic cursor xgr, ygr
     same as box xgr,ygr to xgr+dx,ygr+dy
@@ -268,7 +268,7 @@ Object Save s$,[n] To [n]
 
 Object Load s$,[n] 
 
-Object Limit n 
+Object Limit [n]
 
 Line 3d [x1],[y1],[z1] To [x2],[y2],[z2]
 
@@ -370,7 +370,7 @@ Eye 3d [x],[y]
     bit %110 clear plain 2 and 1
     bit %111 clear plain 2,1 and 0  
 
-**F Plot x,y,[color]**
+**F Plot [x],[y],[color]**
 
     If your changing colors often then this command can be faster then normal Plot command.
     if your not changing color often, it should be faster to preset color with ink command.
@@ -383,19 +383,19 @@ Eye 3d [x],[y]
 
     This command does not change graphic cursor.
 
-**F Circle x,y,r,[color]**
+**F Circle [x],[y],[r],[color]**
 
     Same as normal circle command, no difference in speed.
 
     This command does not change graphic cursor.
 
-**F Draw x,y**
+**F Draw [x],[y]**
 
     Same as normal draw command, no difference in speed.
 
     This command does change graphic cursor.
 
-**F Draw x,y To x,y**
+**F Draw [x0],[y0] To [x1],[y1]**
 
     Same as normal draw command, no difference in speed.
 
@@ -414,11 +414,11 @@ Eye 3d [x],[y]
 		This command will enable multitasking for a short period.
 		but only works if "Multi No" command was used to do it.
 
-**Reserve Stars n**
+**Reserve Stars [n]**
 
     Reserve stars, or random dots in x,y plain
 
-**Define Star n,x,y,x speed,y speed**
+**Define Star [n],[x],[y],[x speed],[y speed]**
 
     Set star [n] coordinate [x],[y] and speed
 
@@ -444,11 +444,11 @@ Eye 3d [x],[y]
     Change the speed of of a range of star from start to end.-    
     First star is at 1, if start is 0, you will get illegal function call.      
 
-Stars Clip x0,y0,x1,y1 
+Stars Clip [x0],[y0],[x1],[y1] 
 
     Limit where stars are drawn
 
-Stars Int On [clear]
+**Stars Int On [clear]**
 
 	if [clear] is true, it screen will be automaticly cleared
 	This command enabled stars to be drawn automatically, at vertical blanking.
@@ -457,7 +457,7 @@ Stars Int On [clear]
 	
 		Can't be used with double buffer.
 
-Stars Int Off  
+**Stars Int Off**
 
 	Disable automatic update for stars.
 
@@ -606,21 +606,21 @@ n=Icon Check(n)
 	881 - MC68881 coprocessor installed
 	882 - MC68882 coprocessor installed
 		
-F Put Block n,n,n 
+F Put Block [n],[n],[n]
 
-Reserve Static Block n 
+Reserve Static Block [n]
 
-Static Block Erase  
+Static Block Erase
 
-Build Static Block  
+Build Static Block
 
-F Put Static Block n,n,n 
+F Put Static Block [n],[n],[n] 
 
-Scene Load s$,n 
+Scene Load s$,[n]
 
-Scene Icon Bank n 
+Scene Icon Bank [n] 
 
-Scene Bank n 
+Scene Bank [n]
 
     A command for a tiles / map system
 
@@ -632,27 +632,27 @@ n=Scene 16 Check(n,n)
 
     A command for a tiles / map system
 
-Scene Change n,n,n 
+Scene Change [n],[n],[n] 
 
     A command for a tiles / map system
 
-Scene 16 Change n,n,n 
+Scene 16 Change [n],[n],[n]
 
     A command for a tiles / map system
 
-Scene 16 Draw n,n,n,n,n,n 
+Scene 16 Draw [n],[n],[n],[n],[n],[n]
 
     A command for a tiles / map system
 
-Scene 16 Def n,n,n,n,n,n,n,n 
+Scene 16 Def [n],[n],[n],[n],[n],[n],[n],[n] 
 
     A command for a tiles / map system
 
-Scene 16 Restore n 
+Scene 16 Restore [n]
 
     A command for a tiles / map system
 
-Scene 16 Limit n 
+Scene 16 Limit [n]
 
     A command for a tiles / map system
 
@@ -660,59 +660,59 @@ n=Scene 32 Check(n,n)
 
     A command for a tiles / map system
 
-Scene 32 Change n,n,n 
+Scene 32 Change [n],[n],[n] 
 
     A command for a tiles / map system
 
-Scene 32 Draw n,n,n,n,n,n 
+Scene 32 Draw [n],[n],[n],[n],[n],[n] 
 
     A command for a tiles / map system
 
-Scene 16 View n,n,n To n,n 
+Scene 16 View [n],[n],[n] To [n],[n] 
 
     A command for a tiles / map system
 
-Scene 32 View n,n,n To n,n 
+Scene 32 View [n],[n],[n] To [n],[n]
 
     A command for a tiles / map system
 
-Scene 16 Do n,n 
+Scene 16 Do [n],[n]
 
     A command for a tiles / map system
 
-Scene 32 Do n,n 
+Scene 32 Do [n],[n] 
 
     A command for a tiles / map system
 
-Scene 16 Top n,n 
+Scene 16 Top [n],[n]
 
     A command for a tiles / map system
 
-Scene 32 Top n,n 
+Scene 32 Top [n],[n] 
 
     A command for a tiles / map system
 
-Scene 16 Bottom n,n 
+Scene 16 Bottom [n],[n] 
 
     A command for a tiles / map system
 
-Scene 32 Bottom n,n 
+Scene 32 Bottom [n],[n]
 
     A command for a tiles / map system
 
-Scene 16 Left n,n 
+Scene 16 Left [n],[n]
 
     A command for a tiles / map system
 
-Scene 32 Left n,n 
+Scene 32 Left [n],[n]
 
     A command for a tiles / map system
 
-Scene 16 Right n,n 
+Scene 16 Right [n],[n]
 
     A command for a tiles / map system
 
-Scene 32 Right n,n 
+Scene 32 Right [n],[n]
 
     A command for a tiles / map system
 
@@ -724,11 +724,11 @@ n=Scene Y
 
     A command for a tiles / map system
 
-Scene Palette n 
+Scene Palette [n]
 
     A command for a tiles / map system
 
-Scene Mask Palette n 
+Scene Mask Palette [n]
 
     A command for a tiles / map system
 
@@ -750,26 +750,26 @@ Workbench Open
 
     Fill memory with text
 
-**n=Range(value,start To end)**
+**n=Range([value],[start] To [end])**
 
     if value is less then [start] then [value] is [start]
     if value is more then [end] then [value] is [end].
 
 n=Texp(n,n,n)
 
-n=T Clip(value,div)
+**n=T Clip([value],[div])**
 
 	Round down, returns a value that can be dividable by [div].
 	
 	This command does the same as:
-	n = value - ( value mod div )
+	n = [value] - ( [value] mod [div] )
 
-**n=Between(min,value,max)**
+**n=Between([min],[value],[max])**
 
     This command returns true if value is more then min, 
     and values is less then max, if this not the case then false is returned.
 
-    Same as "(min < value < max)"
+    Same as "([min] < [value] < [max])"
 
 n=Bank End(n)
 
