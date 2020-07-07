@@ -1486,6 +1486,19 @@ char *turboplusStarsErase KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+void __compute_stars(struct context *context,struct retroScreen *screen,int start, int end)
+{
+	int i;
+	struct star *star = context -> stars + start;
+
+	for (i = start; i <= end ; i++)
+	{
+		star -> x = (star -> x + star -> speedx) % screen -> realWidth ;
+		star -> y = (star -> y + star -> speedy) % screen -> realHeight;
+		star ++;
+	}
+}
+
 char *_turboplusStarsCompute( struct glueCommands *data, int nextToken )
 {
 	struct KittyInstance *instance = data -> instance;
@@ -1527,17 +1540,7 @@ char *_turboplusStarsCompute( struct glueCommands *data, int nextToken )
 
 			if (context -> stars) 
 			{
-				int i;
-				struct star *star;
-
-				star = context -> stars + start;
-
-				for (i = start; i <= end ; i++)
-				{
-					star -> x = (star -> x + star -> speedx) % screen -> realWidth ;
-					star -> y = (star -> y + star -> speedy) % screen -> realHeight;
-					star ++;
-				}
+				__compute_stars( context, screen, start, end );
 			}
 			else api.setError(34,data -> tokenBuffer);
 		}
@@ -1554,6 +1557,22 @@ char *turboplusStarsCompute KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+void __draw_stars(struct context *context, struct retroScreen *screen)
+{
+	if (context -> stars) 
+	{
+		struct star *star;
+		struct star *stars_end = context -> stars + context -> star_count ;
+		unsigned char *mem = screen -> Memory[ screen -> double_buffer_draw_frame ];
+		int ink0 = screen -> ink0;
+
+		for (star = context -> stars; star <= stars_end ; star++)
+		{
+			retroPixel( screen, mem, star -> x, star -> y, ink0 );
+		}
+	}
+}
+
 char *turboplusStarsDraw KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
@@ -1561,21 +1580,7 @@ char *turboplusStarsDraw KITTENS_CMD_ARGS
 	struct context *context = instance -> extensions_context[ instance -> current_extension ];
 	struct retroScreen *screen = instance -> screens[ instance -> current_screen ];
 
-	if (context)
-	{
-		if (context -> stars) 
-		{
-			struct star *star;
-			struct star *stars_end = context -> stars + context -> star_count ;
-			unsigned char *mem = screen -> Memory[ screen -> double_buffer_draw_frame ];
-			int ink0 = screen -> ink0;
-
-			for (star = context -> stars; star <= stars_end ; star++)
-			{
-				retroPixel( screen, mem, star -> x, star -> y, ink0 );
-			}
-		}
-	}
+	if (context) if (screen) __draw_stars( context, screen );
 
 	return tokenBuffer;
 }
@@ -1745,6 +1750,7 @@ char *turboplusFSqr KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+void __draw_stars(struct context *context, struct retroScreen *screen);
 char *turboplusStarsIntOn KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
