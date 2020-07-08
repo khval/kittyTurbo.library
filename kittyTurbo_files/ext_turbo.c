@@ -800,10 +800,57 @@ char *turboplusObjectErase KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusLine3d( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args = instance_stack - data->stack +1;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 6:
+			{ 
+				struct retroScreen *screen = instance -> screens[ instance -> current_screen ];
+				double x0,y0,z0,x1,y1,z1;
+				double x0_2d,y0_2d,x1_2d,y1_2d;
+				double scale = 180.0f;
+
+				if (screen)
+				{
+
+					x0 = getStackDecimal(instance,__stack-5 );
+					y0 = getStackDecimal(instance,__stack-4 );
+					z0 = getStackDecimal(instance,__stack-3 ) + 100.0f;
+					x1 = getStackDecimal(instance,__stack-2 );
+					y1 = getStackDecimal(instance,__stack-1 );
+					z1 = getStackDecimal(instance,__stack ) + 100.0f;
+
+					x0_2d = (x0 * scale / z0) + context->eye3d.x;
+					y0_2d = (y0 * scale / z0) + context->eye3d.y;
+
+					x1_2d = (x1 * scale / z1) + context->eye3d.x;
+					y1_2d = (y1 * scale / z1) + context->eye3d.y;
+
+					retroLine( screen, screen -> double_buffer_draw_frame,x0_2d,y0_2d,x1_2d,y1_2d,screen -> ink0 );	
+				}
+			}
+
+			popStack( instance, instance_stack - data->stack );
+			break;
+		default:
+			popStack( instance, instance_stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+
+	return  NULL ;
+}
+
 char *turboplusLine3d KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusLine3d, tokenBuffer );
 	return tokenBuffer;
 }
 
