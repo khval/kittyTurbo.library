@@ -30,6 +30,14 @@ struct blit
 	void (*fn) (struct blit *);
 };
 
+struct check
+{
+	int x;
+	int y;
+	int x1;
+	int y1;
+};
+
 struct element
 {
 	struct KittyInstance *instance;
@@ -72,8 +80,13 @@ struct context
 	ULONG multi_task_off_count;
 
 	struct xy eye3d;
+
 	struct star *stars;
 	int star_count;
+
+	struct check *checks;
+	int checks_allocated;
+
 	struct list blits;
 	struct list objects;
 

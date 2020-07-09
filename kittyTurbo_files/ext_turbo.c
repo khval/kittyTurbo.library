@@ -423,33 +423,147 @@ char *turboplusVblWait KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusReserveCheck( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args = instance_stack - data->stack +1;
+	unsigned int value;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 1:
+			context -> checks_allocated = getStackNum(instance,__stack );
+
+			if (context -> checks) free ( context -> checks );
+			context -> checks = (struct check *) malloc( sizeof( struct check ) * context -> checks_allocated ) ;
+
+			return  NULL ;
+		default:
+			popStack( instance, instance_stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+
+	return  NULL ;
+}
+
 char *turboplusReserveCheck KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusReserveCheck, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusCheckErase KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
 
-	api.setError(22, tokenBuffer);
+	if (context -> checks) free ( context -> checks );
+	context -> checks = NULL;
+	context -> checks_allocated = 0;
 
 	return tokenBuffer;
+}
+
+char *_turboplusCheck( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args = instance_stack - data->stack +1;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 4:
+			{
+				int n;
+				int first = getStackNum(instance,__stack-3)-1;
+				int last = getStackNum(instance,__stack-2);
+				int x = getStackNum(instance,__stack-1);
+				int y = getStackNum(instance,__stack);
+
+				popStack( instance, instance_stack - data->stack );
+
+				if ((first>=0)&&(first<last)&&(last <= context -> checks_allocated))
+				{
+					for (n=first; n<last;n++)
+					{
+						struct check *c = context -> checks + n;
+						if ( x < c -> x ) continue;
+						if ( x > c -> x1 ) continue;
+						if ( y < c -> y ) continue;
+						if ( y > c -> y1 ) continue;
+						
+						printf("Found\n");
+
+						setStackNum( instance, n+1);
+						return  NULL ;
+					}
+					setStackNum( instance, 0);
+				}
+				else api.setError(24,data->tokenBuffer);
+			}
+			return  NULL ;			
+
+		default:
+			popStack( instance, instance_stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+
+	popStack( instance, instance_stack - data->stack );
+	return  NULL ;
 }
 
 char *turboplusCheck KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdParm( _turboplusCheck, tokenBuffer );
 	return tokenBuffer;
+}
+
+char *_turboplusSetCheck( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args = instance_stack - data->stack +1;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 5:
+			{
+				int n = getStackNum(instance,__stack-4)-1;
+				if ((context -> checks) && (n>-1) && (n<context -> checks_allocated))		// has checks and is in range
+				{
+					struct check *c = context -> checks + n;
+					c->x = getStackNum(instance,__stack-3);
+					c->y = getStackNum(instance,__stack-2);
+					c->x1 = getStackNum(instance,__stack-1);
+					c->y1 = getStackNum(instance,__stack);
+				}
+				else 	api.setError(25,data->tokenBuffer);
+			}
+			break;			
+
+		default:
+			popStack( instance, instance_stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+	popStack( instance, instance_stack - data->stack );
+
+
+	return  NULL ;
 }
 
 char *turboplusSetCheck KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusSetCheck, tokenBuffer );
 	return tokenBuffer;
 }
 

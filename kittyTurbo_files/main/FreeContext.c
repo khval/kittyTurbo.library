@@ -72,10 +72,12 @@ void _kittyturbo_FreeContext(struct kittyTurboIFace *Self,
 {
 	if (context)
 	{
-		if (context -> stars) free (context -> stars );
+		if (context -> stars) free (context -> stars);
 		context -> stars = NULL;
 
-		printf("free blits\n");
+		if (context -> checks) free (context -> checks);
+		context -> checks = NULL;
+
 		list_free( &context -> blits, dispose_blit );
 		list_free( &context -> objects, dispose_object );
 
