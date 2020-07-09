@@ -121,7 +121,7 @@ At bottom of the list you will find none supported commands.
     lsr.l($81818181,1)=$40C0C0C0
 
 **n=L Swap(n)**
-
+	
 **n=Test.b(n,n)**
 
     Check is low bytes is equal
@@ -140,11 +140,11 @@ At bottom of the list you will find none supported commands.
     you don’t have access to internals of retroMode.library, 
     so this command will work, just like "wait vbl" command.
 
-Reserve Check [items] 
+**Reserve Check [items]**
 
 	[items] creates a list of empty check zones.
 
-Check Erase
+**Check Erase**
 
 	Free the memory of check list.
 
@@ -156,9 +156,21 @@ Check Erase
 
 		You must call this command, before your basic program exists or else you might memory leek.
 
-n=Check(n To n,n,n)
+**[id]=Check([first] To [last],[x],[y])**
 
-Set Check [n],[x],[y] To [x1],[y1] 
+	Check if coordinate is inside the [range] of check zones, and return the check [id].
+	
+	[First],[last] is the [range] of check zones.
+	
+		Note: The first id in the table is "1" not "0".
+	
+	[x],[y]	the coordinate to check.
+	
+**Set Check [id],[x],[y] To [x1],[y1]**
+		
+	[ID] is the check ID, first ID number is 1, not 0.		
+	[x],[y] upper left corner
+	[x1],[y1] right, lower corner.
 
 Reset Check [n] 
 
