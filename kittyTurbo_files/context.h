@@ -82,7 +82,7 @@ struct context
 	struct xy eye3d;
 
 	struct star *stars;
-	int star_count;
+	int stars_allocated;
 
 	struct check *checks;
 	int checks_allocated;

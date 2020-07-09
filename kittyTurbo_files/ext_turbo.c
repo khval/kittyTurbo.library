@@ -1528,9 +1528,9 @@ char *_turboplusReserveStars( struct glueCommands *data, int nextToken )
 
 		if (context)
 		{
-			context -> star_count = getStackNum( instance,__stack);
+			context -> stars_allocated = getStackNum( instance,__stack);
 			if (context -> stars)	free( context -> stars );
-			context -> stars = (struct star *) malloc( context -> star_count * sizeof(struct star) );
+			context -> stars = (struct star *) malloc( context -> stars_allocated * sizeof(struct star) );
 		}
 	}
 
@@ -1567,7 +1567,7 @@ char *_turboplusDefineStar( struct glueCommands *data, int nextToken )
 		{
 			int32 num = getStackNum( instance,__stack-4)-1;
 
-			if ((context -> stars) && (num>=0) && (num <= context -> star_count))
+			if ((context -> stars) && (num>=0) && (num <= context -> stars_allocated))
 			{
 				struct star *star = context -> stars + num;
 				star -> x = getStackNum( instance,__stack-3);
@@ -1612,7 +1612,7 @@ char *turboplusDisplayStars KITTENS_CMD_ARGS
 				sw = screen -> realWidth;
 				sh = screen -> realHeight;
 
-				star_end = context -> stars + context -> star_count;
+				star_end = context -> stars + context -> stars_allocated;
 				for (  star = context -> stars; star < star_end ; star++)
 				{
 					retroPixel( screen, mem, star -> x, star -> y, screen -> ink0 );
@@ -1685,14 +1685,14 @@ char *_turboplusStarsCompute( struct glueCommands *data, int nextToken )
 			int32 start = getStackNum( instance,__stack-1)-1;
 			int32 end = getStackNum( instance,__stack)-1;
 
-			if ((start<0) || (start > context -> star_count))
+			if ((start<0) || (start > context -> stars_allocated))
 			{
 				api.setError(34,data -> tokenBuffer);
 				popStack( instance, instance_stack - data->stack );
 				return NULL;
 			}
 
-			if ((end<0) || (end > context -> star_count))
+			if ((end<0) || (end > context -> stars_allocated))
 			{
 				api.setError(34,data -> tokenBuffer);
 				popStack( instance, instance_stack - data->stack );
@@ -1723,7 +1723,7 @@ void __draw_stars(struct context *context, struct retroScreen *screen)
 	if (context -> stars) 
 	{
 		struct star *star;
-		struct star *stars_end = context -> stars + context -> star_count ;
+		struct star *stars_end = context -> stars + context -> stars_allocated ;
 		unsigned char *mem = screen -> Memory[ screen -> double_buffer_draw_frame ];
 		int ink0 = screen -> ink0;
 
@@ -1919,7 +1919,7 @@ void fn_int_star VBL_FUNC_ARGS
 	struct retroScreen *screen = context -> int_stars.screens[ context -> int_stars.screen_id ];
 
 	__draw_stars( context, screen ) ;
-	__compute_stars( context, screen, 0, context -> star_count );
+	__compute_stars( context, screen, 0, context -> stars_allocated );
 
 }
 
