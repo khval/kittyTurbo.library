@@ -428,7 +428,6 @@ char *_turboplusReserveCheck( struct glueCommands *data, int nextToken )
 	struct KittyInstance *instance = data -> instance;
 	struct context *context = instance -> extensions_context[ instance -> current_extension ];
 	int args = instance_stack - data->stack +1;
-	unsigned int value;
 
 	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 
