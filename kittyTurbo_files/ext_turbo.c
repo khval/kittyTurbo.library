@@ -906,10 +906,28 @@ char *turboplusRObjectMagDraw KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusObjectErase( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args =__stack - data->stack +1 ;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	if (args==1)
+	{
+		list_erase( &context -> objects, getStackNum(instance,__stack ), dispose_object );
+	}
+	else api.setError(22,data->tokenBuffer);
+
+	popStack( instance, instance_stack - data->stack );
+	return NULL;
+}
+
 char *turboplusObjectErase KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusObjectErase, tokenBuffer );
 	return tokenBuffer;
 }
 
