@@ -232,6 +232,25 @@ n=Hit Spr Check(n To n,n,n,n)
     you need to move graphic cursor your self with R home 
     or Xgr, Ygr commands.
 
+Object Limit [n]
+
+	“Object Limit” command has misleading name it should be called Reserve Objects.
+	The command defines number of objects items in the list.
+
+	If [n] is set to 0 the objects are freed.
+
+	Amos Kittens:
+		
+		This command should not be needed, the list should grow automatically.
+		However, if you use this command, then the list don’t need to be reallocated.
+		
+	Amos Pro:
+	
+		this used to needed in Trubo extention, where it be defined to max 32.
+		but should not be needed in Turbo Plus, 
+		where you can have up to 32000 objects.
+	
+	
 Reserve Object [object],[number of elements]
 
 	Create an object with x number of elements.
@@ -280,7 +299,6 @@ Object Save s$,[n] To [n]
 
 Object Load s$,[n] 
 
-Object Limit [n]
 
 Line 3d [x1],[y1],[z1] To [x2],[y2],[z2]
 
