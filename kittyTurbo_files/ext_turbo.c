@@ -721,19 +721,19 @@ char *_turboplusRDraw( struct glueCommands *data, int nextToken )
 
 	popStack(instance,__stack - data->stack );
 
-	switch (screen ->autoback)
+	if (screen)
 	{
-		case 0:
-				if (screen) retroLine( screen, screen -> double_buffer_draw_frame,x0,y0,x1,y1,screen -> ink0 );
+		switch (screen ->autoback)
+		{
+			case 0:
+				retroLine( screen, screen -> double_buffer_draw_frame,x0,y0,x1,y1,screen -> ink0 );
 				break;
 
-		default:
-				if (screen)
-				{
-					retroLine( screen, 0,x0,y0,x1,y1,screen -> ink0 );
-					if (screen -> Memory[1])	 retroLine( screen, 1,x0,y0,x1,y1,screen -> ink0 );
-				}
+			default:
+				retroLine( screen, 0,x0,y0,x1,y1,screen -> ink0 );
+				if (screen -> Memory[1])	 retroLine( screen, 1,x0,y0,x1,y1,screen -> ink0 );
 				break;
+		}
 	}
 
 	return NULL;
