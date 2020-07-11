@@ -251,47 +251,53 @@ Object Limit [n]
 		where you can have up to 32000 objects.
 	
 	
-Reserve Object [object],[number of elements]
+**Reserve Object [object],[number of elements]**
 
 	Create an object with x number of elements.
 	an object is a list of draw commands,
 	that are not interpreted in the normal way.
 
-Define Draw [object],[element] To [x],[y] 
+**Define Draw [object],[element] To [x],[y]**
 
 	Adds a draw command into the object list at element position.
 	[x],[y] is relative coordinates, can be negative and positive numbers.
 
-Define Move [object],[element] To [x],[y] 
+**Define Move [object],[element] To [x],[y]**
 
 	Adds a move command into the object list at element position.	
 	[x],[y] is relative coordinates, can be negative and positive numbers.
 
-Define Stop [object],[element]
+**Define Stop [object],[element]**
 
 	Adds a stop command into the object list at element position.
 
-Define Attr [object],[element] To [colors],[drawmode] 
+*Define Attr [object],[element] To [colors],[drawmode]*
 
-Object Draw [object] 
+	This one is not correct yet.
 
-R Object Draw [object],[x],[y]
+**Object Draw [object]**
 
-Object Mag Draw [object],[element] 
+	Draw object relative to 0,0 on the screen.
 
-	Position the object on the screen.
+**R Object Draw [object],[x],[y]**
+
+	Draw object relative to X,Y on the screen.
+
+*Object Mag Draw [object],[element]*
+
+	Draw the object on the screen.
 
 	if [mul]>0 then object coordinates is multiplied by [mul]
 	if [mul]<0 then object coordinates is divided by [mul]
 
-R Object Mag Draw [object],[x],[y],[mul] 
+*R Object Mag Draw [object],[x],[y],[mul]*
 
 	Position the object relative on the screen.
 
 	if [mul]>0 then object coordinates is multiplied by [mul]
 	if [mul]<0 then object coordinates is divided by [mul]
 
-Object Erase [object]
+**Object Erase [object]**
 
 	Free the memoey of a object.
 
@@ -300,11 +306,11 @@ Object Save s$,[n] To [n]
 Object Load s$,[n] 
 
 
-Line 3d [x1],[y1],[z1] To [x2],[y2],[z2]
+**Line 3d [x1],[y1],[z1] To [x2],[y2],[z2]**
 
 	Draws a line between x1,x1,y1 to x2,y2,z3
 
-Eye 3d [x],[y]
+**Eye 3d [x],[y]**
 
 	Set the center of the screen
 
