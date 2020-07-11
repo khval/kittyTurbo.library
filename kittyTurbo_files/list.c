@@ -13,15 +13,11 @@
 
 #include "context.h"
 
-void list_push_back(struct list *list,struct item *item)
+void list_allocate(struct list *list,int new_allocated)
 {
-	struct item **items;
-
-	if ((list -> used +1) > list -> allocated)
+	if (new_allocated > list -> used)
 	{
-		int new_allocated = list -> allocated +10;
-
-		items = (struct item **) malloc( sizeof(struct item *)  * new_allocated );
+		struct item **items = (struct item **) malloc( sizeof(struct item *)  * new_allocated );
 		if (items)
 		{
 			if (list -> items)
@@ -31,19 +27,23 @@ void list_push_back(struct list *list,struct item *item)
 			}
 			list -> items = items;
 			list -> allocated = new_allocated;
-			list -> items[ list -> used ] = item;
-			list -> used ++;
 		}
-	}
-	else
-	{
-		list -> items[ list -> used ] = item;
-		list -> used ++;	
 	}
 }
 
+void list_push_back(struct list *list,struct item *item)
+{
+	if ((list -> used +1) > list -> allocated)
+	{
+		int new_allocated = list -> allocated +10;
+		list_allocate( list, new_allocated );
+	}
 
-struct blit *list_find(struct list *list,int id)
+	list -> items[ list -> used ] = item;
+	list -> used ++;	
+}
+
+struct item *list_find(struct list *list,int id)
 {
 	int i;
 	struct item **items = list -> items;
@@ -81,11 +81,11 @@ void list_dump(struct list *list)
 	{
 		if (items[i])
 		{
-			printf("idx: %d, id: %d, %08x\n",i,items[i]->id, items[i]);
+			printf("idx: %d, id: %d, %08x\n",i,items[i]->id, (int) items[i]);
 		}
 		else
 		{
-			printf("idx: %d, id: -1, NULL\n");
+			printf("idx: %d, id: -1, NULL\n", -1);
 		}
 	}
 }
