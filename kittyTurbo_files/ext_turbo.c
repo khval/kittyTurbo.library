@@ -1083,52 +1083,156 @@ char *turboplusDefineAttr KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
-char *turboplusDefineMove KITTENS_CMD_ARGS
+void object_draw( struct KittyInstance *instance, struct object *obj , int zoom, int rx, int ry )
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
-	return tokenBuffer;
+	int lx=0,ly=0;
+	int buf;
+	struct element *elm;
+	struct element *elm_end = obj -> elements + obj -> allocated;
+	struct retroScreen *screen = instance -> screens[instance -> current_screen];
+
+	printf("zoom %d,rx %d,ry %d\n",zoom,rx,ry);
+
+	if (screen)
+	{
+		switch (screen ->autoback)
+		{
+			case 0:
+				buf =  screen -> double_buffer_draw_frame;
+				for (elm = obj -> elements; elm < elm_end; elm ++) if (elm -> fn( screen, buf, zoom, rx, ry,&lx, &ly, elm )) break;
+				break;
+
+			default:
+				if (screen -> Memory[1])
+				{
+					for (elm = obj -> elements; elm < elm_end; elm ++)
+					{
+						if (elm -> fn( screen, 0, zoom, rx,ry, &lx, &ly, elm )) break;
+						if (elm -> fn( screen, 1, zoom, rx,ry, &lx, &ly, elm )) break;
+					}
+				}
+				else
+				{
+					for (elm = obj -> elements; elm < elm_end; elm ++) if (elm -> fn( screen, 0,1, rx,ry,&lx, &ly, elm )) break;
+				}
+				break;
+		}
+	}
 }
 
-char *turboplusDefineStop KITTENS_CMD_ARGS
+char *_turboplusObjectDraw( struct glueCommands *data, int nextToken )
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
-	return tokenBuffer;
-}
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args =__stack - data->stack +1 ;
 
-char *turboplusDefineAttr KITTENS_CMD_ARGS
-{
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
-	return tokenBuffer;
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	if (args==1)
+	{
+		struct object *obj = (struct object *)	list_find( &context -> objects, getStackNum(instance,__stack ) );
+		if (obj) object_draw( instance, obj, 1, 0, 0 );
+	}
+	else api.setError(22,data->tokenBuffer);
+
+	popStack( instance, instance_stack - data->stack );
+	return NULL;
 }
 
 char *turboplusObjectDraw KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusObjectDraw, tokenBuffer );
 	return tokenBuffer;
+}
+
+char *_turboplusRObjectDraw( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args =__stack - data->stack +1 ;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	if (args==3)
+	{
+		struct object *obj = (struct object *)	list_find( &context -> objects, getStackNum(instance,__stack -2 ) );
+		if (obj) 
+			object_draw( instance, obj, 1,
+				getStackNum(instance,__stack -1 ), 
+				getStackNum(instance,__stack ) );
+	}
+	else api.setError(22,data->tokenBuffer);
+
+	popStack( instance, instance_stack - data->stack );
+	return NULL;
 }
 
 char *turboplusRObjectDraw KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusRObjectDraw, tokenBuffer );
 	return tokenBuffer;
+}
+
+char *_turboplusObjectMagDraw( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args =__stack - data->stack +1 ;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	if (args==2)
+	{
+		struct object *obj = (struct object *)	list_find( &context -> objects, getStackNum(instance,__stack -1 ) );
+		if (obj) object_draw( instance, obj, getStackNum(instance,__stack ), 0, 0 );
+	}
+	else api.setError(22,data->tokenBuffer);
+
+	popStack( instance, instance_stack - data->stack );
+	return NULL;
 }
 
 char *turboplusObjectMagDraw KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusObjectMagDraw, tokenBuffer );
 	return tokenBuffer;
+}
+
+char *_turboplusRObjectMagDraw( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args =__stack - data->stack +1 ;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	if (args==4)
+	{
+		struct object *obj = (struct object *)	list_find( &context -> objects, getStackNum(instance,__stack -3 ) );
+
+		printf("obj %08x\n",obj);
+
+		list_dump( &context -> objects );
+
+		if (obj) 
+			object_draw( instance, obj, 
+				getStackNum(instance,__stack -2 ),
+				getStackNum(instance,__stack -1 ), 
+				getStackNum(instance,__stack ) );
+	}
+	else api.setError(22,data->tokenBuffer);
+
+	popStack( instance, instance_stack - data->stack );
+	return NULL;
 }
 
 char *turboplusRObjectMagDraw KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusRObjectMagDraw, tokenBuffer );
 	return tokenBuffer;
 }
 
