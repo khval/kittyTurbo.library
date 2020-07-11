@@ -2069,10 +2069,33 @@ char *turboplusFDraw KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusObjectLimit( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args =__stack - data->stack +1 ;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 1:
+			list_allocate( &context->objects , getStackNum(instance,__stack ));
+			return NULL;
+
+		default:
+			api.setError(22,data->tokenBuffer);
+	}
+
+	popStack(instance,__stack - data->stack );
+	return NULL;
+}
+
+
 char *turboplusObjectLimit KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusObjectLimit, tokenBuffer );
 	return tokenBuffer;
 }
 
