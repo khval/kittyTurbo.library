@@ -15,6 +15,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include <string.h>
 
 #include <exec/exec.h>
@@ -63,7 +64,13 @@ void dispose_blit (void *ptr)
 
 void dispose_object (void *ptr)
 {
+	struct object *obj = (struct object *) ptr;
+
 	printf("object ptr %08x\n",ptr);
+
+	if (obj -> elements) free (obj -> elements);
+	obj -> elements = NULL;
+
 	free(ptr);
 }
 
