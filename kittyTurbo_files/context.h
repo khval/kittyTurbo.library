@@ -50,6 +50,8 @@ struct element
 
 struct object
 {
+	struct KittyInstance *instance;
+	int id;
 	struct element *elements;
 	int allocated;
 };
