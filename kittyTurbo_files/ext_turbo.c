@@ -932,7 +932,6 @@ char *_turboplusLine3d( struct glueCommands *data, int nextToken )
 
 				if (screen)
 				{
-
 					x0 = getStackDecimal(instance,__stack-5 );
 					y0 = getStackDecimal(instance,__stack-4 );
 					z0 = getStackDecimal(instance,__stack-3 ) + 100.0f;
@@ -1391,7 +1390,7 @@ char *_turboplusBlitSpeed( struct glueCommands *data, int nextToken )
 				struct context *context = instance -> extensions_context[ instance -> current_extension ];
 				int id = getStackNum(instance,__stack -1 );
 
-				struct blit *blit = list_find(&context -> blits, id);
+				struct blit *blit = (struct blit *) list_find(&context -> blits, id);
 				if (blit)
 				{
 					blit -> shift = getStackNum(instance,__stack );
