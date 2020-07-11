@@ -843,6 +843,51 @@ char *turboplusRBar KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusReserveObject( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args =__stack - data->stack +1 ;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	if (args==2)
+	{
+		int obj_id = getStackNum(instance,__stack-1 );
+		struct object *obj = (struct object *)	list_find( &context -> objects, obj_id );
+
+		if (obj == NULL)
+		{
+			printf("need to allocate a object\n");
+
+			obj = (struct object *) malloc( sizeof(struct object) );
+			if (obj)
+			{
+				printf("add a id and push it to list\n");
+
+				obj -> id = obj_id;
+				obj -> elements = NULL;
+				obj -> allocated = 0;
+				list_push_back( &context -> objects, (struct list *) obj );
+			}
+		}
+
+		if (obj)
+		{
+			obj -> allocated = getStackNum(instance,__stack );
+
+			printf("obj -> allocated %d\n", obj -> allocated);
+
+			if (obj -> elements) free( obj -> elements );
+			obj -> elements = ( struct element *) malloc( sizeof(struct element ) * obj -> allocated );
+		}
+	}
+	else api.setError(22,data->tokenBuffer);
+
+	popStack( instance, instance_stack - data->stack );
+	return NULL;
+}
+
 char *turboplusReserveObject KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
