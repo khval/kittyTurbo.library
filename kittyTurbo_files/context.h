@@ -45,7 +45,7 @@ struct element
 	int y;
 	int color;
 	int drawmode;
-	void (*fn) (struct element *);
+	bool (*fn) (struct retroScreen *screen,int buffer,int zoom, int rx, int ry, int *lx,int *ly,struct element *);	// return exit true / false
 };
 
 struct object
