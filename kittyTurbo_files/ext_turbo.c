@@ -1359,11 +1359,109 @@ char *turboplusEye3d KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+void __write_object__(struct object *obj, FILE *fd)
+{
+	struct element *elm;
+
+	int n;
+	int16_t fn_id;
+	int16_t size = obj -> allocated;
+	int16_t x;
+	int16_t y;
+
+	fwrite(&size,2,1,fd);
+
+	for (n=0;n<obj -> allocated;n++)
+	{
+		elm = obj -> elements + n;
+
+		if (elm -> fn == fn_elm_move) 
+		{
+			fn_id = -1;
+		}
+		else if (elm -> fn == fn_elm_draw)
+		{
+			 fn_id = 0;
+		}
+		else if (elm -> fn == fn_elm_stop)
+		{
+			 fn_id = 1;
+		}
+		else if (elm -> fn == fn_elm_attr)
+		{
+			fn_id = 2;
+		}
+
+		x = (int16_t) elm -> x;
+		y = (int16_t) elm -> y;
+
+		fwrite(&fn_id,2,1,fd);
+		fwrite(&x,2,1,fd);
+		fwrite(&y,2,1,fd);
+	}
+
+}
+
+char *_turboplusObjectSave( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args = instance_stack - data->stack +1;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 3:
+			{
+				struct stringData *name = getStackString(instance,__stack-2 ); 
+				int from = getStackNum(instance,__stack-1 );
+				int to = getStackNum(instance,__stack );
+				FILE *fd;
+				int id;
+				int16_t size;
+				struct object *obj;
+
+				fd = fopen(&name -> ptr,"w");
+				if (fd)
+				{
+					fwrite("OBJE",1,4,fd);
+
+					size = to - from;		// write number of objects - 1
+					fwrite(&size,2,1,fd);
+
+					for (id = from; id<=to; id++)
+					{
+						obj = (struct object *) list_find( &context -> objects, id );
+						if (obj)
+						{
+							__write_object__(obj, fd);
+						}
+						else	// if we can't find a object write blank object,
+						{
+							struct object obj;
+							obj.allocated = 0;
+							__write_object__(&obj, fd);
+						}
+					}
+					fclose(fd);
+				}
+			}
+
+			popStack( instance, instance_stack - data->stack );
+			break;
+		default:
+			popStack( instance, instance_stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+
+	return  NULL ;
+}
 
 char *turboplusObjectSave KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusObjectSave, tokenBuffer );
 	return tokenBuffer;
 }
 
