@@ -38,14 +38,30 @@ struct check
 	int y1;
 };
 
+struct element_context
+{
+	struct KittyInstance *instance;
+	struct retroScreen *screen;
+	int buffer;
+	double rx;
+	double ry;
+	double lx;
+	double ly;
+	double zoom;
+};
+
 struct element
 {
 	struct KittyInstance *instance;
-	int x;
-	int y;
-	int color;
-	int drawmode;
-	bool (*fn) (struct retroScreen *screen,int buffer,int zoom, int rx, int ry, int *lx,int *ly,struct element *);	// return exit true / false
+	union {
+		double x;
+		double color;
+	};
+	union {
+		double y;
+		double drawmode;
+	};
+	bool (*fn) (struct element_context * ,struct element *);	// return exit true / false
 };
 
 struct object

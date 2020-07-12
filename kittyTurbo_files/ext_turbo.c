@@ -868,7 +868,7 @@ char *_turboplusReserveObject( struct glueCommands *data, int nextToken )
 				obj -> id = obj_id;
 				obj -> elements = NULL;
 				obj -> allocated = 0;
-				list_push_back( &context -> objects, (struct list *) obj );
+				list_push_back( &context -> objects, (struct item *) obj );
 			}
 		}
 
@@ -902,28 +902,35 @@ char *turboplusReserveObject KITTENS_CMD_ARGS
 	element -> y = _y_;				\
 	element -> fn = _fn_
 
-bool fn_elm_draw(struct retroScreen *screen,int buffer,int zoom,int rx,int ry,int *lx, int *ly,struct element *elm)
+bool fn_elm_draw(struct element_context *ce,struct element *elm)
 {
-	printf("%d,%d\n",elm-> x,elm -> y);
+	retroLine( ce->screen, ce->buffer,
+		(ce->lx*ce->zoom) +ce->rx,
+		(ce->ly*ce->zoom)+ce->ry,
+		(elm->x*ce->zoom)+ce->rx,
+		(elm->y*ce->zoom)+ce->ry,
+		ce -> screen -> ink0 );
 
-	retroLine( screen, buffer,
-		*lx+rx,*ly+ry,
-		elm->x+rx,elm->y+ry,
-		screen -> ink0 );
-
-	*lx = elm -> x;
-	*ly = elm -> y;
+	ce->lx = elm -> x;
+	ce->ly = elm -> y;
 	return false;	// end false
 }
 
-bool fn_elm_move(struct retroScreen *screen,int buffer,int zoom,int rx,int ry,int *lx, int *ly,struct element *elm)
+bool fn_elm_move(struct element_context *ce,struct element *elm)
 {
-	*lx = elm -> x;
-	*ly = elm -> y;
+	ce->lx = elm -> x;
+	ce->ly = elm -> y;
 	return false;	// end false
 }
 
-bool fn_elm_stop(struct retroScreen *screen,int buffer,int zoom,int rx,int ry,int *lx,int *ly,struct element *elm)
+bool fn_elm_attr(struct element_context *ce,struct element *elm)
+{
+	ce -> screen -> ink0 = (int) elm -> color;
+	ce -> instance -> paintMode = (int) elm -> drawmode;
+	return false;	// end false
+}
+
+bool fn_elm_stop(struct element_context *ce,struct element *elm)
 {
 	return true;
 }
@@ -984,14 +991,9 @@ char *_turboplusDefineMove( struct glueCommands *data, int nextToken )
 		struct object *obj = (struct object *)	list_find( &context -> objects, obj_id );
 		if (obj)
 		{
-			printf("%08x\n",obj);
-
 			if ((obj -> elements)&&(elm_id < obj -> allocated ))
 			{
 				struct element *elm = obj -> elements + elm_id;
-
-				printf("set element\n");
-
 				__set_element__(elm,x,y,fn_elm_move);
 			}
 		}
@@ -1060,13 +1062,14 @@ char *_turboplusDefineAttr( struct glueCommands *data, int nextToken )
 		struct object *obj = (struct object *)	list_find( &context -> objects, obj_id );
 		if (obj)
 		{
-			int elm_id = getStackNum(instance,__stack-2 );
+			int elm_id = getStackNum(instance,__stack-2 )-1;
+			int color = getStackNum(instance,__stack-1 );
+			int drawmode = getStackNum(instance,__stack );
 
 			if ((obj -> elements)&&(elm_id<obj -> allocated))
 			{
 				struct element *elm = obj -> elements + elm_id;
-				elm -> color = getStackNum(instance,__stack-1 );
-				elm -> drawmode = getStackNum(instance,__stack );
+				__set_element__(elm,color,drawmode,fn_elm_attr);
 			}
 		}
 	}
@@ -1083,23 +1086,26 @@ char *turboplusDefineAttr KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
-void object_draw( struct KittyInstance *instance, struct object *obj , int zoom, int rx, int ry )
+void object_draw( struct KittyInstance *instance, struct object *obj , double zoom, double rx, double ry )
 {
-	int lx=0,ly=0;
-	int buf;
 	struct element *elm;
 	struct element *elm_end = obj -> elements + obj -> allocated;
 	struct retroScreen *screen = instance -> screens[instance -> current_screen];
-
-	printf("zoom %d,rx %d,ry %d\n",zoom,rx,ry);
+	struct element_context ce;
 
 	if (screen)
 	{
+		ce.instance = instance;
+		ce.screen = screen;
+		ce.zoom = zoom;
+		ce.rx = rx;
+		ce.ry = ry;
+
 		switch (screen ->autoback)
 		{
 			case 0:
-				buf =  screen -> double_buffer_draw_frame;
-				for (elm = obj -> elements; elm < elm_end; elm ++) if (elm -> fn( screen, buf, zoom, rx, ry,&lx, &ly, elm )) break;
+				ce.buffer =  screen -> double_buffer_draw_frame;
+				for (elm = obj -> elements; elm < elm_end; elm ++) if (elm -> fn( &ce, elm )) break;
 				break;
 
 			default:
@@ -1107,13 +1113,16 @@ void object_draw( struct KittyInstance *instance, struct object *obj , int zoom,
 				{
 					for (elm = obj -> elements; elm < elm_end; elm ++)
 					{
-						if (elm -> fn( screen, 0, zoom, rx,ry, &lx, &ly, elm )) break;
-						if (elm -> fn( screen, 1, zoom, rx,ry, &lx, &ly, elm )) break;
+						ce.buffer = 0;
+						if (elm -> fn( &ce, elm )) break;
+						ce.buffer = 1;
+						if (elm -> fn( &ce, elm )) break;
 					}
 				}
 				else
 				{
-					for (elm = obj -> elements; elm < elm_end; elm ++) if (elm -> fn( screen, 0,1, rx,ry,&lx, &ly, elm )) break;
+					ce.buffer = 0;
+					for (elm = obj -> elements; elm < elm_end; elm ++) if (elm -> fn( &ce, elm )) break;
 				}
 				break;
 		}
@@ -1181,12 +1190,16 @@ char *_turboplusObjectMagDraw( struct glueCommands *data, int nextToken )
 	struct context *context = instance -> extensions_context[ instance -> current_extension ];
 	int args =__stack - data->stack +1 ;
 
+
 	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 
 	if (args==2)
 	{
 		struct object *obj = (struct object *)	list_find( &context -> objects, getStackNum(instance,__stack -1 ) );
-		if (obj) object_draw( instance, obj, getStackNum(instance,__stack ), 0, 0 );
+		double zoom = getStackDecimal(instance,__stack );
+
+		zoom = zoom > 0 ? zoom : 1.0f / -zoom;
+		if (obj) object_draw( instance, obj, zoom, 0, 0 );
 	}
 	else api.setError(22,data->tokenBuffer);
 
@@ -1212,16 +1225,17 @@ char *_turboplusRObjectMagDraw( struct glueCommands *data, int nextToken )
 	if (args==4)
 	{
 		struct object *obj = (struct object *)	list_find( &context -> objects, getStackNum(instance,__stack -3 ) );
-
-		printf("obj %08x\n",obj);
-
-		list_dump( &context -> objects );
+		double zoom = getStackDecimal(instance,__stack  );
 
 		if (obj) 
+		{
+			zoom = zoom > 0 ? zoom : 1.0f / -zoom;
+
 			object_draw( instance, obj, 
-				getStackNum(instance,__stack -2 ),
-				getStackNum(instance,__stack -1 ), 
-				getStackNum(instance,__stack ) );
+				zoom ,
+				getStackDecimal(instance,__stack -2), 
+				getStackDecimal(instance,__stack -1) );
+		}
 	}
 	else api.setError(22,data->tokenBuffer);
 
