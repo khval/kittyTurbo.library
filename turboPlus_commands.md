@@ -232,7 +232,7 @@ n=Hit Spr Check(n To n,n,n,n)
     you need to move graphic cursor your self with R home 
     or Xgr, Ygr commands.
 
-Object Limit [n]
+**Object Limit [n]**
 
 	“Object Limit” command has misleading name it should be called Reserve Objects.
 	The command defines number of objects items in the list.
@@ -271,9 +271,12 @@ Object Limit [n]
 
 	Adds a stop command into the object list at element position.
 
-*Define Attr [object],[element] To [colors],[drawmode]*
+**Define Attr [object],[element] To [colors],[drawmode]**
 
-	This one is not correct yet.
+	Insets an attribute command int the element list of the object.
+
+	this command can’t be combined with existing command in same
+	element location, it will overwrite what ever is located there.
 
 **Object Draw [object]**
 
