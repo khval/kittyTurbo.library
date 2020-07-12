@@ -283,25 +283,36 @@ Object Limit [n]
 
 	Draw object relative to X,Y on the screen.
 
-*Object Mag Draw [object],[element]*
+**Object Mag Draw [object],[element]**
 
 	Draw the object on the screen.
 
 	if [mul]>0 then object coordinates is multiplied by [mul]
 	if [mul]<0 then object coordinates is divided by [mul]
 
-*R Object Mag Draw [object],[x],[y],[mul]*
+	Amos Kittens:
+	
+		For Amos kittens this command is able to take double as [mul],
+		this gives it better scaling, everything else is the same.
+
+**R Object Mag Draw [object],[x],[y],[mul]**
 
 	Position the object relative on the screen.
 
 	if [mul]>0 then object coordinates is multiplied by [mul]
 	if [mul]<0 then object coordinates is divided by [mul]
 
+	Amos Kittens:
+	
+		For Amos kittens this command is able to take double as [mul],
+		this gives it better scaling, everything else is the same.
+
+
 **Object Erase [object]**
 
 	Free the memoey of a object.
 
-Object Save s$,[n] To [n] 
+**Object Save s$,[n] To [n]**
 
 Object Load s$,[n] 
 
