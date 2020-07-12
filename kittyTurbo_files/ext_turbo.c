@@ -1745,7 +1745,7 @@ void dump_blits(struct context *context)
 
 		for ( ; blit < blit_end ; blit ++)
 		{
-			printf("pos %08x, %08x -> id %d\n",blit, *blit, (*blit) -> id);
+			printf("pos %08x, %08x -> id %d\n", (int) blit, (int) *blit, (*blit) -> id);
 		}
 	}
 }
@@ -1761,12 +1761,8 @@ void __multi_blit__(struct context *context, int from, int to)
 
 		for ( ; blit < blit_end ; blit ++)
 		{
-			printf("pos %08x, %08x -> id %d\n",blit, *blit, (*blit) -> id);
-
 			if  ((*blit) -> id < from) continue;
 			if  ((*blit) -> id > to) continue;
-
-			printf("call function\n");
 
 			((struct blit *) *blit) -> fn ( (struct blit *) *blit );
 
