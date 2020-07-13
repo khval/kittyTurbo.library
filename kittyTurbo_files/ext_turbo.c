@@ -1399,7 +1399,59 @@ void __write_object__(struct object *obj, FILE *fd)
 		fwrite(&x,2,1,fd);
 		fwrite(&y,2,1,fd);
 	}
+}
 
+void __read_element__(struct element *elm, FILE *fd)
+{
+	int16_t fn_id;
+	int16_t x,y;
+
+	fread(&fn_id,2,1,fd);
+	fread(&x,2,1,fd);
+	fread(&y,2,1,fd);
+
+	switch ( fn_id )
+	{
+		case -1:	elm -> fn = fn_elm_move;	 break;
+		case 0:	elm -> fn = fn_elm_draw;	break;
+		case 1:	elm -> fn = fn_elm_stop;	break;
+		case 2:	elm -> fn = fn_elm_attr;	break;
+	}
+
+	elm -> x = (double) x;
+	elm -> y = (double) y;
+
+}
+
+void __read_object__(struct object *obj, FILE *fd)
+{
+	int n;
+	int16_t size;
+
+	fread(&size,2,1,fd);	// get number of elements.
+
+	obj -> allocated = size;
+	if (obj -> elements) free(obj -> elements);
+	obj -> elements = malloc(sizeof(struct element) * size);
+
+	if (obj -> elements)
+	{
+		for (n=0;n<obj -> allocated;n++) __read_element__(obj -> elements + n, fd);
+	}
+}
+
+struct object *new_object( int id )
+{
+	struct object *obj = (struct object *) malloc(sizeof(struct object));
+
+	if (obj)
+	{
+		obj -> id = id;
+		obj -> allocated = 0;
+		obj -> elements = NULL;
+	}
+
+	return obj;
 }
 
 char *_turboplusObjectSave( struct glueCommands *data, int nextToken )
@@ -1465,10 +1517,75 @@ char *turboplusObjectSave KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusObjectLoad( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args = instance_stack - data->stack +1;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 2:
+			{
+				struct stringData *name = getStackString(instance,__stack-1 ); 
+				int to = getStackNum(instance,__stack );
+				int toEnd = to;
+				FILE *fd;
+				int id;
+				int16_t size;
+				struct object *obj;
+
+				fd = fopen(&name -> ptr,"r");
+				if (fd)
+				{
+					char fileType[5];
+					fileType[4]= 0;
+
+					// read byte 0 to 3
+
+					fread(fileType,1,4,fd);
+
+					if (strcmp(fileType,"OBJE")==0)
+					{
+						fread(&size,2,1,fd);
+						toEnd = to + size;
+
+						for (id = to; id<=toEnd; id++)
+						{
+							obj = (struct object *) list_find( &context -> objects, id );
+
+							if (obj) // if we found a object we can overwrite it.
+							{
+								__read_object__(obj, fd);
+							}
+							else	// if we can't find a object we need to add it.
+							{
+								struct object *obj = new_object( id );
+								__read_object__(obj, fd);
+								list_push_back( &context -> objects, (struct item *) obj );
+							}
+						}
+						fclose(fd);
+					}
+				}
+			}
+
+			popStack( instance, instance_stack - data->stack );
+			break;
+		default:
+			popStack( instance, instance_stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+
+	return  NULL ;
+}
+
 char *turboplusObjectLoad KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusObjectLoad, tokenBuffer );
 	return tokenBuffer;
 }
 
