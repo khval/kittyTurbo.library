@@ -660,18 +660,26 @@ F Put Block [n],[n],[n]
 
 Reserve Static Block [n]
 
-	Reserve memory for static array for faster lookups, instead of the Amos Pro linked lists.
+	Amos: 
+		Amos Pro uses a linked lists, this can slow.
 
 	Amos Kittens:
 		
-		Amos Kittens does, use not use a linked list, but it has to
-		search etch entry to find the block..
+		Amos Kittens does not use a linked list, but it has to
+		search etch entry to find the correct block, when do a lookup.
+	
+	This command allocates a array[0..n], 
+	insted of lookup the block in the buffer, checking etch entry.
+
+	The buffer short cuts it, because the index becomes the same as the ID.	
 
 Static Block Erase
 
 	Erases the fast lookup table
 
 Build Static Block
+
+	Fill in the static array.
 
 	array[0...n]=blocks.find(0...n)
 
