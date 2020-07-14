@@ -660,11 +660,24 @@ F Put Block [n],[n],[n]
 
 Reserve Static Block [n]
 
+	Reserve memory for static array for faster lookups, instead of the Amos Pro linked lists.
+
+	Amos Kittens:
+		
+		Amos Kittens does, use not use a linked list, but it has to
+		search etch entry to find the block..
+
 Static Block Erase
+
+	Erases the fast lookup table
 
 Build Static Block
 
-F Put Static Block [n],[n],[n] 
+	array[0...n]=blocks.find(0...n)
+
+F Put Static Block [n],[x],[y]
+
+	Draw a block from the buffer.
 
 Scene Load s$,[n]
 
