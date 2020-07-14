@@ -317,7 +317,7 @@ n=Hit Spr Check(n To n,n,n,n)
 
 **Object Save s$,[n] To [n]**
 
-Object Load s$,[n] 
+	Object Load s$,[n]
 
 
 **Line 3d [x1],[y1],[z1] To [x2],[y2],[z2]**
@@ -491,8 +491,8 @@ Object Load s$,[n]
 
 **Stars Speed [start] To [end],[speed x],[speed y]**
 
-    Change the speed of of a range of star from start to end.-    
-    First star is at 1, if start is 0, you will get illegal function call.      
+	Change the speed of of a range of star from start to end.-    
+	First star is at 1, if start is 0, you will get illegal function call.      
 
 Stars Clip [x0],[y0],[x1],[y1] 
 
@@ -666,26 +666,27 @@ Reserve Static Block [n]
 	Amos Kittens:
 		
 		Amos Kittens does not use a linked list, but it has to
-		search etch entry to find the correct block, when do a lookup.
+		search etch entry to find the correct block, when it does a lookup.
 	
 	This command allocates a array[0..n], 
-	insted of lookup the block in the buffer, checking etch entry.
-
-	The buffer short cuts it, because the index becomes the same as the ID.	
+	
+	insted of lookup the block in the list checking etch entry.
+	The array[] buffer short cuts the list, because the index becomes the same as the ID.	
 
 Static Block Erase
 
-	Erases the fast lookup table
+	Erases the fast lookup table from memory.
 
 Build Static Block
 
 	Fill in the static array.
+	Etch entry in the array points directly to block with same id as index value.
 
 	array[0...n]=blocks.find(0...n)
 
 F Put Static Block [n],[x],[y]
 
-	Draw a block from the buffer.
+	Draw a block from the static array.
 
 Scene Load s$,[n]
 
