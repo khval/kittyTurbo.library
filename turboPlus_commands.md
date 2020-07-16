@@ -656,35 +656,42 @@ n=Icon Check(n)
 	881 - MC68881 coprocessor installed
 	882 - MC68882 coprocessor installed
 		
-F Put Block [n],[n],[n]
+**F Put Block [n],[x],[y]**
 
-Reserve Static Block [n]
+	Amos Kittens:
+	
+		Same as Amos Pro "Put Block" command, no speed difference.
 
-	Amos: 
-		Amos Pro uses a linked lists, this can slow.
+
+**Reserve Static Block [n]**
+
+	Amos Pro: 
+	
+		Amos Pro uses a linked lists, this can be slow.
 
 	Amos Kittens:
 		
-		Amos Kittens does not use a linked list, but it has to
+		Amos Kittens does not use linked list, but it has to
 		search etch entry to find the correct block, when it does a lookup.
 	
 	This command allocates a array[0..n], 
 	
-	insted of lookup the block in the list checking etch entry.
-	The array[] buffer short cuts the list, because the index becomes the same as the ID.	
+	Insted of lookup the block in the list checking etch entry.
+	The array[] buffer short cuts the list, because the index becomes the same as the ID.
+	What this means is that static blocks does not need to search for the block, when used.
 
-Static Block Erase
+**Static Block Erase**
 
 	Erases the fast lookup table from memory.
 
-Build Static Block
+**Build Static Block**
 
 	Fill in the static array.
 	Etch entry in the array points directly to block with same id as index value.
 
 	array[0...n]=blocks.find(0...n)
 
-F Put Static Block [n],[x],[y]
+**F Put Static Block [n],[x],[y]**
 
 	Draw a block from the static array.
 
