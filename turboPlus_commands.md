@@ -695,19 +695,23 @@ n=Icon Check(n)
 
 	Draw a block from the static array.
 
-Scene Load s$,[n]
+Scene Load s$,[bank]
 
-Scene Icon Bank [n] 
+	load the scene map into Amos [bank]
 
-Scene Bank [n]
+Scene Icon Bank [bank] 
+
+	Set the icon bank to use.
+
+Scene Bank [bank]
+
+    set the current bank to use.
+
+n=Scene Check(x,y)
 
     A command for a tiles / map system
 
-n=Scene Check(n,n)
-
-    A command for a tiles / map system
-
-n=Scene 16 Check(n,n)
+n=Scene 16 Check(x,y)
 
     A command for a tiles / map system
 
@@ -719,9 +723,9 @@ Scene 16 Change [n],[n],[n]
 
     A command for a tiles / map system
 
-Scene 16 Draw [n],[n],[n],[n],[n],[n]
+Scene 16 Draw [map x],[map y],[w],[h],[pixel x],[pixel y]
 
-    A command for a tiles / map system
+    Draw a map 
 
 Scene 16 Def [n],[n],[n],[n],[n],[n],[n],[n] 
 
@@ -743,7 +747,7 @@ Scene 32 Change [n],[n],[n]
 
     A command for a tiles / map system
 
-Scene 32 Draw [n],[n],[n],[n],[n],[n] 
+Scene 32 Draw [map x],[map y],[w],[h],[pixel x],[pixel y]
 
     A command for a tiles / map system
 
