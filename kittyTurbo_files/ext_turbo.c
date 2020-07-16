@@ -2890,38 +2890,173 @@ char *turboplusMathInfo KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+
+char *_turboplusFPutBlock( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args =__stack - data->stack +1 ;
+
+	struct retroScreen *screen;
+	struct retroBlock *block = NULL;
+	int id;
+	int x=0,y=0;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 3:
+			id = getStackNum(instance,__stack-2);
+			x = getStackNum(instance,__stack-1);
+			y = getStackNum(instance,__stack);
+			block = api.findBlock_in_blocks(id);
+			break;
+
+		default:
+			popStack(instance,__stack - data->stack );
+			api.setError( 22,data->tokenBuffer);
+	}
+
+	popStack(instance,__stack - data->stack );
+
+	if (block)
+	{
+		screen = instance->screens[ instance -> current_screen ];
+		if (screen)
+		{
+			switch (screen -> autoback)
+			{
+				case 0:	retroPutBlock(screen, screen -> double_buffer_draw_frame, block, x,y, 255);
+						break;
+				default:	retroPutBlock(screen, 0, block, x,y, 255);
+						if (screen -> Memory[1]) retroPutBlock(screen, 1, block, x,y, 255);
+						break;
+			}	
+		}
+	}
+
+	return NULL;
+}
+
 char *turboplusFPutBlock KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusFPutBlock, tokenBuffer );
 	return tokenBuffer;
+}
+
+char *_turboplusReserveStaticBlock( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args =__stack - data->stack +1 ;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 1:
+			{
+				context -> blocks_allocated = getStackNum(instance,__stack );
+				if (context -> blocks) free(context -> blocks);
+				context -> blocks = (struct retroBlock **) malloc(
+					sizeof(struct retroBlock *) * context -> blocks_allocated);
+			}
+			return NULL;
+	}
+
+	popStack(instance,__stack - data->stack );
+	api.setError(22,data->tokenBuffer);
+	return NULL;
 }
 
 char *turboplusReserveStaticBlock KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusReserveStaticBlock, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusStaticBlockErase KITTENS_CMD_ARGS
 {
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+
+	if (context -> blocks) free(context -> blocks);
+
+	context -> blocks_allocated = 0;
+	context -> blocks = NULL;
+
 	return tokenBuffer;
 }
 
 char *turboplusBuildStaticBlock KITTENS_CMD_ARGS
 {
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+
+	int n;
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+
+	for (n=0; n < context -> blocks_allocated ; n++ )
+	{
+		context -> blocks[n] = api.findBlock_in_blocks( n+1 );
+	}
+
 	return tokenBuffer;
+}
+
+char *_turboplusFPutStaticBlock( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args =__stack - data->stack +1 ;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int n,x=0,y=0;
+	struct retroScreen *screen;
+	struct retroBlock *block = NULL;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 3:
+			n = getStackNum(instance,__stack -2 ) -1;
+			x = getStackNum(instance,__stack -1 );
+			y = getStackNum(instance,__stack );			
+			if ((n>-1)&&(n < context -> blocks_allocated )) block = context -> blocks[n];
+			break;
+
+		default:
+
+			popStack(instance,__stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+			return NULL;
+	}
+
+	popStack(instance,__stack - data->stack );
+
+	if (block)
+	{
+		screen = instance -> screens[ instance -> current_screen ];
+		if (screen)
+		{
+			switch (screen -> autoback)
+			{
+				case 0:	retroPutBlock(screen, screen -> double_buffer_draw_frame, block, x,y, 255);
+						break;
+				default:	retroPutBlock(screen, 0, block, x,y, 255);
+						if (screen -> Memory[1]) retroPutBlock(screen, 1, block, x,y, 255);
+						break;
+			}
+		}
+	}
+
+	return NULL;
 }
 
 char *turboplusFPutStaticBlock KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusFPutStaticBlock, tokenBuffer );
 	return tokenBuffer;
 }
 
