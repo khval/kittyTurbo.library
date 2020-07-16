@@ -102,6 +102,9 @@ struct context
 	struct star *stars;
 	int stars_allocated;
 
+	struct retroBlock **blocks;
+	int blocks_allocated;
+
 	struct check *checks;
 	int checks_allocated;
 
