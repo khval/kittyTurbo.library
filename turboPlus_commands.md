@@ -698,7 +698,15 @@ n=Icon Check(n)
 Scene Load s$,[bank]
 
 	load the scene map into Amos [bank]
-
+	
+	Scene can be created by this commands:
+	
+	Reserve As Work 8,4+(Scene X-1)*(Scene Y-1)
+	Doke Start(8),Scene Y
+	Doke Start(8)+2,Scene X
+	
+	Data is stored from start(8)+4 to 4+(Scene X-1)*(Scene Y-1)
+	
 Scene Icon Bank [bank] 
 
 	Set the icon bank to use.
@@ -715,13 +723,13 @@ n=Scene 16 Check(x,y)
 
     A command for a tiles / map system
 
-Scene Change [n],[n],[n] 
+Scene Change [x],[y],[value] 
 
-    A command for a tiles / map system
+    Change [value] in the scene at map position [x],[y]
 
-Scene 16 Change [n],[n],[n]
+Scene 16 Change [x],[y],[value]
 
-    A command for a tiles / map system
+    Change [value] in the scene at map position [x],[y]
 
 Scene 16 Draw [map x],[map y],[w],[h],[pixel x],[pixel y]
 
@@ -743,29 +751,37 @@ n=Scene 32 Check(n,n)
 
     A command for a tiles / map system
 
-Scene 32 Change [n],[n],[n] 
+Scene 32 Change [x],[y],[value] 
 
-    A command for a tiles / map system
+    Change [value] in the scene at map position [x],[y]
 
 Scene 32 Draw [map x],[map y],[w],[h],[pixel x],[pixel y]
 
     A command for a tiles / map system
 
-Scene 16 View [n],[n],[n] To [n],[n] 
+Scene 16 View [n],[x1],[y1] To [x2],[y2] 
 
-    A command for a tiles / map system
+    Define the draw area for the map
 
-Scene 32 View [n],[n],[n] To [n],[n]
+    [n] is unkown for now.
+    [x1],[y1] upper left corner
+    [x2],[y2] lower right corner
 
-    A command for a tiles / map system
+Scene 32 View [n],[x1],[y1] To [x2],[y2]
 
-Scene 16 Do [n],[n]
+    Define the draw area for the map
+    
+    [n] is unkown for now.
+    [x1],[y1] upper left corner
+    [x2],[y2] lower right corner
 
-    A command for a tiles / map system
+Scene 16 Do [map x],[map y]
 
-Scene 32 Do [n],[n] 
+    Draw the map from icon x,y in the map to the view defined.
 
-    A command for a tiles / map system
+Scene 32 Do [map x],[map y] 
+
+    Draw the map from icon x,y in the map to the view defined.
 
 Scene 16 Top [n],[n]
 
@@ -801,11 +817,11 @@ Scene 32 Right [n],[n]
 
 n=Scene X  
 
-    A command for a tiles / map system
+    Returns the width of the scene map
 
 n=Scene Y  
 
-    A command for a tiles / map system
+    Returns the height of the scene map
 
 Scene Palette [n]
 
