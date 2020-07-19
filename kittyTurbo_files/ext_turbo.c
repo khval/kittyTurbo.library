@@ -3515,10 +3515,30 @@ char *turboplusSceneY KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusAmosPri( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args =__stack - data->stack +1 ;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 1:
+			SetTaskPri(FindTask(NULL), getStackNum(instance,__stack ));
+			return NULL;
+
+		default:
+			popStack(instance,__stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+	return NULL;
+}
+
 char *turboplusAmosPri KITTENS_CMD_ARGS
 {
 	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusAmosPri, tokenBuffer );
 	return tokenBuffer;
 }
 
@@ -3674,10 +3694,6 @@ char *_ext_cmd_range( struct glueCommands *data, int nextToken )
 	int args = instance_stack - data->stack +1;
 	int ret = 0,_min,_max;
 	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-
-	printf("args: %d\n",args);
-
-	api.dumpStack();
 
 	switch (args)
 	{
