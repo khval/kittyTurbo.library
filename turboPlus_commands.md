@@ -870,7 +870,7 @@ Workbench Open
 	if value is less then [start] then [value] is [start]
 	if value is more then [end] then [value] is [end].
 
-n=Texp([bool],[true val],[false val])
+**n=Texp([bool],[true val],[false val])**
 
 	This is similar example in the C language.
 	
