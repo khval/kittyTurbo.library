@@ -18,127 +18,127 @@ At bottom of the list you will find none supported commands.
 
 **Multi Yes**
 
-    Enable multitasking, calls function exec.library/permit()
+	Enable multitasking, calls function exec.library/permit()
 
-    You need too call “Multi Yes” equality number of times as “Multi No” is executed, 
-    it should be safe to use this command in reclusive loop, but you probably should not. 
+	You need too call “Multi Yes” equality number of times as “Multi No” is executed, 
+	it should be safe to use this command in reclusive loop, but you probably should not. 
 
-    (Warning do not mix with craft extension, they do not keep the same count)
+	(Warning do not mix with craft extension, they do not keep the same count)
 
 **Multi No**
 
-    Disable multitasking, executes function exec.library/forbid()
+	Disable multitasking, executes function exec.library/forbid()
 
-    Do not abuse this command!!!
-    This is not a magic bullet, it should not be used to speed up your basic program.
+	Do not abuse this command!!!
+	This is not a magic bullet, it should not be used to speed up your basic program.
 
-    On AmigaOS4.1 the mouse, keyboard, audio, +++, needs multitasking, disabling multitasking
-    for a long-time course bad sound, keyboard / mouse locking up, plus graphics will not be updated,
-    if multitasking is disabled, some of the basic command might result in dead locks,
-    as it they might wait for graphic engine, or a system event,
-    that will never happen, while multitasking is disabled.
+	On AmigaOS4.1 the mouse, keyboard, audio, +++, needs multitasking, disabling multitasking
+	for a long-time course bad sound, keyboard / mouse locking up, plus graphics will not be updated,
+	if multitasking is disabled, some of the basic command might result in dead locks,
+	as it they might wait for graphic engine, or a system event,
+	that will never happen, while multitasking is disabled.
 
-    If you need safe atomic protection, look at the OS4.1 SDK in the folder. 
-    “SDK:Documentation/Autodocs/exec.h”, See functions MutexObtain() and MutexRelease().
+	If you need safe atomic protection, look at the OS4.1 SDK in the folder. 
+	“SDK:Documentation/Autodocs/exec.h”, See functions MutexObtain() and MutexRelease().
 
-    Only when it written you most disable multitasking, should you disable multitasking,
-    and when you keep the multitasking disabled as short as possible.
-    
-    (Warning do not mix with craft extension, they do not keep the same count)
+	Only when it written you most disable multitasking, should you disable multitasking,
+	and when you keep the multitasking disabled as short as possible.
+	
+	(Warning do not mix with craft extension, they do not keep the same count)
 
 **n=Lsl.b(value,shift)**
 
-    Shifts bits down/left, resulting bits moving to left.
-    
-    The command can be explained mathematical like this.
-    
-    result = value * (2^shift)
-    
-    In effect this command is often used for quick multiply,
-    provided you can convert your multipay value to 2^shift format.
-    
-    Example:
-    lsl.b($81818181,1)=$81818102
+	Shifts bits down/left, resulting bits moving to left.
+	
+	The command can be explained mathematical like this.
+	
+	result = value * (2^shift)
+	
+	In effect this command is often used for quick multiply,
+	provided you can convert your multipay value to 2^shift format.
+	
+	Example:
+	lsl.b($81818181,1)=$81818102
 
 **n=Lsl.w(value,shift)**
 
 
-    Shifts bits down/left, resulting bits moving to left.
-    
-    The command can be explained mathematical like this.
-    
-    result = value * (2^shift)
-    
-    In effect this command is often used for quick multiply,
-    provided you can convert your multipay value to 2^shift format.
-    
-    Example:
-    lsl.w($81818181,1)=$81810302
+	Shifts bits down/left, resulting bits moving to left.
+	
+	The command can be explained mathematical like this.
+	
+	result = value * (2^shift)
+	
+	In effect this command is often used for quick multiply,
+	provided you can convert your multipay value to 2^shift format.
+	
+	Example:
+	lsl.w($81818181,1)=$81810302
 
 **n=Lsl.l(value,shift)**
 
-    Shifts bits down/left, resulting bits moving to left.
-    
-    The command can be explained mathematical like this.
-    
-    result = value * (2^shift)
-    
-    In effect this command is often used for quick multiply,
-    provided you can convert your multipay value to 2^shift format.
-    
-    Example:
-    lsl.l($81818181,1)=$03030302
+	Shifts bits down/left, resulting bits moving to left.
+	
+	The command can be explained mathematical like this.
+	
+	result = value * (2^shift)
+	
+	In effect this command is often used for quick multiply,
+	provided you can convert your multipay value to 2^shift format.
+	
+	Example:
+	lsl.l($81818181,1)=$03030302
 
 **n=Lsr.b(value,shift)**
 
-    Shifts bits up/right, resulting bits moving to right.
-    This command only effect low byte, the high bytes are kept.
+	Shifts bits up/right, resulting bits moving to right.
+	This command only effect low byte, the high bytes are kept.
 
-    Example:
-    lsl.b($81818181,1)=$81818140
+	Example:
+	lsl.b($81818181,1)=$81818140
 
 **n=Lsr.w(value,shift)**
 
-    Shifts bits up/right, resulting bits moving to right.
-    This command only effect the two low bytes, the high bytes are kept.
+	Shifts bits up/right, resulting bits moving to right.
+	This command only effect the two low bytes, the high bytes are kept.
 
-    Example:
-    lsr.w($81818181,1)=$818140C0
+	Example:
+	lsr.w($81818181,1)=$818140C0
 
 **n=Lsr.l(value,shift)**
 
-    Shifts bits up/right, resulting bits moving to right.
-    
-    To example the command to none computer geeks.
-    The command can be explained mathematical like this.
-    
-    result = value / (2^shift)
-    
-    In effect this command is often used for quick divide,
-    provided you can convert your divide value to 2^shift format.
+	Shifts bits up/right, resulting bits moving to right.
+	
+	To example the command to none computer geeks.
+	The command can be explained mathematical like this.
+	
+	result = value / (2^shift)
+	
+	In effect this command is often used for quick divide,
+	provided you can convert your divide value to 2^shift format.
 
-    Example:
-    lsr.l($81818181,1)=$40C0C0C0
+	Example:
+	lsr.l($81818181,1)=$40C0C0C0
 
 **n=L Swap(n)**
 	
 **n=Test.b(n,n)**
 
-    Check is low bytes is equal
+	Check is low bytes is equal
 
 **n=Test.w(n,n)**
 
-    Check if low word is equal
+	Check if low word is equal
 
 **n=Test.l(n,n)**
 
-    Check if int is equal
+	Check if int is equal
 
 **Vbl Wait [y beam]**
 
-    Wait for a beam position, 
-    you don’t have access to internals of retroMode.library, 
-    so this command will work, just like "wait vbl" command.
+	Wait for a beam position, 
+	you don’t have access to internals of retroMode.library, 
+	so this command will work, just like "wait vbl" command.
 
 **Reserve Check [items]**
 
@@ -206,45 +206,45 @@ n=Hit Bob Zone([offset x],[offset y],[bob n])
 
 **R Move [dx],[dy]**
 
-    Relative to the graphic cursor xgr, ygr
+	Relative to the graphic cursor xgr, ygr
 
 **R Draw [dx],[dy]**
 
-    Draw a line relative to graphic cursor xgr, ygr
-    same as draw xgr,ygr to xgr+[dx],ygr+[dy]
-    
-    Unlike R Box, R Bar, this command does change graphic cursor (xgr,ygr).
+	Draw a line relative to graphic cursor xgr, ygr
+	same as draw xgr,ygr to xgr+[dx],ygr+[dy]
+	
+	Unlike R Box, R Bar, this command does change graphic cursor (xgr,ygr).
 
 **R Box [dx],[dy]**
 
-    Draw a box relative to graphic cursor xgr, ygr
-    same as box xgr,ygr to xgr+[dx],ygr+[dy]
-    
-    Command does not change graphic cursor, 
-    you need to move graphic cursor your self with R home 
-    or Xgr, Ygr commands.
+	Draw a box relative to graphic cursor xgr, ygr
+	same as box xgr,ygr to xgr+[dx],ygr+[dy]
+	
+	Command does not change graphic cursor, 
+	you need to move graphic cursor your self with R home 
+	or Xgr, Ygr commands.
 
 **R Home [x],[y]**
 
-    moves graphic cursor to x,y
-    Reamended using standard command instead using addons have look at Gr Locate.
+	moves graphic cursor to x,y
+	Reamended using standard command instead using addons have look at Gr Locate.
 
-    same as:
+	same as:
   
-        xgr=[x] : ygr=[y]
+		xgr=[x] : ygr=[y]
 
-    and command:
-    
-        gr locate [x],[y]
+	and command:
+	
+		gr locate [x],[y]
 
 **R Bar [dx],[dy]**
 
-    Draw a bar relative to graphic cursor xgr, ygr
-    same as box xgr,ygr to xgr+dx,ygr+dy
+	Draw a bar relative to graphic cursor xgr, ygr
+	same as box xgr,ygr to xgr+dx,ygr+dy
 
-    Command does not change graphic cursor, 
-    you need to move graphic cursor your self with R home 
-    or Xgr, Ygr commands.
+	Command does not change graphic cursor, 
+	you need to move graphic cursor your self with R home 
+	or Xgr, Ygr commands.
 
 **Object Limit [n]**
 
@@ -352,8 +352,8 @@ n=Hit Bob Zone([offset x],[offset y],[bob n])
 
 **Blit Speed [n],[shift]**
 
-    Sets the speed of blit
-    [shift] value from -15 to 15
+	Sets the speed of blit
+	[shift] value from -15 to 15
 
 **Blit Int On [start] To [end]**
 
@@ -421,57 +421,57 @@ n=Hit Bob Zone([offset x],[offset y],[bob n])
 
 *Blit Clear [bit]*
 
-    This command clears all or some of bit plains. 
-    on Amiga computers with planar graphics this command should be faster than Cls command.
-    On modern graphic cards, this command its slower, instead of clearing one or two bitmaps, 
-    this command has to mask the image with a AND operation, to remove bits from the color value.
+	This command clears all or some of bit plains. 
+	on Amiga computers with planar graphics this command should be faster than Cls command.
+	On modern graphic cards, this command its slower, instead of clearing one or two bitmaps, 
+	this command has to mask the image with a AND operation, to remove bits from the color value.
 
-    bit %001 clear plain 0
-    bit %010 clear plain 1
-    bit %011 clear plain 1 and 0
-    bit %100 clear plain 2
-    bit %101 clear plain 2 and 0
-    bit %110 clear plain 2 and 1
-    bit %111 clear plain 2,1 and 0  
+	bit %001 clear plain 0
+	bit %010 clear plain 1
+	bit %011 clear plain 1 and 0
+	bit %100 clear plain 2
+	bit %101 clear plain 2 and 0
+	bit %110 clear plain 2 and 1
+	bit %111 clear plain 2,1 and 0  
 
 **F Plot [x],[y],[color]**
 
-    If your changing colors often then this command can be faster then normal Plot command.
-    if your not changing color often, it should be faster to preset color with ink command.
+	If your changing colors often then this command can be faster then normal Plot command.
+	if your not changing color often, it should be faster to preset color with ink command.
 
-    This command does not change graphic cursor.
+	This command does not change graphic cursor.
 
 **n=F Point(x,y)**
 
-    Same as normal point command, no difference in speed.
+	Same as normal point command, no difference in speed.
 
-    This command does not change graphic cursor.
+	This command does not change graphic cursor.
 
 **F Circle [x],[y],[r],[color]**
 
-    Same as normal circle command, no difference in speed.
+	Same as normal circle command, no difference in speed.
 
-    This command does not change graphic cursor.
+	This command does not change graphic cursor.
 
 **F Draw [x],[y]**
 
-    Same as normal draw command, no difference in speed.
+	Same as normal draw command, no difference in speed.
 
-    This command does change graphic cursor.
+	This command does change graphic cursor.
 
 **F Draw [x0],[y0] To [x1],[y1]**
 
-    Same as normal draw command, no difference in speed.
+	Same as normal draw command, no difference in speed.
 
-    This command does change graphic cursor.
+	This command does change graphic cursor.
 
 **n=F Sqr(n)**
 
-    Same as normal sqr command, no difference in speed.
+	Same as normal sqr command, no difference in speed.
 
 **n=Left Click**
 
-    This command should work while in exec/forbid(). 
+	This command should work while in exec/forbid(). 
 	
 	Amos Kittens:
 
@@ -480,37 +480,37 @@ n=Hit Bob Zone([offset x],[offset y],[bob n])
 
 **Reserve Stars [n]**
 
-    Reserve stars, or random dots in x,y plain
+	Reserve stars, or random dots in x,y plain
 
 **Define Star [n],[x],[y],[x speed],[y speed]**
 
-    Set star [n] coordinate [x],[y] and speed
+	Set star [n] coordinate [x],[y] and speed
 
 **Display Stars**
-    
-    draws stars and computes the next position of the stars.
+	
+	draws stars and computes the next position of the stars.
 
 **Stars Erase**
 
-    Erase stars / dots
+	Erase stars / dots
 
 **Stars Compute [n start] To [n end]**
 
-    Calculate the new position of the stars.
-    from [n start] to [n end]
+	Calculate the new position of the stars.
+	from [n start] to [n end]
 
 **Stars Draw**
 
-    Draw stars/dots
+	Draw stars/dots
 
 **Stars Speed [start] To [end],[speed x],[speed y]**
 
-	Change the speed of of a range of star from start to end.-    
-	First star is at 1, if start is 0, you will get illegal function call.      
+	Change the speed of of a range of star from start to end.-	
+	First star is at 1, if start is 0, you will get illegal function call.	  
 
 Stars Clip [x0],[y0],[x1],[y1] 
 
-    Limit where stars are drawn
+	Limit where stars are drawn
 
 **Stars Int On [clear]**
 
@@ -560,45 +560,45 @@ Plane Update [screen]
 
 **F Paste Icon [x],[y],[n]**
 
-    On Amos Kittens:
+	On Amos Kittens:
 
-        Same as normal paste icon (uses retroMode.library).
-    
-    On Amos Pro:
-    
-        * This command uses blitter.
-    
-        * This command is made for speed, does not do testing.
+		Same as normal paste icon (uses retroMode.library).
+	
+	On Amos Pro:
+	
+		* This command uses blitter.
+	
+		* This command is made for speed, does not do testing.
 
-        * This command can crash your computer.
+		* This command can crash your computer.
 
 **F 32 Icon [x],[y],[n]**
 
-    On Amos Kittens:
+	On Amos Kittens:
 
-        Same as normal paste icon (uses retroMode.library).
-    
-    On Amos Pro:
+		Same as normal paste icon (uses retroMode.library).
+	
+	On Amos Pro:
 
-        * This command should only work with 32-pixel width icons.
+		* This command should only work with 32-pixel width icons.
 
-        * This command uses blitter.
-    
-        * This command is made for speed, does not do testing.
+		* This command uses blitter.
+	
+		* This command is made for speed, does not do testing.
 
-        * This command can crash your computer.
+		* This command can crash your computer.
 
 **F 16 Icon [x],[y],[n]**
 
 	On Amos Kittens:
 
-        	Same as normal paste icon (uses retroMode.library).
-    
+			Same as normal paste icon (uses retroMode.library).
+	
 	On Amos Pro:
 
-	        * This command should only work with 16-pixel width icons.
+			* This command should only work with 16-pixel width icons.
 
-	        * This command uses blitter.
+			* This command uses blitter.
 
 		* This command is made for speed, does not do testing.
 
@@ -611,14 +611,14 @@ Plane Update [screen]
 		Same as normal paste icon (uses retroMode.library).
 
 	Amos Pro:
-    
-	        * This command should only work with 16-pixel width icons.
-    
-	        * This command uses CPU
-        
-	        * This command is made for speed, does not do testing.
+	
+			* This command should only work with 16-pixel width icons.
+	
+			* This command uses CPU
+		
+			* This command is made for speed, does not do testing.
 
-	        * This command can crash your computer.
+			* This command can crash your computer.
 
 **F 32proc Icon [x],[y],[n]**
 
@@ -628,13 +628,13 @@ Plane Update [screen]
 
 	On Amos Pro:
 
-	        * This command should only work with 32-pixel width icons.
+			* This command should only work with 32-pixel width icons.
 
-	        * This command uses CPU
+			* This command uses CPU
 
-	        * This command is made for speed, does not do testing.
+			* This command is made for speed, does not do testing.
 
-	        * This command can crash your computer.
+			* This command can crash your computer.
 
 n=X Icon(n)
 
@@ -788,7 +788,7 @@ Scene 16 View [n],[x1],[y1] To [x2],[y2]
 Scene 32 View [n],[x1],[y1] To [x2],[y2]
 
 	Define the draw area for the map
-    
+	
 	[n] is unkown for now.
 	[x1],[y1] upper left corner
 	[x2],[y2] lower right corner
