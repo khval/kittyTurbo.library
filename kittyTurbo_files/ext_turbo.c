@@ -39,6 +39,9 @@
 
 #define proc_names_printf printf
 
+
+void find_scene_bank(struct KittyInstance *instance,struct context *context, int bank_id );
+
 #ifdef debug
 	#warning compiling with debug 
 	#define dprintf printf
@@ -3060,17 +3063,88 @@ char *turboplusFPutStaticBlock KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+
+char *_turboplusSceneBank( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args =__stack - data->stack +1 ;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int n;
+	struct kittyBank *bank;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 1:
+
+			n = getStackNum(instance,__stack ) ;
+
+			bank = api.findBankById( n );
+
+			if ((bank) && ( api.findBankById( 2) ))
+			{
+				context -> scene_bank = n;
+				return NULL;
+			}
+			else api.setError( 36, data->tokenBuffer  );
+
+			return NULL;;
+
+		default:
+
+			popStack(instance,__stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+
+	return NULL;
+}
+
 char *turboplusSceneBank KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusSceneBank, tokenBuffer );
 	return tokenBuffer;
+}
+
+char *_turboplusSceneCheck( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args =__stack - data->stack +1 ;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int x,y;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 2:
+			x = getStackNum(instance,__stack -1) ;
+			y = getStackNum(instance,__stack ) ;
+
+			popStack(instance,__stack - data->stack );
+
+			if (context -> scene_memory == NULL)  find_scene_bank(instance,context,context -> scene_bank);
+
+			if (context -> scene_memory)
+			{
+				setStackNum(instance ,*((char *) context -> scene_memory + x + (y * context -> scene_width) )) ;
+			}
+			return NULL;;
+
+		default:
+
+			popStack(instance,__stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+
+	return NULL;
 }
 
 char *turboplusSceneCheck KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdParm( _turboplusSceneCheck, tokenBuffer );
 	return tokenBuffer;
 }
 
@@ -3081,12 +3155,63 @@ char *turboplusScene16Check KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+void find_scene_bank(struct KittyInstance *instance,struct context *context, int bank_id )
+{
+	struct kittyBank *bank = api.findBankById( bank_id );
+
+	if (bank) context -> scene_bank = bank_id;
+
+	if (bank == NULL) bank = api.firstBank();
+
+	if (bank)
+	{
+		context -> scene_memory = (char *) bank -> start + 4;
+		context -> scene_width = *((int16_t *) bank -> start);
+		context -> scene_height = *((int16_t *) ((char *) bank -> start+2));
+	}
+}
+
+char *_turboplusSceneChange( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+	int args =__stack - data->stack +1 ;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 3:
+			{
+				int x,y,v;
+				x = getStackNum(instance,__stack-2 );
+				y = getStackNum(instance,__stack-1 );
+				v = getStackNum(instance,__stack );
+				popStack(instance,__stack - data->stack );
+
+				if (context -> scene_memory == NULL)  find_scene_bank(instance,context,context -> scene_bank);
+
+				if (context -> scene_memory)
+				{
+					*((char *) context -> scene_memory + x + (y * context -> scene_width)  ) = v;
+				}
+			}
+			return NULL;
+
+		default:
+			popStack(instance,__stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+	return NULL;
+}
+
 char *turboplusSceneChange KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdNormal( _turboplusSceneChange, tokenBuffer );
 	return tokenBuffer;
 }
+
 
 char *turboplusScene16Change KITTENS_CMD_ARGS
 {
@@ -3231,14 +3356,22 @@ char *turboplusScene32Right KITTENS_CMD_ARGS
 char *turboplusSceneX KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+
+	if (context -> scene_memory == NULL)  find_scene_bank(instance,context,context -> scene_bank);
+	if (context -> scene_memory) setStackNum(instance, context -> scene_width);
+
 	return tokenBuffer;
 }
 
 char *turboplusSceneY KITTENS_CMD_ARGS
 {
 	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	struct context *context = instance -> extensions_context[ instance -> current_extension ];
+
+	if (context -> scene_memory == NULL)  find_scene_bank(instance,context,context -> scene_bank);
+	if (context -> scene_memory) setStackNum(instance, context -> scene_width);
+
 	return tokenBuffer;
 }
 

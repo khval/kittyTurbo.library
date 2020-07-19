@@ -113,5 +113,10 @@ struct context
 
 	struct int_blit int_blit;
 	struct int_stars int_stars;
+
+	int scene_bank;
+	char *scene_memory;
+	int scene_width;
+	int scene_height;
 };
 
