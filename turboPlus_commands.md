@@ -870,7 +870,16 @@ Workbench Open
     if value is less then [start] then [value] is [start]
     if value is more then [end] then [value] is [end].
 
-n=Texp(n,n,n)
+n=Texp([bool],[true val],[false val])
+
+	This is similar example in the C language.
+	
+	ret = [bool] ? [true val] : [false val]
+	
+	Returns a value depending on true or false input, 
+	so instead of “IF … THEN … ELSE … END IF“
+	you make code cleaner and there is no branching.
+	So should be faster.
 
 **n=T Clip([value],[div])**
 
