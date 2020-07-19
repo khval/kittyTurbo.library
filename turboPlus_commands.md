@@ -590,64 +590,64 @@ Plane Update [screen]
 
 **F 16 Icon [x],[y],[n]**
 
-    On Amos Kittens:
+	On Amos Kittens:
 
-        Same as normal paste icon (uses retroMode.library).
+        	Same as normal paste icon (uses retroMode.library).
     
-    On Amos Pro:
+	On Amos Pro:
 
-        * This command should only work with 16-pixel width icons.
+	        * This command should only work with 16-pixel width icons.
 
-        * This command uses blitter.
+	        * This command uses blitter.
 
-        * This command is made for speed, does not do testing.
+		* This command is made for speed, does not do testing.
 
-        * This command can crash your computer.
+		* This command can crash your computer.
 
 **F 16proc Icon [x],[y],[n]**
 
-    On Amos Kittens:
+	Amos Kittens:
 
-        Same as normal paste icon (uses retroMode.library).
+		Same as normal paste icon (uses retroMode.library).
 
-    On Amos Pro:
+	Amos Pro:
     
-        * This command should only work with 16-pixel width icons.
+	        * This command should only work with 16-pixel width icons.
     
-        * This command uses CPU
+	        * This command uses CPU
         
-        * This command is made for speed, does not do testing.
+	        * This command is made for speed, does not do testing.
 
-        * This command can crash your computer.
+	        * This command can crash your computer.
 
 **F 32proc Icon [x],[y],[n]**
 
-    On Amos Kittens:
+	On Amos Kittens:
 
-        Same as normal paste icon (uses retroMode.library).
+		Same as normal paste icon (uses retroMode.library).
 
-    On Amos Pro:
+	On Amos Pro:
 
-        * This command should only work with 32-pixel width icons.
+	        * This command should only work with 32-pixel width icons.
 
-        * This command uses CPU
+	        * This command uses CPU
 
-        * This command is made for speed, does not do testing.
+	        * This command is made for speed, does not do testing.
 
-        * This command can crash your computer.
+	        * This command can crash your computer.
 
 n=X Icon(n)
 
-    Return width in words of icon[n]
+	Return width in words of icon[n]
 	words width = icon [n] pixel width / 16
 
 n=Y Icon(n)
 
-    return pixel height of icon [n]
+	return pixel height of icon [n]
 
 n=Planes Icon(n)
 
-    Should returns number of bit plains. (on Amos Kittens this command will return 8.)   
+	Should returns number of bit plains. (on Amos Kittens this command will return 8.)   
 
 n=Icon Check(n)
 
@@ -731,127 +731,127 @@ Scene Icon Bank [bank]
 
 **n=Scene Check(x,y)**
 
-    return the icon image number at x,y
+	return the icon image number at x,y
 
 n=Scene 16 Check(x,y)
 
-    return the icon image number at x,y
+	return the icon image number at x,y
 
-    Don’t know this command works, sorry.
+	Don’t know this command works, sorry.
 
 **Scene Change [x],[y],[value]**
 
-    Change [value] in the scene at map position [x],[y]
+	Change [value] in the scene at map position [x],[y]
 
 Scene 16 Change [x],[y],[value]
 
-    Change [value] in the scene at map position [x],[y]
+	Change [value] in the scene at map position [x],[y]
 
 	Don’t know this command works, sorry.
 
 Scene 16 Draw [map x],[map y],[w],[h],[pixel x],[pixel y]
 
-    Draw a map 
+	Draw a map 
 
 Scene 16 Def [n],[n],[n],[n],[n],[n],[n],[n] 
 
-    A command for a tiles / map system
+	A command for a tiles / map system
 
 Scene 16 Restore [n]
 
-    A command for a tiles / map system
+	A command for a tiles / map system
 
 Scene 16 Limit [n]
 
-    A command for a tiles / map system
+	A command for a tiles / map system
 
 n=Scene 32 Check(n,n)
 
-    A command for a tiles / map system
+	A command for a tiles / map system
 
 Scene 32 Change [x],[y],[value] 
 
-    Change [value] in the scene at map position [x],[y]
+	Change [value] in the scene at map position [x],[y]
 
 Scene 32 Draw [map x],[map y],[w],[h],[pixel x],[pixel y]
 
-    A command for a tiles / map system
+	A command for a tiles / map system
 
 Scene 16 View [n],[x1],[y1] To [x2],[y2] 
 
-    Define the draw area for the map
+	Define the draw area for the map
 
-    [n] is unkown for now.
-    [x1],[y1] upper left corner
-    [x2],[y2] lower right corner
+	[n] is unkown for now.
+	[x1],[y1] upper left corner
+	[x2],[y2] lower right corner
 
 Scene 32 View [n],[x1],[y1] To [x2],[y2]
 
-    Define the draw area for the map
+	Define the draw area for the map
     
-    [n] is unkown for now.
-    [x1],[y1] upper left corner
-    [x2],[y2] lower right corner
+	[n] is unkown for now.
+	[x1],[y1] upper left corner
+	[x2],[y2] lower right corner
 
 Scene 16 Do [map x],[map y]
 
-    Draw the map from icon x,y in the map to the view defined.
+	Draw the map from icon x,y in the map to the view defined.
 
 Scene 32 Do [map x],[map y] 
 
-    Draw the map from icon x,y in the map to the view defined.
+	Draw the map from icon x,y in the map to the view defined.
 
 Scene 16 Top [n],[n]
 
-    A command for a tiles / map system
+	A command for a tiles / map system
 
 Scene 32 Top [n],[n] 
 
-    A command for a tiles / map system
+	A command for a tiles / map system
 
 Scene 16 Bottom [n],[n] 
 
-    A command for a tiles / map system
+	A command for a tiles / map system
 
 Scene 32 Bottom [n],[n]
 
-    A command for a tiles / map system
+	A command for a tiles / map system
 
 Scene 16 Left [n],[n]
 
-    A command for a tiles / map system
+	A command for a tiles / map system
 
 Scene 32 Left [n],[n]
 
-    A command for a tiles / map system
+	A command for a tiles / map system
 
 Scene 16 Right [n],[n]
 
-    A command for a tiles / map system
+	A command for a tiles / map system
 
 Scene 32 Right [n],[n]
 
-    A command for a tiles / map system
+	A command for a tiles / map system
 
 **n=Scene X**
 
-    Returns the width of the scene map
+	Returns the width of the scene map
 
 **n=Scene Y**
 
-    Returns the height of the scene map
+	Returns the height of the scene map
 
 Scene Palette [n]
 
-    A command for a tiles / map system
+	A command for a tiles / map system
 
 Scene Mask Palette [n]
 
-    A command for a tiles / map system
+	A command for a tiles / map system
 
 Amos Pri [value]
 
-    Set Amos priority
+	Set Amos priority
 
 n=Bit Field Ins([var],[star bit],[width],[value])
 
@@ -863,12 +863,12 @@ Workbench Open
 
 **Memory Fill [start] To [end],text$**
 
-    Fill memory with text
+	Fill memory with text
 
 **n=Range([value],[start] To [end])**
 
-    if value is less then [start] then [value] is [start]
-    if value is more then [end] then [value] is [end].
+	if value is less then [start] then [value] is [start]
+	if value is more then [end] then [value] is [end].
 
 n=Texp([bool],[true val],[false val])
 
@@ -890,10 +890,10 @@ n=Texp([bool],[true val],[false val])
 
 **n=Between([min],[value],[max])**
 
-    This command returns true if value is more then min, 
-    and values is less then max, if this not the case then false is returned.
+	This command returns true if value is more then min, 
+	and values is less then max, if this not the case then false is returned.
 
-    Same as "([min] < [value] < [max])"
+	Same as "([min] < [value] < [max])"
 
 n=Bank End(n)
 
