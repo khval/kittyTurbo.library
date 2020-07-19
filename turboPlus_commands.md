@@ -733,21 +733,21 @@ Scene Icon Bank [bank]
 
 	return the icon image number at x,y
 
-n=Scene 16 Check(x,y)
+**n=Scene 16 Check([pixel x],[pixel y])**
+
+	This command is for 16x16 tiles, so [pixel x] and [pixel y] are divided by 16.
 
 	return the icon image number at x,y
 
-	Don’t know this command works, sorry.
+**Scene Change [x],[y],[icon id]**
 
-**Scene Change [x],[y],[value]**
+	Change [icon id] in the scene at map position [x],[y]
+
+**Scene 16 Change [pixel x],[pixel y],[value]**
+
+	This command is 16x16 tiles, so x and y are divided by 16.
 
 	Change [value] in the scene at map position [x],[y]
-
-Scene 16 Change [x],[y],[value]
-
-	Change [value] in the scene at map position [x],[y]
-
-	Don’t know this command works, sorry.
 
 Scene 16 Draw [map x],[map y],[w],[h],[pixel x],[pixel y]
 
@@ -765,13 +765,17 @@ Scene 16 Limit [n]
 
 	A command for a tiles / map system
 
-n=Scene 32 Check(n,n)
+**[icon]=Scene 32 Check([pixel x],[pixel y])**
 
-	A command for a tiles / map system
+	This command is for 32x32 tiles, so x and y are divided by 16.
 
-Scene 32 Change [x],[y],[value] 
+	Returns [icon] found at [pixel x],[pixel y]
 
-	Change [value] in the scene at map position [x],[y]
+**Scene 32 Change [pixel x],[pixel y],[value]**
+
+	This command is for 32x32 tiles, so [pixel x] and [pixel y] are divided by 16.
+
+	Change [value] in the scene at map position [pixel x],[pixel y]
 
 Scene 32 Draw [map x],[map y],[w],[h],[pixel x],[pixel y]
 
