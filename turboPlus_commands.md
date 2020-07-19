@@ -156,7 +156,7 @@ At bottom of the list you will find none supported commands.
 
 		You must call this command, before your basic program exists or else you might memory leek.
 
-Reset Check [n] 
+Reset Check [n]
 
 	Erase a check [n]
 
@@ -592,13 +592,13 @@ Plane Update [screen]
 
 	On Amos Kittens:
 
-			Same as normal paste icon (uses retroMode.library).
+		Same as normal paste icon (uses retroMode.library).
 	
 	On Amos Pro:
 
-			* This command should only work with 16-pixel width icons.
+		* This command should only work with 16-pixel width icons.
 
-			* This command uses blitter.
+		* This command uses blitter.
 
 		* This command is made for speed, does not do testing.
 
@@ -612,13 +612,13 @@ Plane Update [screen]
 
 	Amos Pro:
 	
-			* This command should only work with 16-pixel width icons.
+		* This command should only work with 16-pixel width icons.
 	
-			* This command uses CPU
+		* This command uses CPU
 		
-			* This command is made for speed, does not do testing.
+		* This command is made for speed, does not do testing.
 
-			* This command can crash your computer.
+		* This command can crash your computer.
 
 **F 32proc Icon [x],[y],[n]**
 
@@ -628,26 +628,26 @@ Plane Update [screen]
 
 	On Amos Pro:
 
-			* This command should only work with 32-pixel width icons.
+		* This command should only work with 32-pixel width icons.
 
-			* This command uses CPU
+		* This command uses CPU
 
-			* This command is made for speed, does not do testing.
+		* This command is made for speed, does not do testing.
 
-			* This command can crash your computer.
+		* This command can crash your computer.
 
-n=X Icon(n)
+**n=X Icon(n)**
 
 	Return width in words of icon[n]
 	words width = icon [n] pixel width / 16
 
-n=Y Icon(n)
+**n=Y Icon(n)**
 
 	return pixel height of icon [n]
 
-n=Planes Icon(n)
+**n=Planes Icon(n)**
 
-	Should returns number of bit plains. (on Amos Kittens this command will return 8.)   
+	Should returns number of bit plains. 
 
 n=Icon Check(n)
 
@@ -841,15 +841,15 @@ Scene 32 Right [n],[n]
 
 	Returns the height of the scene map
 
-Scene Palette [n]
+*Scene Palette [n]*
 
 	A command for a tiles / map system
 
-Scene Mask Palette [n]
+*Scene Mask Palette [n]*
 
 	A command for a tiles / map system
 
-Amos Pri [value]
+**Amos Pri [value]**
 
 	Set Amos priority
 
