@@ -3567,10 +3567,37 @@ char *turboplusRange KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusTexp( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args = instance_stack - data->stack +1;
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 3:
+			{
+				int _bool = getStackNum(instance,__stack-2 );
+				int _true = getStackNum(instance,__stack-1 );
+				int _false= getStackNum(instance,__stack );
+
+				popStack( instance, instance_stack - data->stack );
+				setStackNum( instance, _bool ? _true : _false );
+			}
+			return  NULL ;
+
+		default:
+			api.setError(22,data->tokenBuffer);
+			popStack( instance, instance_stack - data->stack );
+	}
+
+	return  NULL ;
+}
+
 char *turboplusTexp KITTENS_CMD_ARGS
 {
 	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdParm( _turboplusTexp, tokenBuffer );
 	return tokenBuffer;
 }
 
