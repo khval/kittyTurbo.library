@@ -156,6 +156,10 @@ At bottom of the list you will find none supported commands.
 
 		You must call this command, before your basic program exists or else you might memory leek.
 
+Reset Check [n] 
+
+	Erase a check [n]
+
 **[id]=Check([first] To [last],[x],[y])**
 
 	Check if coordinate is inside the [range] of check zones, and return the check [id].
@@ -172,13 +176,23 @@ At bottom of the list you will find none supported commands.
 	[x],[y] upper left corner
 	[x1],[y1] right, lower corner.
 
-Reset Check [n] 
+n=Hit Spr Check([check start] To [check end],[offset x],[offset y],[sprite n])
 
-n=Hit Spr Zone(n,n,n)
+	Check the range checks from [check start] to [check end], 
+	where [Offset x], [offset y] is offset from hot spot in the [sprite n].
 
-n=Hit Bob Zone(n,n,n)
+n=Hit Bob Check([check start] To [check end],[offset x],[offset y],[bob n])
 
-n=Hit Spr Check(n To n,n,n,n)
+	Check the range checks from [check start] to [check end], 
+	where [Offset x], [offset y] is offset from hot spot in the [bob n].
+
+n=Hit Spr Zone([offset x],[offset y],[sprite n])
+
+	A=Hzone(X Sprite(n)+[offset x],Y Sprite(n)+(offset y))
+
+n=Hit Bob Zone([offset x],[offset y],[bob n])
+
+	A=Zone(X bob(n)+[offset x],Y bob(n)+(offset y))
 
 **n=Raw Key(n)**
 
@@ -662,7 +676,6 @@ n=Icon Check(n)
 	
 		Same as Amos Pro "Put Block" command, no speed difference.
 
-
 **Reserve Static Block [n]**
 
 	Amos Pro: 
@@ -711,25 +724,30 @@ Scene Icon Bank [bank]
 
 	Set the icon bank to use.
 
-Scene Bank [bank]
+**Scene Bank [bank]**
 
-    set the current bank to use.
+	Set the current scene bank, 
+	and Icon bank also has to exist in bank 2, if not then this command will return a error.
 
-n=Scene Check(x,y)
+**n=Scene Check(x,y)**
 
-    A command for a tiles / map system
+    return the icon image number at x,y
 
 n=Scene 16 Check(x,y)
 
-    A command for a tiles / map system
+    return the icon image number at x,y
 
-Scene Change [x],[y],[value] 
+    Don’t know this command works, sorry.
+
+**Scene Change [x],[y],[value]**
 
     Change [value] in the scene at map position [x],[y]
 
 Scene 16 Change [x],[y],[value]
 
     Change [value] in the scene at map position [x],[y]
+
+	Don’t know this command works, sorry.
 
 Scene 16 Draw [map x],[map y],[w],[h],[pixel x],[pixel y]
 
@@ -815,11 +833,11 @@ Scene 32 Right [n],[n]
 
     A command for a tiles / map system
 
-n=Scene X  
+**n=Scene X**
 
     Returns the width of the scene map
 
-n=Scene Y  
+**n=Scene Y**
 
     Returns the height of the scene map
 
@@ -835,13 +853,11 @@ Amos Pri [value]
 
     Set Amos priority
 
-n=Bit Field Ins(n,n,n,n)
+n=Bit Field Ins([var],[star bit],[width],[value])
 
-n=Bit Field Ext(n,n,n)
+n=Bit Field Ext([var],[start bit],[width])
 
-n=Hit Bob Check(n To n,n,n,n)
-
-n=Byte Hunt(n To n,n,n To n)
+n=Byte Hunt([start] To [end],[action],[val1] To [val2])
 
 Workbench Open  
 
