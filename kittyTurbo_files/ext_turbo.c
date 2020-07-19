@@ -109,7 +109,7 @@ char *_turboplusLsl_b( struct glueCommands *data, int nextToken )
 
 char *turboplusLsl_b KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdParm( _turboplusLsl_b, tokenBuffer );
 	return tokenBuffer;
 }
@@ -141,7 +141,7 @@ char *_turboplusLsl_w( struct glueCommands *data, int nextToken )
 
 char *turboplusLsl_w KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdParm( _turboplusLsl_w, tokenBuffer );
 	return tokenBuffer;
 }
@@ -172,7 +172,7 @@ char *_turboplusLsl_l( struct glueCommands *data, int nextToken )
 
 char *turboplusLsl_l KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdParm( _turboplusLsl_l, tokenBuffer );
 	return tokenBuffer;
 }
@@ -203,7 +203,7 @@ char *_turboplusLsr_b( struct glueCommands *data, int nextToken )
 
 char *turboplusLsr_b KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdParm( _turboplusLsr_b, tokenBuffer );
 	return tokenBuffer;
 }
@@ -235,7 +235,7 @@ char *_turboplusLsr_w( struct glueCommands *data, int nextToken )
 
 char *turboplusLsr_w KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdParm( _turboplusLsr_w, tokenBuffer );
 	return tokenBuffer;
 }
@@ -269,7 +269,7 @@ char *_turboplusLsr_l( struct glueCommands *data, int nextToken )
 
 char *turboplusLsr_l KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdParm( _turboplusLsr_l, tokenBuffer );
 	return tokenBuffer;
 }
@@ -300,7 +300,7 @@ char *_turboplusLSwap( struct glueCommands *data, int nextToken )
 
 char *turboplusLSwap KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdParm( _turboplusLSwap, tokenBuffer );
 	return tokenBuffer;
 }
@@ -331,7 +331,7 @@ char *_turboplusTest_b( struct glueCommands *data, int nextToken )
 
 char *turboplusTest_b KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdParm( _turboplusTest_b, tokenBuffer );
 	return tokenBuffer;
 }
@@ -362,7 +362,7 @@ char *_turboplusTest_w( struct glueCommands *data, int nextToken )
 
 char *turboplusTest_w KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdParm( _turboplusTest_w, tokenBuffer );
 	return tokenBuffer;
 }
@@ -392,7 +392,7 @@ char *_turboplusTest_l( struct glueCommands *data, int nextToken )
 
 char *turboplusTest_l KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdParm( _turboplusTest_l, tokenBuffer );
 	return tokenBuffer;
 }
@@ -421,7 +421,7 @@ char *_turboplusVblWait( struct glueCommands *data, int nextToken )
 
 char *turboplusVblWait KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusVblWait, tokenBuffer );
 	return tokenBuffer;
 }
@@ -453,14 +453,14 @@ char *_turboplusReserveCheck( struct glueCommands *data, int nextToken )
 
 char *turboplusReserveCheck KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusReserveCheck, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusCheckErase KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	struct context *context = instance -> extensions_context[ instance -> current_extension ];
 
 	if (context -> checks) free ( context -> checks );
@@ -522,7 +522,7 @@ char *_turboplusCheck( struct glueCommands *data, int nextToken )
 
 char *turboplusCheck KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdParm( _turboplusCheck, tokenBuffer );
 	return tokenBuffer;
 }
@@ -564,35 +564,35 @@ char *_turboplusSetCheck( struct glueCommands *data, int nextToken )
 
 char *turboplusSetCheck KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusSetCheck, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusResetCheck KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusHitSprZone KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusHitBobZone KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusHitSprCheck KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
@@ -629,7 +629,7 @@ char *_turboplusRawKey( struct glueCommands *data, int nextToken )
 
 char *turboplusRawKey KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdParm( _turboplusRawKey, tokenBuffer );
 	return tokenBuffer;
 }
@@ -659,7 +659,7 @@ char *_turboplusRMove( struct glueCommands *data, int nextToken )
 
 char *turboplusRMove KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusRMove, tokenBuffer );
 	setStackNum( instance, 0 );
 	return tokenBuffer;
@@ -690,7 +690,7 @@ char *_turboplusRHome( struct glueCommands *data, int nextToken )
 
 char *turboplusRHome KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusRHome, tokenBuffer );
 	return tokenBuffer;
 }
@@ -744,7 +744,7 @@ char *_turboplusRDraw( struct glueCommands *data, int nextToken )
 
 char *turboplusRDraw KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusRDraw, tokenBuffer );
 	setStackNone(instance);
 	return tokenBuffer;
@@ -798,7 +798,7 @@ char *_turboplusRBox( struct glueCommands *data, int nextToken )
 
 char *turboplusRBox KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusRBox, tokenBuffer );
 	setStackNone(instance);
 	return tokenBuffer;
@@ -841,7 +841,7 @@ char *_turboplusRBar( struct glueCommands *data, int nextToken )
 
 char *turboplusRBar KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusRBar, tokenBuffer );
 	return tokenBuffer;
 }
@@ -893,7 +893,7 @@ char *_turboplusReserveObject( struct glueCommands *data, int nextToken )
 
 char *turboplusReserveObject KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusReserveObject, tokenBuffer );
 	return tokenBuffer;
 }
@@ -971,7 +971,7 @@ char *_turboplusDefineDraw( struct glueCommands *data, int nextToken )
 
 char *turboplusDefineDraw KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusDefineDraw, tokenBuffer );
 	return tokenBuffer;
 }
@@ -1009,7 +1009,7 @@ char *_turboplusDefineMove( struct glueCommands *data, int nextToken )
 
 char *turboplusDefineMove KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusDefineMove, tokenBuffer );
 	return tokenBuffer;
 }
@@ -1045,7 +1045,7 @@ char *_turboplusDefineStop( struct glueCommands *data, int nextToken )
 
 char *turboplusDefineStop KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusDefineStop, tokenBuffer );
 	return tokenBuffer;
 }
@@ -1084,7 +1084,7 @@ char *_turboplusDefineAttr( struct glueCommands *data, int nextToken )
 
 char *turboplusDefineAttr KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusDefineAttr, tokenBuffer );
 	return tokenBuffer;
 }
@@ -1153,7 +1153,7 @@ char *_turboplusObjectDraw( struct glueCommands *data, int nextToken )
 
 char *turboplusObjectDraw KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusObjectDraw, tokenBuffer );
 	return tokenBuffer;
 }
@@ -1182,7 +1182,7 @@ char *_turboplusRObjectDraw( struct glueCommands *data, int nextToken )
 
 char *turboplusRObjectDraw KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusRObjectDraw, tokenBuffer );
 	return tokenBuffer;
 }
@@ -1212,7 +1212,7 @@ char *_turboplusObjectMagDraw( struct glueCommands *data, int nextToken )
 
 char *turboplusObjectMagDraw KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusObjectMagDraw, tokenBuffer );
 	return tokenBuffer;
 }
@@ -1248,7 +1248,7 @@ char *_turboplusRObjectMagDraw( struct glueCommands *data, int nextToken )
 
 char *turboplusRObjectMagDraw KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusRObjectMagDraw, tokenBuffer );
 	return tokenBuffer;
 }
@@ -1273,7 +1273,7 @@ char *_turboplusObjectErase( struct glueCommands *data, int nextToken )
 
 char *turboplusObjectErase KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusObjectErase, tokenBuffer );
 	return tokenBuffer;
 }
@@ -1326,7 +1326,7 @@ char *_turboplusLine3d( struct glueCommands *data, int nextToken )
 
 char *turboplusLine3d KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusLine3d, tokenBuffer );
 	return tokenBuffer;
 }
@@ -1357,7 +1357,7 @@ char *_turboplusEye3d( struct glueCommands *data, int nextToken )
 
 char *turboplusEye3d KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusEye3d, tokenBuffer );
 	return tokenBuffer;
 }
@@ -1515,7 +1515,7 @@ char *_turboplusObjectSave( struct glueCommands *data, int nextToken )
 
 char *turboplusObjectSave KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusObjectSave, tokenBuffer );
 	return tokenBuffer;
 }
@@ -1587,7 +1587,7 @@ char *_turboplusObjectLoad( struct glueCommands *data, int nextToken )
 
 char *turboplusObjectLoad KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusObjectLoad, tokenBuffer );
 	return tokenBuffer;
 }
@@ -1683,7 +1683,7 @@ char *_turboplusBlitLeft( struct glueCommands *data, int nextToken )
 
 char *turboplusBlitLeft KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusBlitLeft, tokenBuffer );
 	return tokenBuffer;
 }
@@ -1748,7 +1748,7 @@ char *_turboplusBlitStoreLeft( struct glueCommands *data, int nextToken )
 
 char *turboplusBlitStoreLeft KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusBlitStoreLeft, tokenBuffer );
 	return tokenBuffer;
 }
@@ -1799,7 +1799,7 @@ char *_turboplusBlitUp( struct glueCommands *data, int nextToken )
 
 char *turboplusBlitUp KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusBlitUp, tokenBuffer );
 	return tokenBuffer;
 }
@@ -1850,7 +1850,7 @@ char *_turboplusBlitStoreUp( struct glueCommands *data, int nextToken )
 
 char *turboplusBlitStoreUp KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusBlitStoreUp, tokenBuffer );
 	return tokenBuffer;
 }
@@ -1914,7 +1914,7 @@ char *_turboplusMultiBlit( struct glueCommands *data, int nextToken )
 
 char *turboplusMultiBlit KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusMultiBlit, tokenBuffer );
 	return tokenBuffer;
 }
@@ -1947,7 +1947,7 @@ char *_turboplusBlitErase( struct glueCommands *data, int nextToken )
 
 char *turboplusBlitErase KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusBlitErase, tokenBuffer );
 	return tokenBuffer;
 }
@@ -1983,7 +1983,7 @@ char *_turboplusBlitSpeed( struct glueCommands *data, int nextToken )
 
 char *turboplusBlitSpeed KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusBlitSpeed, tokenBuffer );
 	return tokenBuffer;
 }
@@ -2017,7 +2017,7 @@ char *_turboplusFPlot( struct glueCommands *data, int nextToken )
 
 char *turboplusFPlot KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusFPlot, tokenBuffer );
 	setStackNone(instance);
 	return tokenBuffer;
@@ -2057,7 +2057,7 @@ char *_turboplusBlitClear( struct glueCommands *data, int nextToken )
 
 char *turboplusBlitClear KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusBlitClear, tokenBuffer );
 	setStackNone( instance );
 	return tokenBuffer;
@@ -2113,7 +2113,7 @@ char *_turboplusReserveStars( struct glueCommands *data, int nextToken )
 
 char *turboplusReserveStars KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusReserveStars, tokenBuffer );
 	return tokenBuffer;
 }
@@ -2159,14 +2159,14 @@ char *_turboplusDefineStar( struct glueCommands *data, int nextToken )
 
 char *turboplusDefineStar KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusDefineStar, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusDisplayStars KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 
 	struct context *context = instance -> extensions_context[ instance -> current_extension ];
 	if (context)
@@ -2208,7 +2208,7 @@ char *turboplusDisplayStars KITTENS_CMD_ARGS
 
 char *turboplusStarsErase KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 
 	struct context *context = instance -> extensions_context[ instance -> current_extension ];
 
@@ -2241,7 +2241,7 @@ char *_turboplusStarsCompute( struct glueCommands *data, int nextToken )
 
 	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 
-	printf("args: %d\n",args);
+	proc_names_printf("args: %d\n",args);
 
 	if (args !=2)
 	{
@@ -2287,7 +2287,7 @@ char *_turboplusStarsCompute( struct glueCommands *data, int nextToken )
 
 char *turboplusStarsCompute KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusStarsCompute, tokenBuffer );
 	return tokenBuffer;
 }
@@ -2310,7 +2310,7 @@ void __draw_stars(struct context *context, struct retroScreen *screen)
 
 char *turboplusStarsDraw KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 
 	struct context *context = instance -> extensions_context[ instance -> current_extension ];
 	struct retroScreen *screen = instance -> screens[ instance -> current_screen ];
@@ -2328,7 +2328,7 @@ char *_turboplusStarsSpeed( struct glueCommands *data, int nextToken )
 
 	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 
-	printf("args: %d\n",args);
+	proc_names_printf("args: %d\n",args);
 
 	switch (args)
 	{
@@ -2367,14 +2367,14 @@ char *_turboplusStarsSpeed( struct glueCommands *data, int nextToken )
 
 char *turboplusStarsSpeed KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusStarsSpeed, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusStarsClip KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
@@ -2415,7 +2415,7 @@ char *_turboplusFPoint( struct glueCommands *data, int nextToken )
 
 char *turboplusFPoint KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdParm( _turboplusFPoint, tokenBuffer );
 	setStackNone(instance);
 	return tokenBuffer;
@@ -2460,7 +2460,7 @@ char *_turboplusFCircle( struct glueCommands *data, int nextToken )
 
 char *turboplusFCircle KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusFCircle, tokenBuffer );
 	return tokenBuffer;
 }
@@ -2480,7 +2480,7 @@ char *_turboplusFSqr( struct glueCommands *data, int nextToken )
 
 char *turboplusFSqr KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdParm( _turboplusFSqr, tokenBuffer );
 	return tokenBuffer;
 }
@@ -2524,14 +2524,14 @@ char *_turboplusStarsIntOn( struct glueCommands *data, int nextToken )
 
 char *turboplusStarsIntOn KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusStarsIntOn, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusStarsIntOff KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.engineRemoveVblInterrupt( fn_int_star );
 	return tokenBuffer;
 }
@@ -2570,14 +2570,14 @@ char *_turboplusBlitIntOn( struct glueCommands *data, int nextToken )
 
 char *turboplusBlitIntOn KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusBlitIntOn, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusBlitIntOff KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 
 	api.engineRemoveVblInterrupt( fn_int_blit );
 
@@ -2639,7 +2639,7 @@ char *_turboplusFDraw( struct glueCommands *data, int nextToken )
 
 char *turboplusFDraw KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusFDraw, tokenBuffer );
 	return tokenBuffer;
 }
@@ -2669,49 +2669,49 @@ char *_turboplusObjectLimit( struct glueCommands *data, int nextToken )
 
 char *turboplusObjectLimit KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusObjectLimit, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusSetPlanes KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusPlaneOffset KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusPlaneSwap KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusPlaneShiftUp KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusPlaneShiftDown KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusPlaneUpdate KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
@@ -2752,35 +2752,35 @@ char *_turboplusFPasteIcon( struct glueCommands *data, int nextToken )
 
 char *turboplusFPasteIcon KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusFPasteIcon, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusF32Icon KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusFPasteIcon, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusF16Icon KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusFPasteIcon, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusF16procIcon KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusFPasteIcon, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusF32procIcon KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusFPasteIcon, tokenBuffer );
 	return tokenBuffer;
 }
@@ -2811,7 +2811,7 @@ char *_turboplusXIcon( struct glueCommands *data, int nextToken )
 
 char *turboplusXIcon KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdParm( _turboplusXIcon, tokenBuffer );
 	return tokenBuffer;
 }
@@ -2841,7 +2841,7 @@ char *_turboplusYIcon( struct glueCommands *data, int nextToken )
 
 char *turboplusYIcon KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdParm( _turboplusYIcon, tokenBuffer );
 	return tokenBuffer;
 }
@@ -2871,7 +2871,7 @@ char *_turboplusPlanesIcon( struct glueCommands *data, int nextToken )
 
 char *turboplusPlanesIcon KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdParm( _turboplusPlanesIcon, tokenBuffer );
 	return tokenBuffer;
 }
@@ -2879,7 +2879,7 @@ char *turboplusPlanesIcon KITTENS_CMD_ARGS
 char *turboplusCpuInfo KITTENS_CMD_ARGS
 {
 	ULONG id;
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 
 	GetCPUInfoTags( GCIT_Model, &id , TAG_END );
 	setStackNum(instance, 0x10000000 | id);
@@ -2888,7 +2888,7 @@ char *turboplusCpuInfo KITTENS_CMD_ARGS
 
 char *turboplusMathInfo KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	setStackNum(instance, 882);
 	return tokenBuffer;
 }
@@ -2943,7 +2943,7 @@ char *_turboplusFPutBlock( struct glueCommands *data, int nextToken )
 
 char *turboplusFPutBlock KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusFPutBlock, tokenBuffer );
 	return tokenBuffer;
 }
@@ -2975,7 +2975,7 @@ char *_turboplusReserveStaticBlock( struct glueCommands *data, int nextToken )
 
 char *turboplusReserveStaticBlock KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusReserveStaticBlock, tokenBuffer );
 	return tokenBuffer;
 }
@@ -2983,7 +2983,7 @@ char *turboplusReserveStaticBlock KITTENS_CMD_ARGS
 char *turboplusStaticBlockErase KITTENS_CMD_ARGS
 {
 	struct context *context = instance -> extensions_context[ instance -> current_extension ];
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 
 	if (context -> blocks) free(context -> blocks);
 
@@ -2998,7 +2998,7 @@ char *turboplusBuildStaticBlock KITTENS_CMD_ARGS
 	struct context *context = instance -> extensions_context[ instance -> current_extension ];
 
 	int n;
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 
 	for (n=0; n < context -> blocks_allocated ; n++ )
 	{
@@ -3058,7 +3058,7 @@ char *_turboplusFPutStaticBlock( struct glueCommands *data, int nextToken )
 
 char *turboplusFPutStaticBlock KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusFPutStaticBlock, tokenBuffer );
 	return tokenBuffer;
 }
@@ -3102,7 +3102,7 @@ char *_turboplusSceneBank( struct glueCommands *data, int nextToken )
 
 char *turboplusSceneBank KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusSceneBank, tokenBuffer );
 	return tokenBuffer;
 }
@@ -3143,14 +3143,14 @@ char *_turboplusSceneCheck( struct glueCommands *data, int nextToken )
 
 char *turboplusSceneCheck KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdParm( _turboplusSceneCheck, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusScene16Check KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
@@ -3207,7 +3207,7 @@ char *_turboplusSceneChange( struct glueCommands *data, int nextToken )
 
 char *turboplusSceneChange KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusSceneChange, tokenBuffer );
 	return tokenBuffer;
 }
@@ -3215,147 +3215,147 @@ char *turboplusSceneChange KITTENS_CMD_ARGS
 
 char *turboplusScene16Change KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusScene16Draw KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusScene16Def KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusScene16Restore KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusScene16Limit KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusScene32Check KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusScene32Change KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusScene32Draw KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusScene16View KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusScene32View KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusScene16Do KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusScene32Do KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusScene16Top KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusScene32Top KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusScene16Bottom KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusScene32Bottom KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusScene16Left KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusScene32Left KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusScene16Right KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusScene32Right KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusSceneX KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	struct context *context = instance -> extensions_context[ instance -> current_extension ];
 
 	if (context -> scene_memory == NULL)  find_scene_bank(instance,context,context -> scene_bank);
@@ -3366,7 +3366,7 @@ char *turboplusSceneX KITTENS_CMD_ARGS
 
 char *turboplusSceneY KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	struct context *context = instance -> extensions_context[ instance -> current_extension ];
 
 	if (context -> scene_memory == NULL)  find_scene_bank(instance,context,context -> scene_bank);
@@ -3377,49 +3377,49 @@ char *turboplusSceneY KITTENS_CMD_ARGS
 
 char *turboplusAmosPri KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusBitFieldIns KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusBitFieldExt KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusHitBobCheck KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusByteHunt KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusWorkbenchOpen KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusSceneLoad KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
@@ -3462,7 +3462,7 @@ char *_turboplusMemoryFill( struct glueCommands *data, int nextToken )
 
 char *turboplusMemoryFill KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusMemoryFill, tokenBuffer );
 	return tokenBuffer;
 }
@@ -3494,7 +3494,7 @@ char *_turboplusBlitIntChange( struct glueCommands *data, int nextToken )
 
 char *turboplusBlitIntChange KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusBlitIntChange, tokenBuffer );
 	return tokenBuffer;
 }
@@ -3523,7 +3523,7 @@ char *_turboplusBlitIntWait( struct glueCommands *data, int nextToken )
 
 char *turboplusBlitIntWait KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdNormal( _turboplusBlitIntWait, tokenBuffer );
 	return tokenBuffer;
 }
@@ -3561,7 +3561,7 @@ char *_ext_cmd_range( struct glueCommands *data, int nextToken )
 
 char *turboplusRange KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setCmdTo(e_cmdTo_default);
 	stackCmdParm( _ext_cmd_range, tokenBuffer );
 	return tokenBuffer;
@@ -3569,22 +3569,21 @@ char *turboplusRange KITTENS_CMD_ARGS
 
 char *turboplusTexp KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
-
 char *turboplusIconCheck KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusSceneIconBank KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
@@ -3613,7 +3612,7 @@ char *_turboplusTClip( struct glueCommands *data, int nextToken )
 
 char *turboplusTClip KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdParm( _turboplusTClip, tokenBuffer );
 	return tokenBuffer;
 }
@@ -3640,41 +3639,40 @@ char *_turboplusBetween( struct glueCommands *data, int nextToken )
 
 	popStack( instance, instance_stack - data->stack );
 	setStackNum( instance, ret);
-
 	return  NULL ;
 }
 
 char *turboplusBetween KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	stackCmdParm( _turboplusBetween, tokenBuffer );
 	return tokenBuffer;
 }
 
 char *turboplusScenePalette KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusSceneMaskPalette KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusBankEnd KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
 
 char *turboplusDebug KITTENS_CMD_ARGS
 {
-	printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 	api.setError(22, tokenBuffer);
 	return tokenBuffer;
 }
