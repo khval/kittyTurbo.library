@@ -714,11 +714,11 @@ Scene Load s$,[bank]
 	
 	Scene can be created by this commands:
 	
-	Reserve As Work 8,4+(Scene X-1)*(Scene Y-1)
-	Doke Start(8),Scene Y
-	Doke Start(8)+2,Scene X
+	Reserve As Work 8,4+W*H
+	Doke Start(8),W
+	Doke Start(8)+2,H
 	
-	Data is stored from start(8)+4 to 4+(Scene X-1)*(Scene Y-1)
+	Data is stored from start(8)+4 to 4+W*H
 	
 Scene Icon Bank [bank] 
 
@@ -781,59 +781,74 @@ Scene 32 Draw [map x],[map y],[w],[h],[pixel x],[pixel y]
 
 	A command for a tiles / map system
 
-Scene 16 View [n],[x1],[y1] To [x2],[y2] 
+Scene 16 View [screen n],[x1],[y1] To [x2],[y2] 
 
-	Define the draw area for the map
+	This command does not draw the scene, but does define the size of the map
 
-	[n] is unkown for now.
+	It calculates the number tiles based on 16x16 pixel icons.
+
+	[screen n] the screen to draw icons on
 	[x1],[y1] upper left corner
 	[x2],[y2] lower right corner
 
-Scene 32 View [n],[x1],[y1] To [x2],[y2]
+Scene 32 View [screen n],[x1],[y1] To [x2],[y2]
 
-	Define the draw area for the map
+	This command does not draw the scene, but does define the size of the map
 	
-	[n] is unkown for now.
+	It calculates the number tiles based on 32x32 pixel icons.
+	
+	[screen n] is unkown for now.
 	[x1],[y1] upper left corner
 	[x2],[y2] lower right corner
 
 Scene 16 Do [map x],[map y]
 
 	Draw the map from icon x,y in the map to the view defined.
+	
+	Icons are spaced for 16x16 icons.
+	
+	This command draw the scene view on to screen.
+	[map x],[map y] are offsets in the map.
+
 
 Scene 32 Do [map x],[map y] 
 
 	Draw the map from icon x,y in the map to the view defined.
 
-Scene 16 Top [n],[n]
+	Icons are spaced for 32x32 pixel icons.
+
+	This command draw the scene view on to screen.
+	[map x],[map y] are offsets in the map.
+
+Scene 16 Top [map x],[map y]
+
+	Draw the top raw of a scene.
+
+Scene 32 Top [map x],[map y]
+
+	Draw the top raw of a scene.
+
+Scene 16 Bottom [map x],[map y]
 
 	A command for a tiles / map system
 
-Scene 32 Top [n],[n] 
+Scene 32 Bottom [map x],[map y]
 
 	A command for a tiles / map system
 
-Scene 16 Bottom [n],[n] 
+Scene 16 Left [map x],[map y]
 
 	A command for a tiles / map system
 
-Scene 32 Bottom [n],[n]
+Scene 32 Left [map x],[map y]
 
 	A command for a tiles / map system
 
-Scene 16 Left [n],[n]
+Scene 16 Right [map x],[map y]
 
 	A command for a tiles / map system
 
-Scene 32 Left [n],[n]
-
-	A command for a tiles / map system
-
-Scene 16 Right [n],[n]
-
-	A command for a tiles / map system
-
-Scene 32 Right [n],[n]
+Scene 32 Right [map x],[map y]
 
 	A command for a tiles / map system
 
