@@ -55,7 +55,7 @@
 *
 */
 
-void * _kittyturbo_makeContext(struct kittyCompactIFace *Self)
+void * _kittyturbo_makeContext(struct kittyTurboIFace *Self)
 {
 	struct context *context;
 

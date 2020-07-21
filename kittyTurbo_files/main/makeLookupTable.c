@@ -59,7 +59,7 @@
 
 extern struct cmdData AMOSPro_TURBO_Plus[];
 
-char * _kittyturbo_makeLookupTable(struct kittyCompactIFace *Self)
+char * _kittyturbo_makeLookupTable(struct kittyTurboIFace *Self)
 {
 	struct cmdData *cmd;
 	char *ptr;

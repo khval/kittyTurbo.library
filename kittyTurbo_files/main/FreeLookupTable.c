@@ -50,7 +50,7 @@
 *
 */
 
-void _kittyturbo_FreeLookupTable(struct kittyCompactIFace *Self,
+void _kittyturbo_FreeLookupTable(struct kittyTurboIFace *Self,
        void * table)
 {
 	FreeVec( table );
