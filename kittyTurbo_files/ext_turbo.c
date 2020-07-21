@@ -3071,7 +3071,7 @@ char *_turboplusSceneBank( struct glueCommands *data, int nextToken )
 	int args =__stack - data->stack +1 ;
 	struct context *context = instance -> extensions_context[ instance -> current_extension ];
 	int n;
-	struct kittyBank *bank;
+	struct kittyBank *bank,*ibank;
 
 	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 
@@ -3082,10 +3082,12 @@ char *_turboplusSceneBank( struct glueCommands *data, int nextToken )
 			n = getStackNum(instance,__stack ) ;
 
 			bank = api.findBankById( n );
+			ibank = api.findBankById( context -> scene_icon_id );
 
-			if ((bank) && ( api.findBankById( 2) ))
+			if ((bank) && (ibank))
 			{
 				context -> scene_bank = n;
+				context -> scene_icon = api.getBankObject( context -> scene_icon_id );
 				return NULL;
 			}
 			else api.setError( 36, data->tokenBuffer  );
