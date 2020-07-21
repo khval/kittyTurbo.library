@@ -28,6 +28,7 @@
 #include "cmdList.h"
 #include "context.h"
 #include "list.h"
+#include "support.h"
 
 #define kittyError instance->kittyError
 #define api instance -> api

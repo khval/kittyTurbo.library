@@ -65,6 +65,7 @@ void * _kittyturbo_makeContext(struct kittyTurboIFace *Self)
 		bzero( context, sizeof(struct context) );
 
 		context -> int_blit.wait = true;
+		context -> scene_icon_id = 2;
 	}
 
 	return context;

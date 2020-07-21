@@ -118,5 +118,17 @@ struct context
 	char *scene_memory;
 	int scene_width;
 	int scene_height;
+	int scene_icon_id;
+	struct retroSprite *scene_icon;
+
+	int scene16_x16;
+	int scene16_y;
+	int scene16_w;
+	int scene16_h;
+
+	int scene32_x32;
+	int scene32_y;
+	int scene32_w;
+	int scene32_h;
 };
 
