@@ -749,9 +749,11 @@ Scene Icon Bank [bank]
 
 	Change [value] in the scene at map position [x],[y]
 
-Scene 16 Draw [map x],[map y],[w],[h],[pixel x],[pixel y]
+**Scene 32 Change [pixel x],[pixel y],[value]**
 
-	Draw a map 
+	This command is for 32x32 tiles, so [pixel x] and [pixel y] are divided by 16.
+
+	Change [value] in the scene at map position [pixel x],[pixel y]
 
 Scene 16 Def [n],[n],[n],[n],[n],[n],[n],[n] 
 
@@ -771,17 +773,23 @@ Scene 16 Limit [n]
 
 	Returns [icon] found at [pixel x],[pixel y]
 
-**Scene 32 Change [pixel x],[pixel y],[value]**
+**Scene 16 Draw [map x],[map y],[w],[h],[pixel x],[pixel y]**
 
-	This command is for 32x32 tiles, so [pixel x] and [pixel y] are divided by 16.
+	Draw map/scene on [screen n].
+	[w],[h] is area / number tiles to draw.
+	its drawn on the screen at destination [pixel x],[pixel y]
+	
+	This command space tiles for 16x16 tiles
 
-	Change [value] in the scene at map position [pixel x],[pixel y]
+**Scene 32 Draw [map x],[map y],[w],[h],[pixel x],[pixel y]**
 
-Scene 32 Draw [map x],[map y],[w],[h],[pixel x],[pixel y]
+	Draw map/scene on [screen n].
+	[w],[h] is area / number tiles to draw.
+	its drawn on the screen at destination [pixel x],[pixel y]
 
-	A command for a tiles / map system
+	This command space tiles for 32x32 tiles
 
-Scene 16 View [screen n],[x1],[y1] To [x2],[y2] 
+**Scene 16 View [screen n],[x1],[y1] To [x2],[y2]**
 
 	This command does not draw the scene, but does define the size of the map
 
@@ -791,7 +799,7 @@ Scene 16 View [screen n],[x1],[y1] To [x2],[y2]
 	[x1],[y1] upper left corner
 	[x2],[y2] lower right corner
 
-Scene 32 View [screen n],[x1],[y1] To [x2],[y2]
+**Scene 32 View [screen n],[x1],[y1] To [x2],[y2]**
 
 	This command does not draw the scene, but does define the size of the map
 	
@@ -801,19 +809,21 @@ Scene 32 View [screen n],[x1],[y1] To [x2],[y2]
 	[x1],[y1] upper left corner
 	[x2],[y2] lower right corner
 
-Scene 16 Do [map x],[map y]
+**Scene 16 Do [map x],[map y]**
 
-	Draw the map from icon x,y in the map to the view defined.
-	
+	Draw the scene/map using the [scene icons]	
+	The size of map is defined by the "scene 16 View" command
+
 	Icons are spaced for 16x16 icons.
-	
+
 	This command draw the scene view on to screen.
 	[map x],[map y] are offsets in the map.
 
 
-Scene 32 Do [map x],[map y] 
+**Scene 32 Do [map x],[map y]**
 
-	Draw the map from icon x,y in the map to the view defined.
+	Draw the scene/map using the [scene icons]	
+	The size of map is defined by the "scene 32 View" command
 
 	Icons are spaced for 32x32 pixel icons.
 
