@@ -43,7 +43,8 @@ main_SRCS = main/Obtain.c main/Release.c main/makeLookupTable.c \
 	stack.c \
 	cmdList.c \
 	list.c \
-	ext_turbo.c
+	ext_turbo.c \
+	support.c
 
 # -------------------------------------------------------------
 # Nothing should need changing below this line
