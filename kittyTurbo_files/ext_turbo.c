@@ -41,7 +41,6 @@
 
 #define getSprite(num) &(instance -> video -> sprites[num])
 
-
 void find_scene_bank(struct KittyInstance *instance,struct context *context, int bank_id );
 
 #ifdef debug
@@ -578,10 +577,48 @@ char *turboplusResetCheck KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusHitSprZone( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args = instance_stack - data->stack +1;
+	int ox,oy,b;
+	struct retroSpriteObject *sprite;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 3:
+			ox = getStackNum(instance,__stack-2 );
+			oy = getStackNum(instance,__stack-1 );
+			b = getStackNum(instance,__stack );
+			popStack( instance, instance_stack - data->stack );
+
+			sprite = getSprite(b);
+			if (sprite)
+			{
+				setStackNum( instance, 
+					api.find_zone_in_any_screen_hard(
+						api.from_XSprite_formula( sprite -> x ) + ox,
+						api.from_YSprite_formula( sprite -> y ) + oy) );
+
+				return  NULL;
+			}
+			setStackNum( instance, 0 );
+			return  NULL ;
+
+		default:
+			popStack( instance, instance_stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+
+	return  NULL ;
+}
+
 char *turboplusHitSprZone KITTENS_CMD_ARGS
 {
 	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdParm( _turboplusHitSprZone, tokenBuffer );
 	return tokenBuffer;
 }
 
