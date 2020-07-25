@@ -585,10 +585,57 @@ char *turboplusHitSprZone KITTENS_CMD_ARGS
 	return tokenBuffer;
 }
 
+char *_turboplusHitBobZone( struct glueCommands *data, int nextToken )
+{
+	struct KittyInstance *instance = data -> instance;
+	int args = instance_stack - data->stack +1;
+	int ox,oy,b;
+	struct retroSpriteObject *bob;
+
+	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
+
+	switch (args)
+	{
+		case 3:
+			ox = getStackNum(instance,__stack-2 );
+			oy = getStackNum(instance,__stack-1 );
+			b = getStackNum(instance,__stack );
+			popStack( instance, instance_stack - data->stack );
+
+			bob = api.getBob(b);
+			if (bob)
+			{
+				struct zone *zz;
+				struct zone *zones_end = instance -> zones + instance -> zones_allocated;
+				int x,y;
+
+				x = bob -> x + ox;
+				y = bob -> y + oy;
+
+				for (zz=instance -> zones;zz<zones_end;zz++)
+				{
+					if ((x>zz->x0)&&(y>zz->y0)&&(x<zz->x1)&&(y<zz->y1))
+					{
+						setStackNum( instance, (zz - instance -> zones) +1 );
+						return  NULL;
+					}
+				}
+			}
+			setStackNum( instance, 0 );
+			return  NULL ;
+
+		default:
+			popStack( instance, instance_stack - data->stack );
+			api.setError(22,data->tokenBuffer);
+	}
+
+	return  NULL ;
+}
+
 char *turboplusHitBobZone KITTENS_CMD_ARGS
 {
 	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
-	api.setError(22, tokenBuffer);
+	stackCmdParm( _turboplusHitBobZone, tokenBuffer );
 	return tokenBuffer;
 }
 
