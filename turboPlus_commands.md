@@ -190,7 +190,7 @@ n=Hit Spr Zone([offset x],[offset y],[sprite n])
 
 	A=Hzone(X Sprite(n)+[offset x],Y Sprite(n)+(offset y))
 
-n=Hit Bob Zone([offset x],[offset y],[bob n])
+**n=Hit Bob Zone([offset x],[offset y],[bob n])**
 
 	A=Zone(X bob(n)+[offset x],Y bob(n)+(offset y))
 
@@ -830,7 +830,7 @@ Scene 16 Limit [n]
 	This command draw the scene view on to screen.
 	[map x],[map y] are offsets in the map.
 
-Scene 16 Top [map x],[map y]
+**Scene 16 Top [map x],[map y]**
 
 	Draw the top raw of a scene.
 
@@ -838,7 +838,7 @@ Scene 32 Top [map x],[map y]
 
 	Draw the top raw of a scene.
 
-Scene 16 Bottom [map x],[map y]
+**Scene 16 Bottom [map x],[map y]**
 
 	A command for a tiles / map system
 
@@ -846,7 +846,7 @@ Scene 32 Bottom [map x],[map y]
 
 	A command for a tiles / map system
 
-Scene 16 Left [map x],[map y]
+**Scene 16 Left [map x],[map y]**
 
 	A command for a tiles / map system
 
@@ -854,7 +854,7 @@ Scene 32 Left [map x],[map y]
 
 	A command for a tiles / map system
 
-Scene 16 Right [map x],[map y]
+**Scene 16 Right [map x],[map y]**
 
 	A command for a tiles / map system
 
