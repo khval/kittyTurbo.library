@@ -29,6 +29,7 @@
 #include "context.h"
 #include "list.h"
 #include "support.h"
+#include "debug.h"
 
 #define kittyError instance->kittyError
 #define api instance -> api
@@ -38,7 +39,7 @@
 #define alloc_private(x) AllocVecTags( x , AVT_Type, MEMF_PRIVATE, TAG_END )
 #define alloc_shared(x) AllocVecTags( x , AVT_Type, MEMF_SHARED, TAG_END )
 
-#define proc_names_printf printf
+#define getSprite(num) &(instance -> video -> sprites[num])
 
 
 void find_scene_bank(struct KittyInstance *instance,struct context *context, int bank_id );
