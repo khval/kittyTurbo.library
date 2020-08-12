@@ -65,7 +65,6 @@ init.o:		init.c
 main/makeContext.o:	debug.h	context.h	main/makeContext.c 
 	gcc  -Wall -O3  $(INC) -c  $(@:.o=.c) -o $@
 
-
 .PHONY: clean
 clean:
 	$(RM) $(TARGET) $(OBJS)
