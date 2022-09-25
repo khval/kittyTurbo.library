@@ -14,7 +14,6 @@
 
 #include "cmdList.h"
 
-
 struct cmdData AMOSPro_TURBO_Plus[]={
 		{0x0006,"Multi Yes",0,turboplusMultiYes},
 		{0x0016,"Multi No",0,turboplusMultiNo},

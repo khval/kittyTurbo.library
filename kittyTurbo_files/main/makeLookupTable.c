@@ -68,8 +68,6 @@ char * _kittyturbo_makeLookupTable(struct kittyTurboIFace *Self)
 			AVT_ClearWithValue, 0,
 			TAG_END );
 
-	Printf("makeLookupTable\n");
-
 	for (cmd=AMOSPro_TURBO_Plus;cmd -> fn;cmd++)
 	{
 		*((char *(**) KITTENS_CMD_ARGS) (ptr + cmd -> token)) = cmd -> fn;

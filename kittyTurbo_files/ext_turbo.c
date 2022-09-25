@@ -501,7 +501,7 @@ char *_turboplusCheck( struct glueCommands *data, int nextToken )
 						if ( y < c -> y ) continue;
 						if ( y > c -> y1 ) continue;
 						
-						printf("Found\n");
+						proc_names_printf("Found\n");
 
 						setStackNum( instance, n+1);
 						return  NULL ;
@@ -726,7 +726,7 @@ char *_turboplusRMove( struct glueCommands *data, int nextToken )
 	int args = instance_stack - data->stack +1;
 	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 
-	printf("args: %d\n",args);
+	proc_names_printf("args: %d\n",args);
 
 	switch (args)
 	{
@@ -757,7 +757,7 @@ char *_turboplusRHome( struct glueCommands *data, int nextToken )
 	int args = instance_stack - data->stack +1;
 	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 
-	printf("args: %d\n",args);
+	proc_names_printf("args: %d\n",args);
 
 	switch (args)
 	{
@@ -847,7 +847,7 @@ char *_turboplusRBox( struct glueCommands *data, int nextToken )
 
 	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 
-	printf("args: %d\n",args);
+	proc_names_printf("args: %d\n",args);
 
 	if (args==2)
 	{
@@ -947,12 +947,12 @@ char *_turboplusReserveObject( struct glueCommands *data, int nextToken )
 
 		if (obj == NULL)
 		{
-			printf("need to allocate a object\n");
+			proc_names_printf("need to allocate a object\n");
 
 			obj = (struct object *) malloc( sizeof(struct object) );
 			if (obj)
 			{
-				printf("add a id and push it to list\n");
+				proc_names_printf("add a id and push it to list\n");
 
 				obj -> id = obj_id;
 				obj -> elements = NULL;
@@ -965,7 +965,7 @@ char *_turboplusReserveObject( struct glueCommands *data, int nextToken )
 		{
 			obj -> allocated = getStackNum(instance,__stack );
 
-			printf("obj -> allocated %d\n", obj -> allocated);
+			proc_names_printf("obj -> allocated %d\n", obj -> allocated);
 
 			if (obj -> elements) free( obj -> elements );
 			obj -> elements = ( struct element *) malloc( sizeof(struct element ) * obj -> allocated );
@@ -1951,7 +1951,7 @@ void dump_blits(struct context *context)
 
 		for ( ; blit < blit_end ; blit ++)
 		{
-			printf("pos %08x, %08x -> id %d\n", (int) blit, (int) *blit, (*blit) -> id);
+			proc_names_printf("pos %08x, %08x -> id %d\n", (int) blit, (int) *blit, (*blit) -> id);
 		}
 	}
 }
@@ -2089,7 +2089,7 @@ char *_turboplusFPlot( struct glueCommands *data, int nextToken )
 			x = getStackNum(instance,__stack-2 );
 			y =  getStackNum(instance,__stack-1 );
 
-			printf("%d,%d\n",x,y);
+			proc_names_printf("%d,%d\n",x,y);
 
 			if (screen) retroPixel( screen, screen -> Memory[ screen -> double_buffer_draw_frame ], x,y,getStackNum(instance,__stack ) );
 			break;
@@ -2211,7 +2211,7 @@ char *_turboplusDefineStar( struct glueCommands *data, int nextToken )
 
 	proc_names_printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__);
 
-	printf("args: %d\n",args);
+	proc_names_printf("args: %d\n",args);
 
 	if (args !=5)
 	{
@@ -2560,7 +2560,6 @@ char *_turboplusFSqr( struct glueCommands *data, int nextToken )
 	if (args == 1)	d = getStackDecimal(instance,__stack);
 	popStack(instance,__stack - data->stack);
 	setStackDecimal(instance, sqrt( d ) );
-	instance -> kittyStack[__stack].state = state_none;
 	return NULL;
 }
 
